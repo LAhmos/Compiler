@@ -1,0 +1,17 @@
+PROGRAM expr
+BEGIN
+
+	INT a,b,c,d;
+	FLOAT x,y,z,t;
+
+	FUNCTION VOID main()
+	BEGIN
+		IF ( a*2=4+5 OR NOT c=0 OR d>9 AND FALSE)
+			
+		ENDIF
+		
+
+	END	
+END
+
+

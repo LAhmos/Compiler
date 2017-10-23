@@ -48,33 +48,66 @@ public class Micro {
 		regCounter++;
 		return tmp;
 	}
-	public static void prepIns(IRCode code){
+	public static void prepCondBranchIns(IRCode code){
 
 		AssemblyCode asscode=new AssemblyCode();
 		IRIns ins=code.ins;
 		String op1=code.op1,op2=code.op2,result=code.result;
-	if(op2.charAt(0)=='$'){
+		if(op2.charAt(0)=='$'){
+			code.op2=Micro.registerMap.get(op2);
+		} else {
+
+			AssemblyCode asscode2=new AssemblyCode();
+			String tmp=GetReg();
+			Micro.registerMap.put(op2,tmp);
+
+			asscode2.ASCODE="move " + op2 + " "+tmp;
+			asCode.add(asscode2);
+			code.op2=tmp;
+
+
+		}
+		if(op1.charAt(0)=='$'){
+
+			code.op1=Micro.registerMap.get(op1);
+		}
+
+
+		if(code.resultType==Type.INT)
+			asscode.ASCODE="cmpi "+ code.op1 +" "+code.op2;
+		else 
+
+			asscode.ASCODE="cmpr "+ code.op1 +" "+code.op2;
+		asCode.add(asscode) ;
+	}
+
+	public static void prepAluIns(IRCode code){
+
+		AssemblyCode asscode=new AssemblyCode();
+		IRIns ins=code.ins;
+		String op1=code.op1,op2=code.op2,result=code.result;
+		if(op2.charAt(0)=='$'){
 			code.op2=Micro.registerMap.get(op2);
 		}
-	if(op1.charAt(0)=='$'){
+		if(op1.charAt(0)=='$'){
 			Micro.registerMap.put(result,Micro.registerMap.get(op1));
 			code.result=code.op1=Micro.registerMap.get(op1);
-		return;
+			return;
 		}
 		if(result.charAt(0)=='$'){
 			if(Micro.registerMap.get(result)==null){
 
-			String tmp=GetReg();
-			Micro.registerMap.put(result,tmp);
-			code.result=tmp;
+				String tmp=GetReg();
+				Micro.registerMap.put(result,tmp);
+				code.result=tmp;
 			} else {
 				code.result=	Micro.registerMap.get(result);
 
 
 			}
 		}
-		
-		
+
+
 		asscode.ASCODE="move "+ code.op1 +" "+code.result;
 		asCode.add(asscode) ;
 	}
@@ -85,15 +118,29 @@ public class Micro {
 		AssemblyCode asscode=new AssemblyCode();
 
 		if(ins==IRIns.STOREI||ins==IRIns.STOREF){
-			if(op1.charAt(0)=='$')
-				op1=Micro.registerMap.get(op1);
 
-			if(result.charAt(0)=='$'){
+			if(op1.charAt(0)!='$'&& result.charAt(0)!='$')
+			{
 				String tmp=GetReg();
-				Micro.registerMap.put(result,tmp);
-				result=tmp;
+				Micro.registerMap.put(op1,tmp);
+				AssemblyCode tmpCode=new AssemblyCode();
+
+
+				tmpCode.ASCODE="move "+ op1 +" "+tmp ;
+				asCode.add(tmpCode);
+				asscode.ASCODE="move "+ tmp +" "+result ;
+
+			}else{
+				if(op1.charAt(0)=='$')
+					op1=Micro.registerMap.get(op1);
+
+				if(result.charAt(0)=='$'){
+					String tmp=GetReg();
+					Micro.registerMap.put(result,tmp);
+					result=tmp;
+				}
+				asscode.ASCODE="move "+ op1 +" "+result ;
 			}
-			asscode.ASCODE="move "+ op1 +" "+result ;
 		}
 		if(ins==IRIns.WRITEI){
 			asscode.ASCODE="sys writei "+ result  ;
@@ -115,7 +162,7 @@ public class Micro {
 		{
 
 
-			prepIns(code);
+			prepAluIns(code);
 			asscode=new AssemblyCode();
 			switch (ins){
 
@@ -148,7 +195,51 @@ public class Micro {
 
 
 		}
-		asCode.add(asscode) ;
+		if(code.isCondBranch){
+
+			prepCondBranchIns(code);
+			switch (ins){
+				case GT:
+
+					asscode.ASCODE="jgt "+ result  ;
+					break;
+				case GE:
+
+					asscode.ASCODE="jge "+ result  ;
+					break;
+				case LT:
+
+					asscode.ASCODE="jlt "+ result  ;
+					break;
+				case LE:
+
+					asscode.ASCODE="jle "+ result  ;
+					break;
+				case EQ:
+
+					asscode.ASCODE="jeq "+ result  ;
+					break;
+				case NE:
+
+					asscode.ASCODE="jne "+ result  ;
+					break;
+
+
+			}
+		}
+		if(ins==IRIns.JUMP){
+
+			asscode.ASCODE="jmp "+ result  ;
+
+
+		}
+		if(ins==IRIns.LABEL){
+
+			asscode.ASCODE= "label "+ result  ;
+
+		}
+		if(asscode!=null)
+			asCode.add(asscode) ;
 
 	}
 	public static void main(String[] args) throws Exception {
@@ -158,6 +249,7 @@ public class Micro {
 		if ( inputFile!=null ) {
 			is = new FileInputStream(inputFile);
 		}
+
 
 		ANTLRInputStream input = new ANTLRInputStream(is);
 		MicroLexer lexer = new MicroLexer(input);
@@ -212,7 +304,9 @@ public class Micro {
 
 
 		  }*/
-		astTrees.get(0).printroot();
+		//		
+		//	for(int i=0;i<astTrees.size();i++)
+		//	astTrees.get(i).printroot();
 
 		for (String key : symbolTables.tables.get(0).table.keySet()) {
 			AssemblyCode asscode=new AssemblyCode();

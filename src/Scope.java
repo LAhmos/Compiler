@@ -68,6 +68,10 @@ public class Scope{
 		return parent.findSymbol(name);
 		return null;
 	}
+	public String getScopeID(){
+		return scopeID.replace(' ','_');
+
+		}
 
 
 }

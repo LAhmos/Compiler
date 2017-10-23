@@ -1,29 +1,27 @@
 grammar Micro;	
 program
-	:PROGRAM id BEGIN pgm_body END;
+:PROGRAM id BEGIN pgm_body END;
 
 id
-	:IDENTIFIER;
-		
+:IDENTIFIER;
+
 pgm_body
-	:decl func_declarations;
+:decl func_declarations;
 decl
-	:string_decl decl | var_decl decl | ;
+:string_decl decl | var_decl decl | ;
 
 /** Global String Declaration */
 string_decl
-	:STRING id ':=' str';'{if(!Micro.symbolTables.defineSymbol($id.text,"STRING",$str.text)) throw new RuntimeException("DECLARATION ERROR "+$id.text);};
+:STRING id ':=' str';'{if(!Micro.symbolTables.defineSymbol($id.text,"STRING",$str.text)) throw new RuntimeException("DECLARATION ERROR "+$id.text);};
 str: STRINGLITERAL;
 
 /** Variable Declaration */
-var_decl          locals [
-	List<String> symbols = new ArrayList<String>()
+	var_decl          locals [
+List<String> symbols = new ArrayList<String>()
 	]: var_type id_list ';'{	
-for(int i=0;i<$symbols.size();i++){
-if(!Micro.symbolTables.defineSymbol($symbols.get(i),$var_type.text,null)) throw new RuntimeException("DECLARATION ERROR "+$symbols.get(i));
-}
-
-
+	for(int i=0;i<$symbols.size();i++){
+		if(!Micro.symbolTables.defineSymbol($symbols.get(i),$var_type.text,null)) throw new RuntimeException("DECLARATION ERROR "+$symbols.get(i));
+	}
 };
 var_type          : FLOAT | INT;
 any_type          : var_type | VOID;
@@ -41,17 +39,17 @@ func_decl         : FUNCTION any_type id {if(!Micro.symbolTables.defineSymbol($i
 func_body         : decl stmt_list;
 
 /** Statement List */
-stmt_list         : stmt stmt_list | ;
-stmt              : base_stmt | if_stmt | for_stmt;
-base_stmt         : assign_stmt | read_stmt | write_stmt | return_stmt;
+stmt_list  returns [AstTree tree]       : t1=stmt{$tree =$t1.tree;} stmt_list |{$tree=null;} ;
+stmt       returns [AstTree tree]       : t1=base_stmt{$tree=$t1.node;} | if_stmt | for_stmt;
+base_stmt   returns [AstTree node]       : t1= assign_stmt { AstTree tree =new AstTree(); tree.root=$t1.node;   Micro.astTrees.add(tree); $node=tree;} | t2=read_stmt{ AstTree tree =new AstTree(); tree.root=$t2.node;  Micro.astTrees.add(tree); $node=tree;}  | t3=write_stmt{ AstTree tree =new AstTree(); tree.root=$t3.node;  Micro.astTrees.add(tree); $node=tree;}  | t4=return_stmt;
 
 /** Basic Statements */
 id_list2  returns[List<id> ids]   locals [List<id> _ids=new ArrayList()]:{$ids=new ArrayList<id>();} id {id tmp=new id(); tmp.type=NodeType.id; Symbol symbol= Micro.symbolTables.Lookup($id.text); if(symbol==null) throw new RuntimeException("Varaiable not  decleared  "+$id.text); tmp.name=symbol.GetName(); tmp.dataType=symbol.GetType(); $ids.add(tmp);}  id_tail2 { for(int i=0;i<$_ids.size();i++) $ids.add($_ids.get(i));  };
 id_tail2           : ',' id { id tmp=new id(); tmp.type=NodeType.id; Symbol symbol= Micro.symbolTables.Lookup($id.text); if(symbol==null) throw new RuntimeException("Varaiable not  decleared  "+$id.text); tmp.name=symbol.GetName();   tmp.dataType=symbol.GetType(); $id_list2::_ids.add(tmp);} id_tail2 | ;
-assign_stmt       : assign_expr';';
-assign_expr       : {AstTree tree =new AstTree(); exp assign_op=new exp();  tree.root = assign_op; assign_op.type=NodeType.exp; assign_op.opType=OpType.assign; } t1=id ':=' t2=expr { id id_var =new id(); id_var.type=NodeType.id; Symbol symbol= Micro.symbolTables.Lookup($id.text);     if(symbol==null) throw new RuntimeException("Varaiable not  decleared  "+$id.text); ((id)id_var).name=symbol.GetName(); ((id)id_var).dataType=symbol.GetType(); assign_op.left=id_var; assign_op.right=$t2.node; Micro.astTrees.add(tree);  };
-read_stmt         :{ AstTree tree =new AstTree();} READ '(' t1=id_list2 ')'';' { read_write node=new read_write(); node.type=NodeType.read; node.id_list=$t1.ids;  tree.root=node;  Micro.astTrees.add(tree); }; /* todo: check ids*/
-write_stmt        : { AstTree tree =new AstTree();}WRITE '(' t1=id_list2 ')'';'{ read_write node=new read_write(); node.type=NodeType.write; node.id_list=$t1.ids;    tree.root=node;  Micro.astTrees.add(tree);  };
+assign_stmt    returns[AstNode node]   : t1=assign_expr';' {$node =$t1.node; };
+assign_expr  returns [AstNode node]     : { exp assign_op=new exp();   assign_op.type=NodeType.exp; assign_op.opType=OpType.assign; } t1=id ':=' t2=expr { id id_var =new id(); id_var.type=NodeType.id; Symbol symbol= Micro.symbolTables.Lookup($id.text);     if(symbol==null) throw new RuntimeException("Varaiable not  decleared  "+$id.text); ((id)id_var).name=symbol.GetName(); ((id)id_var).dataType=symbol.GetType(); assign_op.left=id_var; assign_op.right=$t2.node; $node=assign_op;  };
+read_stmt returns [AstNode node]   :READ '(' t1=id_list2 ')'';' {  $node=new read_write(); $node.type=NodeType.read; ((read_write)($node)).id_list=$t1.ids;  }; /* todo: check ids*/
+write_stmt  returns[AstNode node]  :WRITE '(' t1=id_list2 ')'';'{  $node=new read_write(); $node.type=NodeType.write; ((read_write)($node)).id_list=$t1.ids;     };
 return_stmt       : RETURN expr';';
 
 /** Expressions */
@@ -68,37 +66,289 @@ addop             : '+' | '-';
 mulop             : '*' | '/';
 
 /** Complex Statements and Condition */ 
-if_stmt           : IF  {Micro.symbolTables.createNewScope(ScopeType.Block,null);}'(' t1=cond ')' decl stmt_list elif_part ENDIF {Micro.symbolTables.popTable(); AstTree tree =new AstTree();   tree.root =$t1.node; ; $t1.node.type=NodeType.cond;  Micro.astTrees.add(tree);};
-elif_part         : ELIF {Micro.symbolTables.createNewScope(ScopeType.Block,null);}'(' cond ')' decl stmt_list  {Micro.symbolTables.popTable();} elif_part | else_part;
+if_stmt     returns [AstTree tree] locals[ String elseLab, String outLab]  : IF  {		Micro.symbolTables.createNewScope(ScopeType.Block,null); 
+												$outLab= Micro.symbolTables.currTable.getScopeID()+"_Out";
+												$elseLab= Micro.symbolTables.currTable.getScopeID()+"_Else";  
+												AstTree ifSta=new AstTree(); 
+												IF ifNode=new IF(); 
+												ifNode.type=NodeType.ifSta; 
+												ifSta.root=ifNode;  
+												Micro.astTrees.add(ifSta);
+											} 
+												'(' t1=cond ')' decl t2=stmt_list
+												{
+													Micro.symbolTables.popTable();   
+													AstTree jumpTree = new AstTree();
+													AstNode jnode= new IF();
+													jnode.type=NodeType.jumpOut;
+													jumpTree.root=jnode;
+													jumpTree.isTarget=true;
+													jumpTree.label=$outLab;
+													Micro.astTrees.add(jumpTree);
+
+												
+												
+												} 
+												
+												
+												t3=elif_part[$outLab]   ENDIF 
+												{  
+													ifNode.cond=$t1.node;
+												AstTree outTree=new AstTree();
+												AstNode outnode= new AstNode();
+												outTree.root=outnode;
+												outnode.type=NodeType.outLab; 
+												outTree.label=$outLab;
+												outTree.isTarget=true;
+												Micro.astTrees.add(outTree);
+												if($t3.tree!=null) {
+														$t3.tree.isTarget=true;
+														$t3.tree.label=$elseLab; 
+														ifNode.ifLabel=$elseLab; 
+												} else { 
+											
+												ifNode.ifLabel=$outLab; 
+												jumpTree.root.type=NodeType.skip;
+												 
+												 } 
+												} ;
+
+elif_part [String outin]  returns [AstTree tree] locals[String elseLab, String outLab] : ELIF {	Micro.symbolTables.createNewScope(ScopeType.Block,null); 
+											$elseLab= Micro.symbolTables.currTable.getScopeID()+"_Else"; 
+											$outLab= Micro.symbolTables.currTable.getScopeID()+"_Out";
+											AstTree ifElseSta=new AstTree(); 
+											IF elseIfNode=new IF(); 
+											elseIfNode.type=NodeType.elseIf; 
+											ifElseSta.root=elseIfNode; 
+											$tree=ifElseSta;  
+											Micro.astTrees.add(ifElseSta);   
+											}
+											'(' t12=cond ')' decl stmt_list 
+											{
+											Micro.symbolTables.popTable();
+													AstTree jumpTree = new AstTree();
+													AstNode jnode= new IF();
+													jnode.type=NodeType.jumpOut;
+													jumpTree.root=jnode;
+													jumpTree.isTarget=true;
+													jumpTree.label=outin;
+												Micro.astTrees.add(jumpTree);
+												
+											
+											
+											
+											} 
+											t3=elif_part[outin] 
+											{
+											elseIfNode.cond=$t12.node;	
+
+											if($t3.tree!=null) 
+											{
+											$t3.tree.isTarget=true; 
+											$t3.tree.label=$elseLab; 
+											elseIfNode.ifLabel=$elseLab; 
+
+											}
+											else { 
+											
+												elseIfNode.ifLabel=$outin; 
+												jumpTree.root.type=NodeType.skip;
+												 
+												 } 
+
+											
+											
+											}| t5=else_part {$tree =$t5.tree; };
 
 
 
 
-else_part         : ELSE {Micro.symbolTables.createNewScope(ScopeType.Block,null);} decl  stmt_list {Micro.symbolTables.popTable();} | ;
+else_part     returns [AstTree tree ]     : ELSE
+{Micro.symbolTables.createNewScope(ScopeType.Block,null);  IF node=new IF(); node.type=NodeType.elseSta; AstTree ElseTree=new AstTree(); $tree=ElseTree; ElseTree.root=node; Micro.astTrees.add(ElseTree);  } 
 
-
+decl  stmt_list {Micro.symbolTables.popTable(); } |{$tree=null;} ;
 
 
 cond    returns [AstNode node]          : t1=lit {  $node=$t1.node; } t2=cond_suffix[$node] {if($t2.node!=null) $node=$t2.node;};
 cond_suffix  [AstNode in_node]  returns [AstNode node]     : OR t1=lit {  boolExp tmp=new boolExp(); tmp.right=$t1.node; tmp.left=$in_node; tmp.type=NodeType.cond; tmp.opType=LogicOp.or; $node=tmp; } t2=cond_suffix[$node] {
-if($t2.node!=null) $node=$t2.node; } | AND t3=lit {  boolExp tmp=new boolExp(); tmp.right=$t3.node;  tmp.left=$in_node; tmp.type=NodeType.cond; tmp.opType=LogicOp.and; $node=tmp; } t4=cond_suffix[$node]{
-if($t4.node!=null) $node=$t4.node;  } | {$node=null;};
+	if($t2.node!=null) $node=$t2.node; } | AND t3=lit {  boolExp tmp=new boolExp(); tmp.right=$t3.node;  tmp.left=$in_node; tmp.type=NodeType.cond; tmp.opType=LogicOp.and; $node=tmp; } t4=cond_suffix[$node]{
+		if($t4.node!=null) $node=$t4.node;  } | {$node=null;};
 lit        returns [AstNode node]       : NOT t1=basic_cond{((boolExp)($t1.node)).opType=LogicOp.not; $node=$t1.node;} | t2=basic_cond{$node =$t2.node; };
 basic_cond  returns [AstNode node]      : t1=expr t2=compop t3=expr{ boolExp tmp=new boolExp(); tmp.left=$t1.node; tmp.type=NodeType.cond; tmp.right=$t3.node; tmp.opType=LogicOp.noOp; tmp.compOp=boolExp.getOpFromString($t2.text);  $node=tmp;  } | TRUE { boolExp tmp=new boolExp(); tmp.left=null; tmp.right=null; tmp.opType=LogicOp.noOp;tmp.type=NodeType.cond;  tmp.compOp=CompOp.True;  $node=tmp; }| FALSE{ boolExp tmp=new boolExp(); tmp.left=null; tmp.right=null; tmp.opType=LogicOp.noOp; tmp.type=NodeType.cond; tmp.compOp=CompOp.False;  $node=tmp; };
 compop            : '<' | '>' | '=' | '!=' | '<=' | '>=';
 
 /** For Statements */
-init_stmt         : assign_expr | ;
-incr_stmt         : assign_expr | ;
+init_stmt       			: t1=assign_expr {AstTree tmp = new AstTree(); tmp.root=$t1.node;  Micro.astTrees.add(tmp);  } | ;
+incr_stmt   returns [AstTree tree]      : t1=assign_expr {AstTree tmp = new AstTree(); tmp.root=$t1.node;  $tree=tmp;  } | {$tree=null;};
 
-for_stmt       : FOR { Micro.symbolTables.createNewScope(ScopeType.Block,null);}'(' init_stmt ';' cond ';' incr_stmt ')' decl aug_stmt_list ENDFOR {Micro.symbolTables.popTable();};
+for_stmt       locals[String incLab, String loopLab,String outLab ]: FOR { Micro.symbolTables.createNewScope(ScopeType.Block,null);
+												$outLab= Micro.symbolTables.currTable.getScopeID()+"_OUT";
+												$incLab= Micro.symbolTables.currTable.getScopeID()+"_INC";  
+												$loopLab= Micro.symbolTables.currTable.getScopeID()+"_Loop";  
+												
+										}
+										'(' init_stmt ';' { 
+												AstNode loopLabelNode=new AstNode();
+												loopLabelNode.type=NodeType.outLab;
+												AstTree labelTree=new AstTree();
+												labelTree.root=loopLabelNode;
+												labelTree.label=$loopLab;
+												Micro.astTrees.add(labelTree);
 
-aug_stmt_list     : aug_stmt aug_stmt_list | ;
-aug_stmt          : base_stmt | aug_if_stmt | for_stmt | CONTINUE';'| BREAK';';
+   } t6=cond ';'{
+												AstTree forSta=new AstTree(); 
+												FOR forNode=new FOR(); 
+												forNode.type=NodeType.forSta; 
+												forSta.root=forNode; 
+												forNode.cond=$t6.node;
+												forNode.forLabel=$outLab;
+												Micro.astTrees.add(forSta);
+												
 
-aug_if_stmt       : IF '(' cond ')' decl aug_stmt_list aug_elif_part ENDIF;
-aug_elif_part     : ELIF '(' cond ')' decl aug_stmt_list aug_elif_part | aug_else_part;
-aug_else_part     : ELSE decl aug_stmt_list | ;
+										}
+										
+										t8=incr_stmt ')' decl aug_stmt_list[Micro.symbolTables.currTable.getScopeID()] ENDFOR {Micro.symbolTables.popTable();   
+											if($t8.tree!=null){
+
+
+												AstNode incLabelNode=new AstNode();
+												incLabelNode.type=NodeType.outLab;
+												AstTree incLabelTree=new AstTree();
+												incLabelTree.root=incLabelNode;
+												incLabelTree.label=$incLab;
+												Micro.astTrees.add(incLabelTree);
+												Micro.astTrees.add($t8.tree);
+												}
+													AstTree jumpTree = new AstTree();
+													AstNode jnode= new AstNode();
+													jnode.type=NodeType.jumpOut;
+													jumpTree.root=jnode;
+													jumpTree.isTarget=true;
+													jumpTree.label=$loopLab;
+													Micro.astTrees.add(jumpTree);
+
+
+												AstTree outTree=new AstTree();
+												AstNode outnode= new AstNode();
+												outTree.root=outnode;
+												outnode.type=NodeType.outLab; 
+												outTree.label=$outLab;
+												outTree.isTarget=true;
+												Micro.astTrees.add(outTree);
+
+										
+ };
+
+aug_stmt_list   [String block]  : aug_stmt [$block] aug_stmt_list[$block] | ;
+aug_stmt [String block]         : base_stmt | aug_if_stmt[$block] | for_stmt | CONTINUE';'{ 		AstTree jumpTree = new AstTree();
+													AstNode jnode= new AstNode();
+													jnode.type=NodeType.jumpOut;
+													jumpTree.root=jnode;
+													jumpTree.isTarget=true;
+													jumpTree.label=$block+"_INC";
+													Micro.astTrees.add(jumpTree);
+     } | BREAK';'{
+     													AstTree jumpTree = new AstTree();
+													AstNode jnode= new AstNode();
+													jnode.type=NodeType.jumpOut;
+													jumpTree.root=jnode;
+													jumpTree.isTarget=true;
+													jumpTree.label=$block+"_OUT";
+													Micro.astTrees.add(jumpTree);
+     
+     
+     
+     };
+
+aug_if_stmt   [String block] returns [AstTree tree] locals[ String elseLab, String outLab]   : IF {		Micro.symbolTables.createNewScope(ScopeType.Block,null); 
+												$outLab= Micro.symbolTables.currTable.getScopeID()+"_Out";
+												$elseLab= Micro.symbolTables.currTable.getScopeID()+"_Else";  
+												AstTree ifSta=new AstTree(); 
+												IF ifNode=new IF(); 
+												ifNode.type=NodeType.ifSta; 
+												ifSta.root=ifNode;  
+												Micro.astTrees.add(ifSta);
+											} '('t1= cond ')' decl t2=aug_stmt_list[$block] {
+													Micro.symbolTables.popTable();   
+													AstTree jumpTree = new AstTree();
+													AstNode jnode= new IF();
+													jnode.type=NodeType.jumpOut;
+													jumpTree.root=jnode;
+													jumpTree.isTarget=true;
+													jumpTree.label=$outLab;
+													Micro.astTrees.add(jumpTree);
+
+												
+												
+												} 
+t3=aug_elif_part[$block,$outLab] ENDIF{  
+													ifNode.cond=$t1.node;
+												AstTree outTree=new AstTree();
+												AstNode outnode= new AstNode();
+												outTree.root=outnode;
+												outnode.type=NodeType.outLab; 
+												outTree.label=$outLab;
+												outTree.isTarget=true;
+												Micro.astTrees.add(outTree);
+												if($t3.tree!=null) {
+														$t3.tree.isTarget=true;
+														$t3.tree.label=$elseLab; 
+														ifNode.ifLabel=$elseLab; 
+												} else { 
+											
+												ifNode.ifLabel=$outLab; 
+												jumpTree.root.type=NodeType.skip;
+												 
+												 } 
+												};
+aug_elif_part [String block,String outin]  returns [AstTree tree] locals[String elseLab, String outLab]   : ELIF {	Micro.symbolTables.createNewScope(ScopeType.Block,null); 
+											$elseLab= Micro.symbolTables.currTable.getScopeID()+"_Else"; 
+											$outLab= Micro.symbolTables.currTable.getScopeID()+"_Out";
+											AstTree ifElseSta=new AstTree(); 
+											IF elseIfNode=new IF(); 
+											elseIfNode.type=NodeType.elseIf; 
+											ifElseSta.root=elseIfNode; 
+											$tree=ifElseSta;  
+											Micro.astTrees.add(ifElseSta);   
+											}
+										'(' t12=cond ')'	decl aug_stmt_list[$block] {
+											Micro.symbolTables.popTable();
+													AstTree jumpTree = new AstTree();
+													AstNode jnode= new IF();
+													jnode.type=NodeType.jumpOut;
+													jumpTree.root=jnode;
+													jumpTree.isTarget=true;
+													jumpTree.label=outin;
+												Micro.astTrees.add(jumpTree);
+												
+											
+											
+											
+											}
+t3=aug_elif_part[$block,outin] {
+											elseIfNode.cond=$t12.node;	
+
+											if($t3.tree!=null) 
+											{
+											$t3.tree.isTarget=true; 
+											$t3.tree.label=$elseLab; 
+											elseIfNode.ifLabel=$elseLab; 
+
+											}
+											else { 
+											
+												elseIfNode.ifLabel=$outin; 
+												jumpTree.root.type=NodeType.skip;
+												 
+												 } 
+
+											
+											
+											}| t5=aug_else_part[$block] {$tree =$t5.tree; };
+
+aug_else_part [String block] returns [AstTree tree ]   : ELSE {Micro.symbolTables.createNewScope(ScopeType.Block,null);  IF node=new IF(); node.type=NodeType.elseSta; AstTree ElseTree=new AstTree(); $tree=ElseTree; ElseTree.root=node; Micro.astTrees.add(ElseTree);  } 
+
+decl aug_stmt_list[$block] |{$tree=null;} ;
 
 
 
@@ -108,10 +358,10 @@ FLOATLITERAL: ([0-9]+'.'[0-9]+)| ('.'[0-9]+);
 
 
 STRINGLITERAL:
-	'"' ~('"')* '"';
+'"' ~('"')* '"';
 
 COMMENT:
-	'--' ~('\n')* '\n' ->skip;
+'--' ~('\n')* '\n' ->skip;
 
 OR: 'OR';
 AND: 'AND';

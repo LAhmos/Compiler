@@ -3,7 +3,7 @@ import java.io.InputStream;
 import java.util.Stack;
 import java.util.*;  
 
-enum NodeType  {exp,id,literal,read,write,cond,ifSta,elseIf,elseSta,forSta,contSta,breakSta,outLab,jumpOut,skip;};
+enum NodeType  {exp,id,literal,read,write,cond,ifSta,elseIf,elseSta,forSta,contSta,breakSta,outLab,jumpOut,skip,call_exp,return_sta;};
 enum OpType {add,sub,mul,div,assign;};
 enum LogicOp {and,or,not,noOp;};
 enum CompOp {less,lessOrEqual,greater,greaterOrEqual,equal, notEqual,True,False,error;};
@@ -89,7 +89,7 @@ class exp extends AstNode{
 		}
 		return IRIns.ADDI;
 	}
-	public IRCode genIRCode(IRCode leftCode,IRCode rightCode){
+	public IRCode genIRCode(IRCode leftCode,IRCode rightCode,FunctionUnit curr){
 
 		IRCode expCode=new IRCode();
 		expCode.resultType=rightCode.resultType;
@@ -98,9 +98,9 @@ class exp extends AstNode{
 		expCode.ins=getIns(expCode.resultType);
 
 		if(this.opType==OpType.assign)
-			expCode.setOperand(rightCode.result,null,((id)(this.left)).name); 
+			expCode.setOperand(rightCode.result,null,((id)(this.left)).getName()); 
 		else{	
-			expCode.setOperand(leftCode.result,rightCode.result,Micro.GetTmp()); 
+			expCode.setOperand(leftCode.result,rightCode.result,curr.getTmp()); 
 
 			expCode.isALU=true;
 		}
@@ -132,14 +132,15 @@ class boolExp extends AstNode{
 		{
 			return opType+":"+compOp;
 		}
-	public ArrayList <IRCode> genIR (){
+	public void genIR (FunctionUnit fun){
 
 		AstTree tree= new AstTree();
 		tree.root =this;
+		tree.setFun(fun);
 		//tree.printroot();
 		tree.ConvertToIR();
 	//	tree.printIR();
-		return tree.code;
+		//return tree.code;
 
 
 	}
@@ -167,12 +168,39 @@ class boolExp extends AstNode{
 }
 class id extends AstNode{
 
-	public String name;
-	public Type dataType;
+	//public String name;
+	//public Type dataType;
+	private Symbol idSymbol;
+	public String getName(){
+		if(idSymbol.getStackLabel()==null)
+		return idSymbol.getName();
+		return idSymbol.getStackLabel();
+
+	}
+	public Type getType(){
+		return idSymbol.getType();
+	}
+	public void setSymbol(Symbol in){
+
+		idSymbol=in;
+	}
+	public Symbol getSymbol(){
+
+		return idSymbol;
+	}
+	public void setIndex(int _index){
+
+		idSymbol.setIndex(_index);
+	}
+	public int getIndex(){
+
+		return idSymbol.getIndex();
+	}
+	
 	@Override 
 		public String toString()
 		{
-			return name+" " + dataType;
+			return getName()+" " + getType();
 		}
 }
 
@@ -204,4 +232,28 @@ class read_write extends AstNode{
 			return tmp;
 		}
 }
+class call_exp extends AstNode{
+	public Symbol funSymbol;
+	public FunctionUnit funObj;
+	public ArrayList<AstNode> parList;
+	public int getParListSize(){
+		return (parList==null)? 0:parList.size();
 
+	}
+	public String getFunName(){
+		return funObj.getFunName();
+	}
+	@Override
+		public String toString(){
+			return null;
+		}
+
+}
+class return_sta extends AstNode{
+	public AstNode return_exp;
+	@Override
+		public String toString(){
+			return null;
+		}
+
+}

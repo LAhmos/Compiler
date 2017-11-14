@@ -8,7 +8,8 @@ public class Tables{
 
 	public ArrayList<Scope> tables=new ArrayList<Scope> ();
 	public Scope currTable;
-	private int currBlock;	
+	private int currBlock;
+	private int parm=1;	
 	public Tables()
 	{	
 
@@ -18,25 +19,30 @@ public class Tables{
 
 	}
 	public boolean createNewScope(ScopeType type, String name)	{
+		Scope tmp=null;		
+		
 		if(type==ScopeType.Block){
-			tables.add(currTable=new Scope(currTable,"BLOCK "+currBlock,type));
+			//currTable=new Scope(currTable,"BLOCK "+currBlock,type);
+			tables.add(tmp=new Scope(currTable,"BLOCK "+currBlock,type));
 			currBlock++;
 			
-			return true;
 		}
 		if(type==ScopeType.Fun){
-			tables.add(currTable=new Scope(currTable, name,type));
-			return true;
+			tables.add(tmp=new Scope(currTable, name,type));
+			
 
 		}
 		if(type==ScopeType.Global){
 
-			tables.add(currTable=new Scope(currTable, "GLOBAL",type));
+			tables.add(tmp=new Scope(currTable, "GLOBAL",type));
 			return true;
 
 
 		}	
-		return false;
+		//System.out.println(tmp); 
+		currTable.child.add(tmp);
+		currTable=tmp;
+		return true;
 
 	}	
 	public boolean defineSymbol(String name,String type,String value){
@@ -45,11 +51,17 @@ public class Tables{
 		return false;
 
 	}
+	public boolean defineSymbol(String name,String type,String value,boolean isPar){
+
+		if(currTable.defineSym(name,type,value,isPar)) return true;
+		return false;
+
+	}
 	public void popTable(){
-	
+		//System.out.println("poping:"+ currTable.scopeID);
 	if(currTable.type==ScopeType.Global) return;
 	currTable= currTable.parent;
-	
+	//System.out.println("after poping:"+ currTable.scopeID);
 	}
 	public Symbol Lookup (String name){
 		return currTable.findSymbol(name);

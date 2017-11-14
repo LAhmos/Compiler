@@ -1,11 +1,3 @@
-/***
- * Excerpted from "The Definitive ANTLR 4 Reference",
- * published by The Pragmatic Bookshelf.
- * Copyrights apply to this code. It may not be used to create training material, 
- * courses, books, articles, and the like. Contact us if you are in doubt.
- * We make no guarantees that this code is fit for any purpose. 
- * Visit http://www.pragmaticprogrammer.com/titles/tpantlr2 for more book information.
- ***/
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
@@ -29,219 +21,13 @@ class MyErrorStrategy extends DefaultErrorStrategy {
 public class Micro {
 
 	public static Tables symbolTables = new Tables();
-	public static ArrayList<AstTree> astTrees=new ArrayList<AstTree> ();
-	public static ArrayList<AssemblyCode> asCode=new ArrayList<AssemblyCode> ();
-	public static LinkedHashMap<String , String> registerMap= new LinkedHashMap<String,String>();
+	//public static ArrayList<AstTree> astTrees=new ArrayList<AstTree> ();
+	
+	//public static LinkedHashMap<String , String> registerMap= new LinkedHashMap<String,String>();
 	public static int tmpCounter=0;
 	public static int regCounter=0;
-	public static String GetTmp()
-	{	
-		String tmp=new String();
-		tmp="$T"+tmpCounter;
-		tmpCounter++;
-		return tmp;
-	}
-	public static String GetReg()
-	{	
-		String tmp=new String();
-		tmp="r"+regCounter;
-		regCounter++;
-		return tmp;
-	}
-	public static void prepCondBranchIns(IRCode code){
-
-		AssemblyCode asscode=new AssemblyCode();
-		IRIns ins=code.ins;
-		String op1=code.op1,op2=code.op2,result=code.result;
-		if(op2.charAt(0)=='$'){
-			code.op2=Micro.registerMap.get(op2);
-		} else {
-
-			AssemblyCode asscode2=new AssemblyCode();
-			String tmp=GetReg();
-			Micro.registerMap.put(op2,tmp);
-
-			asscode2.ASCODE="move " + op2 + " "+tmp;
-			asCode.add(asscode2);
-			code.op2=tmp;
-
-
-		}
-		if(op1.charAt(0)=='$'){
-
-			code.op1=Micro.registerMap.get(op1);
-		}
-
-
-		if(code.resultType==Type.INT)
-			asscode.ASCODE="cmpi "+ code.op1 +" "+code.op2;
-		else 
-
-			asscode.ASCODE="cmpr "+ code.op1 +" "+code.op2;
-		asCode.add(asscode) ;
-	}
-
-	public static void prepAluIns(IRCode code){
-
-		AssemblyCode asscode=new AssemblyCode();
-		IRIns ins=code.ins;
-		String op1=code.op1,op2=code.op2,result=code.result;
-		if(op2.charAt(0)=='$'){
-			code.op2=Micro.registerMap.get(op2);
-		}
-		if(op1.charAt(0)=='$'){
-			Micro.registerMap.put(result,Micro.registerMap.get(op1));
-			code.result=code.op1=Micro.registerMap.get(op1);
-			return;
-		}
-		if(result.charAt(0)=='$'){
-			if(Micro.registerMap.get(result)==null){
-
-				String tmp=GetReg();
-				Micro.registerMap.put(result,tmp);
-				code.result=tmp;
-			} else {
-				code.result=	Micro.registerMap.get(result);
-
-
-			}
-		}
-
-
-		asscode.ASCODE="move "+ code.op1 +" "+code.result;
-		asCode.add(asscode) ;
-	}
-	public static void GenAssembly(IRCode code){
-		String IRins=code.IRCODE;	
-		IRIns ins=code.ins;
-		String op1=code.op1,op2=code.op2,result=code.result;
-		AssemblyCode asscode=new AssemblyCode();
-
-		if(ins==IRIns.STOREI||ins==IRIns.STOREF){
-
-			if(op1.charAt(0)!='$'&& result.charAt(0)!='$')
-			{
-				String tmp=GetReg();
-				Micro.registerMap.put(op1,tmp);
-				AssemblyCode tmpCode=new AssemblyCode();
-
-
-				tmpCode.ASCODE="move "+ op1 +" "+tmp ;
-				asCode.add(tmpCode);
-				asscode.ASCODE="move "+ tmp +" "+result ;
-
-			}else{
-				if(op1.charAt(0)=='$')
-					op1=Micro.registerMap.get(op1);
-
-				if(result.charAt(0)=='$'){
-					String tmp=GetReg();
-					Micro.registerMap.put(result,tmp);
-					result=tmp;
-				}
-				asscode.ASCODE="move "+ op1 +" "+result ;
-			}
-		}
-		if(ins==IRIns.WRITEI){
-			asscode.ASCODE="sys writei "+ result  ;
-		}
-		if(ins==IRIns.WRITEF){
-
-			asscode.ASCODE="sys writer "+ result  ;
-		}
-		if(ins==IRIns.WRITES){
-			asscode.ASCODE="sys writes "+ result  ;
-		}
-		if(ins==IRIns.READI){
-			asscode.ASCODE="sys readi "+ result  ;
-		}
-		if(ins==IRIns.READF){
-			asscode.ASCODE="sys readr "+ result  ;
-		}
-		if(code.isALU)
-		{
-
-
-			prepAluIns(code);
-			asscode=new AssemblyCode();
-			switch (ins){
-
-				case ADDI:
-					asscode.ASCODE="addi "+ code.op2 +" "+code.result ;
-					break;
-				case ADDF:
-					asscode.ASCODE="addr "+ code.op2 +" "+code.result ;
-					break;
-				case SUBI:
-					asscode.ASCODE="subi "+code.op2 +" "+code.result ;
-					break;
-				case SUBF:
-					asscode.ASCODE="subr "+code.op2 +" "+code.result ;
-					break;
-				case MULI:
-					asscode.ASCODE="muli "+code.op2 +" "+code.result ;
-					break;
-				case MULF:
-					asscode.ASCODE="mulr "+ code.op2 +" "+code.result ;
-					break;
-				case DIVI:
-					asscode.ASCODE="divi "+ code.op2 +" "+code.result ;
-					break;
-				case DIVF:
-					asscode.ASCODE="divr "+ code.op2 +" "+code.result ;
-					break;
-
-			}
-
-
-		}
-		if(code.isCondBranch){
-
-			prepCondBranchIns(code);
-			switch (ins){
-				case GT:
-
-					asscode.ASCODE="jgt "+ result  ;
-					break;
-				case GE:
-
-					asscode.ASCODE="jge "+ result  ;
-					break;
-				case LT:
-
-					asscode.ASCODE="jlt "+ result  ;
-					break;
-				case LE:
-
-					asscode.ASCODE="jle "+ result  ;
-					break;
-				case EQ:
-
-					asscode.ASCODE="jeq "+ result  ;
-					break;
-				case NE:
-
-					asscode.ASCODE="jne "+ result  ;
-					break;
-
-
-			}
-		}
-		if(ins==IRIns.JUMP){
-
-			asscode.ASCODE="jmp "+ result  ;
-
-
-		}
-		if(ins==IRIns.LABEL){
-
-			asscode.ASCODE= "label "+ result  ;
-
-		}
-		if(asscode!=null)
-			asCode.add(asscode) ;
-
-	}
+	public static ProgramFunctions program=new ProgramFunctions();
+	
 	public static void main(String[] args) throws Exception {
 		String inputFile = null;
 		if ( args.length>0 ) inputFile = args[0];
@@ -294,10 +80,22 @@ public class Micro {
 
 		  System.out.println("Symbol table "+symbolTables.tables.get(i).scopeID);
 		  for (String key : symbolTables.tables.get(i).table.keySet()) {
-		  if(symbolTables.tables.get(i).table.get(key).GetType()==Type.STRING)	
-		  System.out.println("name "+symbolTables.tables.get(i).table.get(key).GetName()+" type "+symbolTables.tables.get(i).table.get(key).GetType()+" value "+symbolTables.tables.get(i).table.get(key).GetValue()); 
-		  else if(symbolTables.tables.get(i).table.get(key).GetType()!=Type.FUN)	
-		  System.out.println("name "+symbolTables.tables.get(i).table.get(key).GetName()+" type "+symbolTables.tables.get(i).table.get(key).GetType());
+		  if(symbolTables.tables.get(i).table.get(key).getType()==Type.STRING)	
+		  System.out.println("name "+symbolTables.tables.get(i).table.get(key).getName()+" type "+symbolTables.tables.get(i).table.get(key).getType()+" value "+symbolTables.tables.get(i).table.get(key).getValue()); 
+		  else if(symbolTables.tables.get(i).table.get(key).getType()!=Type.FUN)	
+		  System.out.println("name "+symbolTables.tables.get(i).table.get(key).getName()+" type "+symbolTables.tables.get(i).table.get(key).getType());
+		  }
+		  if(i!=-1+symbolTables.tables.size())
+		  System.out.println("");
+
+
+		  }*/
+	/*for(int i=0;i<symbolTables.tables.size();i++){
+			
+		  System.out.println("Symbol table "+symbolTables.tables.get(i).scopeID  );
+		  for (String key : symbolTables.tables.get(i).table.keySet()) {
+			
+		  System.out.println("name "+symbolTables.tables.get(i).table.get(key).getName()+" type "+symbolTables.tables.get(i).table.get(key).getType()  );
 		  }
 		  if(i!=-1+symbolTables.tables.size())
 		  System.out.println("");
@@ -308,37 +106,31 @@ public class Micro {
 		//	for(int i=0;i<astTrees.size();i++)
 		//	astTrees.get(i).printroot();
 
-		for (String key : symbolTables.tables.get(0).table.keySet()) {
-			AssemblyCode asscode=new AssemblyCode();
-
-			if(symbolTables.tables.get(0).table.get(key).GetType()!=Type.FUN){	
-				asscode.ASCODE=("var "+symbolTables.tables.get(0).table.get(key).GetName()); 
-
-				asCode.add(asscode);}
-		}
+		
+		
 		/*
-		   AssemblyCode asscode=new AssemblyCode();
-
-		   asscode.ASCODE=("aaa"); 
-
-		   asCode.add(asscode);
-		 */
 		for(int i=0;i<astTrees.size();i++){
 			astTrees.get(i).ConvertToIR();
 			astTrees.get(i).printIR();
 			for(int j=0;j<astTrees.get(i).code.size();j++)
 				GenAssembly(astTrees.get(i).code.get(j));
-		}
+		}*/
+		program.convertToIR();
+		program.printIR();
+		
+		
+		program.convertToAssembly();
+		program.printAssembly();
 		AssemblyCode asscode=new AssemblyCode();
 
 		asscode.ASCODE=("sys halt");
 
-		asCode.add(asscode);
+		//asCode.add(asscode);
 
-		for(int i=0;i<asCode.size();i++){
-			System.out.println(asCode.get(i).ASCODE);
+		//for(int i=0;i<asCode.size();i++){
+		//	System.out.println(asCode.get(i).ASCODE);
 
-		}
+		//}
 
 
 

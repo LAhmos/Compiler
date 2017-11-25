@@ -163,7 +163,7 @@ public class AstTree{
 			else {
 				if(var.getStackLabel()!=null)
 					tmp.result=var.getStackLabel();
-				 else 
+				else 
 					var.setStackLabel(tmp.result=fun.getLocal());
 
 			}
@@ -329,23 +329,23 @@ public class AstTree{
 				tmp.ins=IRIns.POP;
 				fun.addIR(tmp);
 			}
-				tmp = new IRCode();
-				tmp.ins=IRIns.POP;
-				tmp.result=fun.getTmp();
-				fun.addIR(tmp);
+			tmp = new IRCode();
+			tmp.ins=IRIns.POP;
+			tmp.result=fun.getTmp();
+			fun.addIR(tmp);
 			return tmp;
-			
-			
-			
+
+
+
 		}else if( base.type ==NodeType.return_sta){
 			//System.out.println("ret-");
 			return_sta node=(return_sta)base;
 			IRCode res=convertToIR(node.return_exp);
 			IRCode tmp = new IRCode();
 			if(res.resultType==Type.INT)
-			tmp.ins=IRIns.STOREI;
+				tmp.ins=IRIns.STOREI;
 			else 
-			tmp.ins=IRIns.STOREF;
+				tmp.ins=IRIns.STOREF;
 			tmp.setOperand(res.result,null,"$R");
 			fun.addIR(tmp);	
 			tmp = new IRCode();

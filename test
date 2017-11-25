@@ -1,17 +1,21 @@
-PROGRAM expr
+PROGRAM test
 BEGIN
 
-	INT a,b,c,d;
-	FLOAT x,y,z,t;
-
+	INT i,a,num;
+	
 	FUNCTION VOID main()
 	BEGIN
-		IF ( a*2=4+5 OR NOT c=0 OR d>9 AND FALSE)
+		num := 7;
+		i := 2;	
+		a := 42;
+	
+		IF (i<5)
+			num := num +a;
 			
+		ELIF (i >= 5)
+			num := num - a;
 		ENDIF
-		
 
-	END	
+		WRITE(num);
+	END
 END
-
-

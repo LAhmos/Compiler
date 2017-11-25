@@ -34,8 +34,9 @@ public class ProgramFunctions{
 	
 	public void printIR(){
 		for (int i=0;i<funList.size();i++)
-			funList.get(i).printIR();
-		
+		{	funList.get(i).printIR();
+		funList.get(i).liveAnalysis();
+}
 	}
 	public void printAssembly(){
 		for (String key : Micro.symbolTables.tables.get(0).table.keySet()) {

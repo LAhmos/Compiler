@@ -19,6 +19,134 @@ public class FunctionUnit{
 		return this.symbolTable.getScopeID();
 
 	}
+	public IRCode getIRfromLabel(String label){
+		for(int i=0;i<funIRCode.size();i++){
+			IRCode curr = funIRCode.get(i);
+			if(curr.ins==IRIns.LABEL&& curr.result.equals(label))
+				return curr;
+
+		}
+		return null;
+
+	}
+	public void genCFG(){
+		IRCode curr,target; 
+		for(int i=0;i<funIRCode.size();i++){
+
+			curr = funIRCode.get(i);
+			if(i!=0){
+				if(funIRCode.get(i-1).ins!=IRIns.JUMP)
+					curr.addPre(funIRCode.get(i-1));
+
+
+			}
+			if(i!= funIRCode.size()-1){
+
+
+				if(curr.ins!=IRIns.JUMP)
+					curr.addSucc(funIRCode.get(i+1));
+
+
+
+			}
+			if(curr.isCondBranch || (curr.ins==IRIns.JUMP)){
+				target=getIRfromLabel(curr.result);
+				target.addPre(curr);
+				curr.addSucc(target);
+
+			}
+
+		}
+
+
+	}
+
+	public void liveAnalysis(){
+		IRCode curr;
+		genCFG();
+		defineLeaders();
+		Set<IRCode> workList=new LinkedHashSet<IRCode> ();
+		for (int i=funIRCode.size()-1;i>=0;i--){
+			workList.add(funIRCode.get(i));
+			funIRCode.get(i).setGenKill();
+		}
+			while(!workList.isEmpty()){
+
+			curr = workList.iterator().next(); 
+			workList.remove(curr);
+			curr.calOut();
+			if(curr.calIn()){
+				if(curr.pre!=null)	
+					for(int i=0;i<curr.pre.size();i++)
+						workList.add(curr.pre.get(i));
+
+			}
+
+		}
+
+
+		for (int i=0;i<funIRCode.size();i++){
+			System.out. println ("isLead:"+ funIRCode.get(i).isLeader);	
+			System.out. println ( funIRCode.get(i).IRCODE);	
+			System.out. println ( funIRCode.get(i).genSet);	
+			System.out. println ( funIRCode.get(i).killSet);	
+			System.out. println ( "in:"+funIRCode.get(i).inSet);	
+			System.out. println ("out:"+ funIRCode.get(i).outSet);	
+		}
+
+
+	}
+	public void defineLeaders(){
+		
+		IRCode curr;
+		funIRCode.get(0).isLeader=true;
+		for(int i=1;i<funIRCode.size();i++){
+			curr=funIRCode.get(i);
+
+			if(curr.isCondBranch || (curr.ins==IRIns.JUMP)){
+				for(int j=0;j<curr.succ.size();j++)
+					curr.succ.get(j).isLeader=true;
+
+			}
+		} 
+
+		/*	if(curr.pre.size()>1){
+			curr.isLeader=true;
+			continue ;
+			}
+			
+			else if(curr.pre.size()==1){
+
+				if(curr.pre.get(0) != funIRCode.get(i-1) ) {
+					curr.isLeader=true;
+					continue ;
+				}
+
+			}
+			else if(i==funIRCode.size()-1) {
+				continue;
+
+			}
+			else if( curr.succ.size()>1){
+			curr.isLeader=true;
+			continue ;
+
+			}
+			else if( curr.succ.size()==1) {
+
+					if(curr.succ.get(0) != funIRCode.get(i+1) ) {
+					curr.isLeader=true;
+					continue ;
+				}
+
+
+			}
+			*/
+		
+	
+		//curr=funIRCode.get(funIRCode.size()-1);
+
+	}
 	public String getTmp(){	
 		String tmp=new String();
 		tmp="$T"+tmpCounter;
@@ -73,7 +201,13 @@ public class FunctionUnit{
 	public void genFunIR(){
 		for(int i=0;i<funTrees.size();i++)
 			funTrees.get(i).ConvertToIR();
-		getIR(1).result=String.valueOf(localCounter-1);
+		//getIR(1).result=String.valueOf(localCounter-1);
+		if(getIR(getIRSize()-1).ins!=IRIns.RET){
+
+			IRCode lab=new IRCode();
+			lab.ins=IRIns.RET;
+			this.addIR(lab);
+		}
 
 	}
 	public IRCode getIR(int i){
@@ -395,7 +529,7 @@ public class FunctionUnit{
 
 				String tmp=	this.getMapValue(result);
 				if(tmp!=null){
-			
+
 					result=tmp;
 				}
 
@@ -405,23 +539,23 @@ public class FunctionUnit{
 
 		}
 		if(ins==IRIns.JSR  ){
-			
+
 			for(int i=0;i<ProgramFunctions.machineReg;i++)
-				{
-					AssemblyCode tmp= new AssemblyCode();
-					tmp.ASCODE="push r"	+String.valueOf(i) ;
-					asCode.add(tmp) ;
-				}
+			{
+				AssemblyCode tmp= new AssemblyCode();
+				tmp.ASCODE="push r"	+String.valueOf(i) ;
+				asCode.add(tmp) ;
+			}
 			asscode.ASCODE= "jsr "+( (result==null)?"":result );
-			
+
 			asCode.add(asscode) ;
-				asscode=null;
+			asscode=null;
 			for(int i=ProgramFunctions.machineReg-1;i>=0;i--)
-				{
-					AssemblyCode tmp= new AssemblyCode();
-					tmp.ASCODE="pop r"	+String.valueOf(i) ;
-					asCode.add(tmp) ;
-				}
+			{
+				AssemblyCode tmp= new AssemblyCode();
+				tmp.ASCODE="pop r"	+String.valueOf(i) ;
+				asCode.add(tmp) ;
+			}
 		}
 		if(asscode!=null)
 			asCode.add(asscode) ;

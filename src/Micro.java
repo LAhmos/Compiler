@@ -119,8 +119,8 @@ public class Micro {
 		program.printIR();
 		
 		
-		//program.convertToAssembly();
-		//program.printAssembly();
+		program.convertToAssembly();
+		program.printAssembly();
 		//AssemblyCode asscode=new AssemblyCode();
 
 		//asscode.ASCODE=("sys halt");

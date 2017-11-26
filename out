@@ -1,57 +1,170 @@
-;LABEL add
+;LABEL factorial
 ;LINK 
-;ADDF $P1 $P2 $T1
-;STOREF $T1 $L1
-;RET 
-;LABEL multiply
-;LINK 
-;MULF $P1 $P2 $T1
-;STOREF $T1 $L1
-;STOREF $L1 $R
-;RET 8
+;WRITEI x
+;STOREI 1 $T1
+;NE $P1 $T1 BLOCK_1_Else
+;STOREI 1 $R
+;RET 7
+;JUMP BLOCK_1_Out
+;LABEL BLOCK_1_Else
+;PUSH 
+;STOREI 1 $T2
+;SUBI $P1 $T2 $T3
+;PUSH $T3
+;JSR factorial
+;POP 
+;POP $T4
+;STOREF $T4 $L2
+;MULI $L2 $P1 $T5
+;STOREI $T5 $L1
+;LABEL BLOCK_1_Out
+;STOREI $L1 $R
+;RET 7
 ;LABEL main
 ;LINK 
-;WRITES intro
-;WRITES first
-;READF $L1
-;WRITES second
-;READF $L2
-;WRITES third
-;READF $L3
+;WRITES input
+;READI $L1
+;STOREI 1 $T1
+;NE $L1 $T1 BLOCK_3_Else
+;STOREI 1 $T2
+;STOREI $T2 $L2
+;JUMP BLOCK_3_Out
+;LABEL BLOCK_3_Else
+;STOREI 1 $T3
+;LE $L1 $T3 BLOCK_4_Else
+;STOREI 1 $T4
+;STOREI $T4 x
 ;PUSH 
 ;PUSH $L1
-;PUSH $L2
-;JSR multiply
+;JSR factorial
 ;POP 
-;POP 
-;POP $T1
-;STOREF $T1 $L5
-;PUSH 
-;PUSH $L5
-;PUSH $L3
-;JSR add
-;POP 
-;POP 
-;POP $T2
-;STOREF $T2 $L4
-;WRITEF $L1
-;WRITES star
-;WRITEF $L2
-;WRITES plus
-;WRITEF $L3
-;WRITES equal
-;WRITEF $L4
+;POP $T5
+;STOREF $T5 $L2
+;JUMP BLOCK_3_Out
+;LABEL BLOCK_4_Else
+;STOREI 0 $T6
+;STOREI $T6 $L2
+;LABEL BLOCK_3_Out
+;STOREI x $L1
+;WRITEI $L2
 ;WRITES eol
 ;STOREI 0 $R
 ;RET 6
-str intro "You will be asked for three float numbers\n"
-str first "Please enter the first float number: "
-str second "Please enter the second float number: "
-str third "Please enter the third float number: "
+;LABEL factorial
+;LINK 
+;WRITEI x
+; x gets reg:r0
+; freeing  reg:r0 is dirtyfalse
+;STOREI 1 $T1
+;$T1 gets reg:r0
+;NE $P1 $T1 BLOCK_1_Else
+; $P1 gets reg:r1
+;$T1 has reg:r0
+; freeing  reg:r0 is dirtytrue
+;STOREI 1 $R
+;RET 7
+;JUMP BLOCK_1_Out
+;LABEL BLOCK_1_Else
+;PUSH 
+;STOREI 1 $T2
+;$T2 gets reg:r0
+;SUBI $P1 $T2 $T3
+; $P1 gets reg:r1
+;$T2 has reg:r0
+; changing reg r1 from $P1to $T3
+; freeing  reg:r1 is dirtyfalse
+; freeing  reg:r0 is dirtytrue
+;PUSH $T3
+;$T3 has reg:r1
+; freeing  reg:r1 is dirtytrue
+;JSR factorial
+;POP 
+;POP $T4
+;$T4 gets reg:r0
+;STOREF $T4 $L2
+;$T4 has reg:r0
+;$L2 gets reg:r1
+; freeing  reg:r0 is dirtytrue
+;MULI $L2 $P1 $T5
+;$L2 has reg:r1
+; $P1 gets reg:r0
+; changing reg r1 from $L2to $T5
+; freeing  reg:r1 is dirtytrue
+; freeing  reg:r0 is dirtyfalse
+;STOREI $T5 $L1
+;$T5 has reg:r1
+;$L1 gets reg:r0
+; freeing  reg:r1 is dirtytrue
+;LABEL BLOCK_1_Out
+;STOREI $L1 $R
+; $L1 gets reg:r0
+;RET 7
+;LABEL main
+;LINK 
+;WRITES input
+;READI $L1
+;$L1 gets reg:r0
+;STOREI 1 $T1
+;$T1 gets reg:r1
+;NE $L1 $T1 BLOCK_3_Else
+;$L1 has reg:r0
+;$T1 has reg:r1
+; freeing  reg:r1 is dirtytrue
+;STOREI 1 $T2
+;$T2 gets reg:r0
+;STOREI $T2 $L2
+;$T2 has reg:r0
+;$L2 gets reg:r1
+; freeing  reg:r0 is dirtytrue
+;JUMP BLOCK_3_Out
+;LABEL BLOCK_3_Else
+;STOREI 1 $T3
+;$T3 gets reg:r0
+;LE $L1 $T3 BLOCK_4_Else
+; $L1 gets reg:r1
+;$T3 has reg:r0
+; freeing  reg:r0 is dirtytrue
+;STOREI 1 $T4
+;$T4 gets reg:r0
+;STOREI $T4 x
+;$T4 has reg:r0
+;x gets reg:r1
+; freeing  reg:r0 is dirtytrue
+;PUSH 
+;PUSH $L1
+; $L1 gets reg:r0
+; freeing  reg:r0 is dirtyfalse
+;JSR factorial
+;POP 
+;POP $T5
+;$T5 gets reg:r0
+;STOREF $T5 $L2
+;$T5 has reg:r0
+;$L2 gets reg:r1
+; freeing  reg:r0 is dirtytrue
+;JUMP BLOCK_3_Out
+;LABEL BLOCK_4_Else
+;STOREI 0 $T6
+;$T6 gets reg:r0
+;STOREI $T6 $L2
+;$T6 has reg:r0
+;$L2 gets reg:r1
+; freeing  reg:r0 is dirtytrue
+;LABEL BLOCK_3_Out
+;STOREI x $L1
+; x gets reg:r0
+;$L1 gets reg:r1
+; freeing  reg:r0 is dirtyfalse
+; freeing  reg:r1 is dirtytrue
+;WRITEI $L2
+; $L2 gets reg:r0
+; freeing  reg:r0 is dirtyfalse
+;WRITES eol
+;STOREI 0 $R
+;RET 6
+str input "Please enter an integer number: "
 str eol "\n"
-str star "*"
-str plus "+"
-str equal "="
+var x
 push 
 push r0
 push r1
@@ -59,72 +172,105 @@ push r2
 push r3
 jsr main
 sys halt
-label add
-link 1
-move $7 r0
-addr $6 r0
-move r0 $-1
+label factorial
+link 7
+move x r0
+sys writei r0
+move 1 r0
+move $6 r1
+cmpi r1 r0
+move r0 $-3
+jne BLOCK_1_Else
+move 1 $7
 unlnk
 ret 
-label multiply
-link 1
-move $7 r0
-mulr $6 r0
+jmp BLOCK_1_Out
+label BLOCK_1_Else
+push 
+move 1 r0
+move $6 r1
+subi r0 r1
+move r0 $-4
+move r1 $-5
+push r1
+push r0
+push r1
+push r2
+push r3
+jsr factorial
+pop r3
+pop r2
+pop r1
+pop r0
+pop 
+pop r0
+move r0 r1
+move r0 $-6
+move $6 r0
+move r1 $-2
+muli r0 r1
+move r1 r0
+move r1 $-7
 move r0 $-1
-move $-1 r1
-move r1 $8
+label BLOCK_1_Out
+move $-1 r0
+move r0 $7
 unlnk
 ret 
 label main
-link 5
-sys writes intro
-sys writes first
-sys readr $-1
-sys writes second
-sys readr $-2
-sys writes third
-sys readr $-3
-push 
-push $-1
-push $-2
-push r0
-push r1
-push r2
-push r3
-jsr multiply
-pop r3
-pop r2
-pop r1
-pop r0
-pop 
-pop 
-pop r0
+link 8
+sys writes input
+sys readi r0
+move 1 r1
+cmpi r0 r1
+move r1 $-3
+move r0 $-1
+jne BLOCK_3_Else
+move 1 r0
+move r0 r1
+move r0 $-4
+move r1 $-2
+jmp BLOCK_3_Out
+label BLOCK_3_Else
+move 1 r0
+move $-1 r1
+cmpi r1 r0
 move r0 $-5
+jle BLOCK_4_Else
+move 1 r0
+move r0 r1
+move r0 $-6
 push 
-push $-5
-push $-3
+move $-1 r0
+push r0
+move r1 x
 push r0
 push r1
 push r2
 push r3
-jsr add
+jsr factorial
 pop r3
 pop r2
 pop r1
 pop r0
 pop 
-pop 
-pop r1
-move r1 $-4
-sys writer $-1
-sys writes star
-sys writer $-2
-sys writes plus
-sys writer $-3
-sys writes equal
-sys writer $-4
+pop r0
+move r0 r1
+move r0 $-7
+move r1 $-2
+jmp BLOCK_3_Out
+label BLOCK_4_Else
+move 0 r0
+move r0 r1
+move r0 $-8
+move r1 $-2
+label BLOCK_3_Out
+move x r0
+move r0 r1
+move r1 $-1
+move $-2 r0
+sys writei r0
 sys writes eol
-move 0 r2
-move r2 $6
+move 0 $6
 unlnk
 ret 

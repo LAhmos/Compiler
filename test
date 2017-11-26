@@ -1,21 +1,41 @@
-PROGRAM test
+PROGRAM factorial2
 BEGIN
-
-	INT i,a,num;
-	
-	FUNCTION VOID main()
+	STRING input := "Please enter an integer number: ";
+	STRING eol := "\n";
+	INT x;
+	FUNCTION INT factorial(INT a)
 	BEGIN
-		num := 7;
-		i := 2;	
-		a := 42;
-	
-		IF (i<5)
-			num := num +a;
+		
+		INT ret;
+		INT tret;
+WRITE(x);
+		IF (a = 1)
+			RETURN 1;
+		ELSE
 			
-		ELIF (i >= 5)
-			num := num - a;
+			tret := factorial(a-1);
+			ret := tret*a;
 		ENDIF
+		RETURN ret;
+	END
 
-		WRITE(num);
+	FUNCTION INT main ()
+	BEGIN
+		INT num;
+		INT result;
+		WRITE(input);
+		READ(num);
+		
+		IF(num = 1)
+			result := 1;
+		ELIF(num >1)
+			x:=1;
+			  result := factorial(num); 
+	    	ELSE
+			  result := 0;
+		ENDIF
+		num:=x;
+		WRITE(result,eol);
+		RETURN 0;
 	END
 END

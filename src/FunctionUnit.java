@@ -4,7 +4,49 @@ import java.util.Stack;
 import java.util.*;  
 
 import java.util.Random;
+class Loop{
 
+	public IRCode start;
+	public IRCode end;
+	public String loop_label;
+	public String loop_exit_label;
+	public Set<String> loopInv=new HashSet<String>();
+	public ArrayList<Integer> loopExits=new ArrayList<Integer>();
+	public int start_indx;
+	public int end_indx;
+	public boolean isInsideLoop(IRCode var) {return (var.index>start_indx&& var.index< end_indx);}
+	public boolean isInsideLoop(int var) {return (var>start_indx&& var< end_indx);}
+	public boolean isInv(String op) { 
+		if(IRCode.defineType(op)==opType.number) 
+			return true; 
+		return ( loopInv.contains(op)); 
+	}
+	public boolean isAllDefInsideLoop ( ArrayList<Integer> var) {
+
+		for( int i=0;i<var.size();i++){
+
+			if( isInsideLoop(var.get(i))) return false; 
+
+		}
+		return true;
+	}
+	public boolean isDominatingAllExits(IRCode var){
+		int ind=var.index;
+		if(!isInsideLoop(ind)) return false;
+		for(int i=0;i<loopExits.size();i++){
+			if(ind>loopExits.get(i)) return false;
+
+		}
+		return true;
+
+	}
+	public boolean isLiveBeforeLoop(IRCode var){
+
+		return (start.outSet.contains(var.result));
+
+	}
+
+}
 
 public class FunctionUnit{
 	private ArrayList <AstTree> funTrees=new ArrayList<AstTree>();
@@ -18,6 +60,7 @@ public class FunctionUnit{
 	private Scope symbolTable;
 	private ArrayList<Register> registersArray = new ArrayList<Register>();
 	private  LinkedHashMap<String , String> spillMap= new LinkedHashMap<String,String>();
+	private ArrayList<Loop> loops= new ArrayList<Loop>();
 	public FunctionUnit(){
 		for(int i=0;i<ProgramFunctions.machineReg;i++){
 			registersArray.add(new Register(i)); 
@@ -36,6 +79,71 @@ public class FunctionUnit{
 		}
 		return null;
 
+	}
+	public void defineLoops (){
+
+		for(int i=0;i<funIRCode.size();i++){
+			IRCode curr = funIRCode.get(i);
+			if(curr.ins==IRIns.LABEL&& curr.result.contains("_Loop")){
+				Loop var= new Loop();
+				var.start=curr;
+				var.start_indx=i;
+				String outLab=curr.result.substring(0,curr.result.indexOf("_Loop"))+"_OUT";
+				System.out.println(";;; out;;;; " + outLab);
+				var.loop_exit_label=outLab;
+				var.loop_label=curr.result;
+				var.end= getIRfromLabel(outLab);
+				var.end_indx= funIRCode.indexOf(var.end);
+				loops.add(var);
+				defineLoopExits(var);
+			}	
+		}
+
+	}
+	public void defineLoopExits(Loop var){
+		boolean isFirst=true;
+		for(int i=var.start_indx;i<var.end_indx;i++){
+
+			IRCode curr = funIRCode.get(i);
+			if(curr.isCondBranch){
+				if(isFirst) {
+					isFirst=false;
+					continue;
+		
+				}
+				if( curr.result.equals(var.loop_exit_label))
+
+					var.loopExits.add(i);
+
+			}
+			if(curr.ins==IRIns.JUMP) {
+				if(isFirst) {
+					isFirst=false;
+					continue;
+		
+				}
+				if(curr.result.equals(var.loop_exit_label))
+
+					var.loopExits.add(i);
+			}
+
+		}
+
+
+	}
+	public boolean definedMoreThanOnce(Loop var,IRCode code){
+
+		
+		for(int i=var.start_indx;i<var.end_indx;i++){
+
+			IRCode curr = funIRCode.get(i);
+			if(curr==code) continue;
+			if(curr.result.equals(code.result)) return true;
+		
+		
+		
+		}
+		return false;
 	}
 	public void genCFG(){
 		IRCode curr,target; 
@@ -62,6 +170,7 @@ public class FunctionUnit{
 		IRCode curr;
 		genCFG();
 		defineLeaders();
+		defineLoops();
 		Set<IRCode> workList=new LinkedHashSet<IRCode> ();
 		for (int i=funIRCode.size()-1;i>=0;i--){
 			workList.add(funIRCode.get(i));
@@ -79,17 +188,207 @@ public class FunctionUnit{
 
 			}
 		}
-		/*
-		   for (int i=0;i<funIRCode.size();i++){
-		   System.out. println ("isLead:"+ funIRCode.get(i).isLeader);	
-		   System.out. println ( funIRCode.get(i).IRCODE);	
-		   System.out. println ( funIRCode.get(i).genSet);	
-		   System.out. println ( funIRCode.get(i).killSet);	
-		   System.out. println ( "in:"+funIRCode.get(i).inSet);	
-		   System.out. println ("out:"+ funIRCode.get(i).outSet);	
-		   }
 
+		/*   for (int i=0;i<funIRCode.size();i++){
+		     System.out. println ("isLead:"+ funIRCode.get(i).isLeader);	
+		     System.out. println ( funIRCode.get(i).IRCODE);	
+		     System.out. println ( funIRCode.get(i).genSet);	
+		     System.out. println ( funIRCode.get(i).killSet);	
+		     System.out. println ( "in:"+funIRCode.get(i).inSet);	
+		     System.out. println ("out:"+ funIRCode.get(i).outSet);	
+		     }
 		 */
+
+
+	}
+	public void reachingAnalysis(){
+		IRCode curr;
+		Set<IRCode> workList=new LinkedHashSet<IRCode> ();
+		for (int i=0;i<funIRCode.size();i++){
+			workList.add(funIRCode.get(i));
+			funIRCode.get(i).setGenKill_def();
+		}
+		while(!workList.isEmpty()){
+
+			curr = workList.iterator().next(); 
+			workList.remove(curr);
+			curr.calIn_def();
+			if(curr.calOut_def()){
+				if(curr.succ!=null)	
+					for(int i=0;i<curr.succ.size();i++)
+						workList.add(curr.succ.get(i));
+
+			}
+		}
+
+		for (int i=0;i<funIRCode.size();i++){
+			System.out. println (";isLead:"+ funIRCode.get(i).isLeader);	
+			System.out. println ( ";"+funIRCode.get(i).IRCODE);	
+			System.out. println ( ";"+funIRCode.get(i).genSet_def);	
+			System.out. println ( ";"+funIRCode.get(i).killSet_def);	
+			System.out. println ( ";in:"+funIRCode.get(i).inSet_def);	
+			System.out. println (";out:"+ funIRCode.get(i).outSet_def);	
+		}
+
+		for (int i=0;i<loops.size();i++){
+			System.out. println ( ";"+loops.get(i));	
+			System.out. println ( ";start:"+loops.get(i).start.IRCODE + loops.get(i).start_indx);	
+			System.out. println ( ";end:"+loops.get(i).end.IRCODE+ loops.get(i).end_indx);
+			for(int mm: loops.get(i).loopExits)  
+			System.out. println ( ";Exit: "+mm );
+		
+			System.out. println ( ";---------" );
+		}
+
+		//optmizeLoop(0);
+	}
+	public void optmizeLoop(int r){
+
+		Loop loop= loops.get(r);
+		Set<IRCode> moveCand=new LinkedHashSet<IRCode>();
+		IRCode curr;
+		boolean op1Inv,op2Inv;
+		boolean change =true;
+		while (change ){
+			change =false;
+			for(int i=loop.start_indx;i<loop.end_indx;i++){
+
+				curr=funIRCode.get(i);
+				if(curr.isALU ){
+
+					op1Inv=loop.isInv(curr.op1);	
+					op2Inv=loop.isInv(curr.op2);	
+
+					if(!op1Inv) {
+						if(loop.isAllDefInsideLoop(curr.findDefintions(curr.op1))){
+							change = true ;
+							loop.loopInv.add(curr.op1);  
+							op1Inv=true;
+						}
+					}
+					if(!op2Inv) { 
+						if(loop.isAllDefInsideLoop(curr.findDefintions(curr.op2))){
+							change = true ;
+							loop.loopInv.add(curr.op2);  
+							op2Inv=true;
+						}
+
+					}
+
+					if( op1Inv&& op2Inv && !loop.loopInv.contains(curr.result)) { 
+						change = true ;
+						moveCand.add(curr);
+						loop.loopInv.add(curr.result);  
+					}
+
+
+
+
+				}
+				if( curr.ins==IRIns.STOREI || 	curr.ins==IRIns.STOREF){
+					op1Inv=loop.isInv(curr.op1);
+					if(!op1Inv) {
+						if(loop.isAllDefInsideLoop(curr.findDefintions(curr.op1))){
+							change = true ;
+							loop.loopInv.add(curr.op1);  
+							op1Inv=true;
+						}
+					}
+					if( op1Inv  && !loop.loopInv.contains(curr.result)) { 
+						change = true ;
+						moveCand.add(curr);
+						loop.loopInv.add(curr.result);  
+					}
+
+
+				}
+
+				op1Inv=op2Inv= false;
+
+			}
+
+
+		}
+
+		System.out.println("; loop inv---------- ");
+		for (String curr_t : loop.loopInv) 
+			System.out.println("; loop inv : "+curr_t);
+		System.out.println("; loop cand --------- ");
+		for (IRCode c : moveCand) 
+			System.out.println("; loop cand : "+c.IRCODE);
+		Set<IRCode> removeSet = new HashSet<IRCode>();
+		for (IRCode c : moveCand) {
+
+			
+
+			if(!loop.isDominatingAllExits(c)) {
+			System.out.println("; isNotmovable NT Dom " + c.IRCODE);
+				removeSet.add(c); 
+				continue;
+			}
+			if(definedMoreThanOnce(loop,c)){
+
+				System.out.println("; isNotmovable Defined " + c.IRCODE);
+				removeSet.add(c); 
+				continue;
+
+
+
+			}
+			if(loop.isLiveBeforeLoop(c)){
+
+				System.out.println("; isNotmovable LIVE " + c.IRCODE);
+				removeSet.add(c); 
+				continue;
+
+
+
+			}
+		
+
+		}
+		Set < IRCode> removeset2= new LinkedHashSet<IRCode>();
+	for (IRCode c : removeSet){ 
+		for (IRCode c2 : moveCand){
+			if(c==c2) continue;
+			if(c2.isALU)
+			{
+			if(c2.op1.equals(c.result) || c2.op2.equals(c.result))
+				removeset2.add(c2);
+		}
+		else		
+			if(c2.op1.equals(c.result) )
+				removeset2.add(c2);
+
+		}
+	}
+		moveCand.removeAll(removeSet);
+		moveCand.removeAll(removeset2);
+		for (IRCode c : moveCand) 
+			System.out.println("; movable : "+ c.index+"  "+c.IRCODE);
+		ArrayList<IRCode> newIR= new ArrayList<IRCode>();
+		for(int i=0;i<loop.start_indx;i++){
+
+			newIR.add(funIRCode.get(i));
+
+		}
+		for (IRCode c : moveCand) 
+			newIR.add(c);
+
+		for(int i=loop.start_indx;i<=loop.end_indx;i++) {
+			if(moveCand.contains(funIRCode.get(i))) continue;
+			newIR.add(funIRCode.get(i));
+		}
+		for(int i=loop.end_indx+1;i<funIRCode.size();i++) {
+
+			newIR.add(funIRCode.get(i));
+		}
+		funIRCode=newIR;
+		printIR();
+liveAnalysis();
+
+
+
 	}
 	public void defineLeaders(){
 
@@ -111,7 +410,7 @@ public class FunctionUnit{
 
 		}
 		//printIR();
-funIRCode.get(funIRCode.size()-1).isEndOfBlock=true;
+		funIRCode.get(funIRCode.size()-1).isEndOfBlock=true;
 
 	}
 	public String getTmp(){	
@@ -150,17 +449,34 @@ funIRCode.get(funIRCode.size()-1).isEndOfBlock=true;
 				return curr;
 			}
 		}
+		System.out.println(";all full");
 		Random rand=new Random();
-		int n= rand.nextInt(ProgramFunctions.machineReg);
+		do {
+			int n= rand.nextInt(ProgramFunctions.machineReg);
 
-		curr=registersArray.get(n);
+			curr=registersArray.get(n);
+			System.out.println(";reg: "+n+" to be kicked old var : "+curr.varName );
+		}
+		while  ( curr.varName.equals(code.op1) || curr.varName.equals(code.op2));
+
 		free(curr, code);
 		curr.allocReg(varName);
 		putMapValue(varName,curr);
 
 		return curr;
 	}
+	public void printReg(){
+		System.out.print(";{");
+		Register curr;
+		for(int i=0;i<ProgramFunctions.machineReg;i++){
+			curr=registersArray.get(i);
+			System.out.print("r"+i+"->"+curr.varName+"    ");
+		}
+		System.out.print("}\n");
+	}
 	public Register ensure(String op , IRCode code){
+		System.out.println(";enuse()");
+		printReg();
 		Register var= getMapValue(op);
 		if(var!=null){ 
 			System.out.println(";"+ op+ " has reg:"+var.regName);
@@ -194,7 +510,7 @@ funIRCode.get(funIRCode.size()-1).isEndOfBlock=true;
 		if(varType==opType.ret) return "$"+String.valueOf(getReturnAdd());		
 		if(varType==opType.temp) {
 			if(spillMap.get(var)!=null)
-				return "$"+spillMap.get(var);
+				return spillMap.get(var);
 			String loc=getMemTemp();
 			spillMap.put(var,loc);
 			return loc;
@@ -216,8 +532,8 @@ funIRCode.get(funIRCode.size()-1).isEndOfBlock=true;
 
 	}
 	public void free(Register reg, IRCode code){
-	
-		System.out.println("; freeing  reg:"+reg.regName + " is dirty"+ reg.isDirty);
+
+		System.out.println("; freeing  reg:"+reg.regName + " is dirty: "+ reg.isDirty);
 		if (reg.isDirty  )
 			spillReg(reg);
 		removeMapValue(reg.varName);
@@ -241,7 +557,9 @@ funIRCode.get(funIRCode.size()-1).isEndOfBlock=true;
 
 
 	}
-	public void addIR(IRCode var){
+	public void addIR(AstTree curr,IRCode var){
+		var.codeTree=curr;
+		var.index=funIRCode.size();
 		funIRCode.add(var);
 	}
 	public int getReturnAdd(){
@@ -257,10 +575,10 @@ funIRCode.get(funIRCode.size()-1).isEndOfBlock=true;
 		IRCode lab=new IRCode();
 		lab.ins=IRIns.LABEL;
 		lab.result=getFunName();
-		this.addIR(lab);
+		this.addIR(null,lab);
 		lab=new IRCode();
 		lab.ins=IRIns.LINK;
-		this.addIR(lab);
+		this.addIR(null,lab);
 
 
 	}
@@ -269,14 +587,17 @@ funIRCode.get(funIRCode.size()-1).isEndOfBlock=true;
 		funTrees.add(var);
 	}
 	public void genFunIR(){
-		for(int i=0;i<funTrees.size();i++)
+		for(int i=0;i<funTrees.size();i++){
 			funTrees.get(i).ConvertToIR();
+			funTrees.get(i).findUsedVar();
+
+		}
 		//getIR(1).result=String.valueOf(localCounter-1);
 		if(getIR(getIRSize()-1).ins!=IRIns.RET){
 
 			IRCode lab=new IRCode();
 			lab.ins=IRIns.RET;
-			this.addIR(lab);
+			this.addIR(null,lab);
 		}
 
 	}
@@ -399,7 +720,7 @@ funIRCode.get(funIRCode.size()-1).isEndOfBlock=true;
 
 	}
 	public void spillAtEndofBasic(){
-
+		System.out.println(";spill end of basic");
 		for(int j=0; j<ProgramFunctions.machineReg;j++){
 			spillReg(registersArray.get(j));
 			removeMapValue(registersArray.get(j).varName);
@@ -407,7 +728,7 @@ funIRCode.get(funIRCode.size()-1).isEndOfBlock=true;
 		}
 	}
 	public void spillGlobal(){
-		
+
 		for(int j=0; j<ProgramFunctions.machineReg;j++){
 			if( IRCode.defineType(registersArray.get(j).varName) == opType.var){ 
 				spillReg(registersArray.get(j));
@@ -677,7 +998,7 @@ public  void genAssemblyIR(IRCode code){
 		if(code.result!="$R"){
 			result = ensureWithoutLoad(code.result,code);
 			result.isDirty=true;
-		
+
 			asscode.ASCODE="move "+ op1.regName +" "+result.regName ;
 			asCode.add(asscode) ;
 			asscode=null;
@@ -732,13 +1053,14 @@ public  void genAssemblyIR(IRCode code){
 	if(ins==IRIns.READI){
 		result=ensureWithoutLoad(code.result,code);
 		result.isDirty=true;
+
+		asscode.ASCODE="sys readi "+  result.regName;
+		asCode.add(asscode) ;
 		if(!code.outSet.contains(code.result)){
 			free(result,code);
 		}
 
 
-		asscode.ASCODE="sys readi "+  result.regName;
-		asCode.add(asscode) ;
 		asscode=null;
 		if(code.isEndOfBlock) spillAtEndofBasic();
 
@@ -746,13 +1068,14 @@ public  void genAssemblyIR(IRCode code){
 	if(ins==IRIns.READF){
 		result=ensureWithoutLoad(code.result,code);
 		result.isDirty=true;
-		if(!code.outSet.contains(code.result)){
-			free(result,code);
-		}
 
 
 		asscode.ASCODE="sys readr "+  result.regName;
 		asCode.add(asscode) ;
+		if(!code.outSet.contains(code.result)){
+			free(result,code);
+		}
+
 		asscode=null;
 		if(code.isEndOfBlock) spillAtEndofBasic();
 	}
@@ -766,7 +1089,7 @@ public  void genAssemblyIR(IRCode code){
 		op2=ensure(code.op2,code );
 		changeRegOwner(op1,code.result,code);
 		op1.isDirty=true;
-	
+
 
 		switch (ins){
 
@@ -800,7 +1123,7 @@ public  void genAssemblyIR(IRCode code){
 		asCode.add(asscode) ;
 		asscode=null;
 		if(!code.outSet.contains(code.result)){
-			System.out.println("freeing " + code.result + "  " + op1.regName);
+			System.out.println(";freeing " + code.result + "  " + op1.regName);
 			free(op1,code);
 		}
 
@@ -899,11 +1222,13 @@ public  void genAssemblyIR(IRCode code){
 		else {
 			result=ensureWithoutLoad(code.result,code);
 			result.isDirty=true;
+
+			asscode.ASCODE="pop "	+result.regName ;
+			asCode.add(asscode) ;
+			asscode=null;
 			if(!code.outSet.contains(code.result)){
 				free(result,code);
 			}
-			asscode.ASCODE="pop "	+result.regName ;
-
 		}
 
 	}

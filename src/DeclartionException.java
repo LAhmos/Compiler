@@ -8,13 +8,13 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Stack;
 import java.util.*;  
-public class DeclartionException extends Exception{
+public class DeclartionException extends  RuntimeException {
    String var;
  
    DeclartionException (String str2) {
 	var=str2;
    }
    public String toString(){ 
-	return ("DECLARATION ERROR "+var) ;
+	return (var) ;
    }
 }

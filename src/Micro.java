@@ -3,6 +3,8 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.antlr.v4.runtime.tree.TerminalNode;
+import java.lang.System;
+import java.io.*;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -13,7 +15,7 @@ class MyErrorStrategy extends DefaultErrorStrategy {
 	@Override
 		protected void	beginErrorCondition(Parser recognizer)
 		{
-			throw new RuntimeException("Not Accepted");
+			throw new DeclartionException("Not Accepted");
 		}
 
 
@@ -31,6 +33,11 @@ public class Micro {
 	public static void main(String[] args) throws Exception {
 		String inputFile = null;
 		if ( args.length>0 ) inputFile = args[0];
+		String filename=args[0];
+	PrintStream stdout = System.out;
+		filename=filename.substring(0,filename.indexOf(".micro"));
+		PrintStream out = new PrintStream(new FileOutputStream(filename+".out"));
+		System.setOut(out);
 		InputStream is = System.in;
 		if ( inputFile!=null ) {
 			is = new FileInputStream(inputFile);
@@ -65,13 +72,15 @@ public class Micro {
 		MicroParser parser = new MicroParser(tokens);
 		ANTLRErrorStrategy es = new MyErrorStrategy(); 
 		parser.setErrorHandler(es);
-		//try
+		try
 		{
 			parser.program();
 		}
-		//	catch(RuntimeException e)
+		catch(DeclartionException e)
 		{	
-			//		System.exit(0);
+			System.setOut(stdout);
+			System.out.println(e);		
+			System.exit(0);
 
 		}
 

@@ -9,6 +9,7 @@ public class ProgramFunctions{
 	private FunctionUnit currFunction=null;
 	private ArrayList <FunctionUnit> funList = new ArrayList<FunctionUnit>();
 	static int machineReg=4;
+	static boolean isFor=false;
 	public void addFunction(FunctionUnit var){
 		funList.add(var);
 		currFunction=var;
@@ -35,7 +36,9 @@ public class ProgramFunctions{
 	public void printIR(){
 		for (int i=0;i<funList.size();i++)
 		{	funList.get(i).printIR();
+
 		funList.get(i).liveAnalysis();
+funList.get(i).reachingAnalysis();
 }
 	}
 	public void printAssembly(){
@@ -47,13 +50,11 @@ public class ProgramFunctions{
 					
 				System.out.println(("var "+Micro.symbolTables.tables.get(0).table.get(key).getName())); 
 
-				//asCode.add(asscode);
 			}
-							if(tmp==Type.STRING){
+			if(tmp==Type.STRING){
 					
 				System.out.println("str "+Micro.symbolTables.tables.get(0).table.get(key).getName() + " "+ Micro.symbolTables.tables.get(0).table.get(key).getValue()); 
 
-				//asCode.add(asscode);
 			}
 		}
 		System.out.println("push ");

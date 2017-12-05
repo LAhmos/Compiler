@@ -8,6 +8,7 @@ public class AstTree{
 	public boolean isTarget;
 	public String label;
 	private FunctionUnit fun;
+	public Set<String> usedVar= new HashSet<String>();
 	public void setFun(FunctionUnit var){
 		fun=var;
 
@@ -37,6 +38,33 @@ public class AstTree{
 
 
 	}
+public void findUsedVar(){
+findUsedVar2(root);
+
+}
+
+	public void findUsedVar2(AstNode _base){
+
+		if(_base==null ) return;
+		//System.out.println(_base.toString());
+
+
+		if(_base.type==NodeType.exp){
+			findUsedVar2( ((exp)_base).left);
+			findUsedVar2( ((exp)_base).right);
+		}
+		if ( _base.type==NodeType.id){
+			Symbol var = ((id)_base).getSymbol();
+			if( var.getScopeType() == ScopeType.Global)
+				usedVar.add(((id)_base).getName());
+			else {
+				usedVar.add(var.getStackLabel());
+					
+			}		
+		
+		}
+
+	}
 	public void ConvertToIR(){
 		convertToIR(root);
 	}
@@ -50,7 +78,7 @@ public class AstTree{
 			tmp.ins=IRIns.STOREF;
 		tmp.setOperand(symbol.result,null,reg);
 
-		fun.addIR(tmp);
+		fun.addIR(this,tmp);
 	}
 	public IRCode convertToIR(AstNode base){
 
@@ -111,7 +139,7 @@ public class AstTree{
 				  }*/
 			}
 			expCode=((exp)base).genIRCode(leftCode,rightCode,fun);
-			fun.addIR(expCode);
+			fun.addIR(this,expCode);
 			return expCode;
 
 		}
@@ -128,7 +156,7 @@ public class AstTree{
 				else 
 					tmp.ins= IRIns.READF;
 				tmp.setOperand(null,null,((read_write)base).id_list.get(i).getName());
-				fun.addIR(tmp);	
+				fun.addIR(this,tmp);	
 
 			}
 
@@ -148,7 +176,7 @@ public class AstTree{
 					tmp.ins= IRIns.WRITES;
 				tmp.setOperand(null,null,((read_write)base).id_list.get(i).getName());
 
-				fun.addIR(tmp);	
+				fun.addIR(this,tmp);	
 
 
 			}
@@ -185,6 +213,9 @@ public class AstTree{
 
 
 			}
+			String reg=fun.getTmp();
+			GenerateLoad(tmp,reg);
+			tmp.result=reg;
 			return tmp;
 
 		} else if(base.type==NodeType.cond){
@@ -216,7 +247,7 @@ public class AstTree{
 				tmp2.op2=rightCode.result;
 				//tmp2.setOperand(leftCode.result, rightCode.result, _);
 				tmp2.result="-*f";
-				fun.addIR(tmp2);	
+				fun.addIR(this,tmp2);	
 
 			}
 			else {
@@ -227,7 +258,7 @@ public class AstTree{
 					tmp2.ins=IRIns.JUMP;
 					//tmp2.setIR();
 					tmp2.result="-*f";
-					fun.addIR(tmp2);	
+					fun.addIR(this,tmp2);	
 
 
 
@@ -247,7 +278,7 @@ public class AstTree{
 				IRCode lab=new IRCode();
 				lab.ins=IRIns.LABEL;
 				lab.result=this.label;
-				fun.addIR(lab);	
+				fun.addIR(this,lab);	
 
 			}
 			/*ArrayList<IRCode> condCode=*/((boolExp)(tmp.cond)).genIR(fun);
@@ -262,7 +293,7 @@ public class AstTree{
 			/*	for(int i=0;i<condCode.size();i++){
 
 
-				fun.addIR(condCode.get(i));	
+				fun.addIR(this,condCode.get(i));	
 
 				}
 			 */
@@ -272,7 +303,7 @@ public class AstTree{
 			IRCode lab=new IRCode();
 			lab.ins=IRIns.LABEL;
 			lab.result=this.label;
-			fun.addIR(lab);	
+			fun.addIR(this,lab);	
 		}else if(base.type==NodeType.forSta){
 			FOR tmp=(FOR)base;
 
@@ -288,7 +319,7 @@ public class AstTree{
 
 			}
 			/*	for(int i=0;i<condCode.size();i++){
-				fun.addIR(condCode.get(i));	
+				fun.addIR(this,condCode.get(i));	
 
 				}
 			 */
@@ -299,40 +330,42 @@ public class AstTree{
 			IRCode tmp = new IRCode();
 			tmp.ins=IRIns.LABEL;
 			tmp.result=this.label;
-			fun.addIR(tmp);	
+			fun.addIR(this,tmp);	
 		}	
 		else if( base.type ==NodeType.jumpOut){
 			IRCode tmp = new IRCode();
 			tmp.ins=IRIns.JUMP;
 			tmp.result=this.label;
-			fun.addIR(tmp);	
+			fun.addIR(this,tmp);	
 		}
 		else if(base.type==NodeType.call_exp){
 			call_exp node=(call_exp)base;
 			ArrayList<String> result=new ArrayList<String>();
-			IRCode tmp = new IRCode();
+			IRCode tmp ;
+			 tmp = new IRCode();
 			tmp.ins=IRIns.PUSH;
-			fun.addIR(tmp);
+			fun.addIR(this,tmp);
 			for(int i=0;i<node.getParListSize();i++){
 				String res=convertToIR(node.parList.get(i)).result;				
 				tmp = new IRCode();
 				tmp.ins=IRIns.PUSH;
 				tmp.result=res;
-				fun.addIR(tmp);
+				fun.addIR(this,tmp);
 			}
+			
 			tmp = new IRCode();
 			tmp.ins=IRIns.JSR;
 			tmp.result=node.getFunName();
-			fun.addIR(tmp);
+			fun.addIR(this,tmp);
 			for(int i=0;i<node.getParListSize();i++){		
 				tmp = new IRCode();
 				tmp.ins=IRIns.POP;
-				fun.addIR(tmp);
+				fun.addIR(this,tmp);
 			}
 			tmp = new IRCode();
 			tmp.ins=IRIns.POP;
 			tmp.result=fun.getTmp();
-			fun.addIR(tmp);
+			fun.addIR(this,tmp);
 			return tmp;
 
 
@@ -347,11 +380,11 @@ public class AstTree{
 			else 
 				tmp.ins=IRIns.STOREF;
 			tmp.setOperand(res.result,null,"$R");
-			fun.addIR(tmp);	
+			fun.addIR(this,tmp);	
 			tmp = new IRCode();
 			tmp.ins=IRIns.RET;
 			tmp.result=String.valueOf(fun.getReturnAdd());
-			fun.addIR(tmp);	
+			fun.addIR(this,tmp);	
 		}
 		return null;
 

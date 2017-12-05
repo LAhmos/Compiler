@@ -370,7 +370,7 @@ public class MicroParser extends Parser {
 			((String_declContext)_localctx).str = str();
 			setState(132);
 			match(T__1);
-			if(!Micro.symbolTables.defineSymbol((((String_declContext)_localctx).id!=null?_input.getText(((String_declContext)_localctx).id.start,((String_declContext)_localctx).id.stop):null),"STRING",(((String_declContext)_localctx).str!=null?_input.getText(((String_declContext)_localctx).str.start,((String_declContext)_localctx).str.stop):null))) throw new RuntimeException("DECLARATION ERROR "+(((String_declContext)_localctx).id!=null?_input.getText(((String_declContext)_localctx).id.start,((String_declContext)_localctx).id.stop):null));
+			if(!Micro.symbolTables.defineSymbol((((String_declContext)_localctx).id!=null?_input.getText(((String_declContext)_localctx).id.start,((String_declContext)_localctx).id.stop):null),"STRING",(((String_declContext)_localctx).str!=null?_input.getText(((String_declContext)_localctx).str.start,((String_declContext)_localctx).str.stop):null))) throw new DeclartionException("DECLARATION ERROR "+(((String_declContext)_localctx).id!=null?_input.getText(((String_declContext)_localctx).id.start,((String_declContext)_localctx).id.stop):null));
 			}
 		}
 		catch (RecognitionException re) {
@@ -458,7 +458,7 @@ public class MicroParser extends Parser {
 			match(T__1);
 				
 				for(int i=0;i<_localctx.symbols.size();i++){
-					if(!Micro.symbolTables.defineSymbol(_localctx.symbols.get(i),(((Var_declContext)_localctx).var_type!=null?_input.getText(((Var_declContext)_localctx).var_type.start,((Var_declContext)_localctx).var_type.stop):null),null)) throw new RuntimeException("DECLARATION ERROR "+_localctx.symbols.get(i));
+					if(!Micro.symbolTables.defineSymbol(_localctx.symbols.get(i),(((Var_declContext)_localctx).var_type!=null?_input.getText(((Var_declContext)_localctx).var_type.start,((Var_declContext)_localctx).var_type.stop):null),null)) throw new DeclartionException("DECLARATION ERROR "+_localctx.symbols.get(i));
 				}
 
 			}
@@ -769,7 +769,7 @@ public class MicroParser extends Parser {
 			((Param_declContext)_localctx).var_type = var_type();
 			setState(167);
 			((Param_declContext)_localctx).id = id();
-			if(!Micro.symbolTables.defineSymbol((((Param_declContext)_localctx).id!=null?_input.getText(((Param_declContext)_localctx).id.start,((Param_declContext)_localctx).id.stop):null),(((Param_declContext)_localctx).var_type!=null?_input.getText(((Param_declContext)_localctx).var_type.start,((Param_declContext)_localctx).var_type.stop):null),null,true)) throw new RuntimeException("DECLARATION ERROR "+(((Param_declContext)_localctx).id!=null?_input.getText(((Param_declContext)_localctx).id.start,((Param_declContext)_localctx).id.stop):null));;
+			if(!Micro.symbolTables.defineSymbol((((Param_declContext)_localctx).id!=null?_input.getText(((Param_declContext)_localctx).id.start,((Param_declContext)_localctx).id.stop):null),(((Param_declContext)_localctx).var_type!=null?_input.getText(((Param_declContext)_localctx).var_type.start,((Param_declContext)_localctx).var_type.stop):null),null,true)) throw new DeclartionException("DECLARATION ERROR "+(((Param_declContext)_localctx).id!=null?_input.getText(((Param_declContext)_localctx).id.start,((Param_declContext)_localctx).id.stop):null));;
 			}
 		}
 		catch (RecognitionException re) {
@@ -940,7 +940,7 @@ public class MicroParser extends Parser {
 			any_type();
 			setState(185);
 			((Func_declContext)_localctx).id = id();
-			if(!Micro.symbolTables.defineSymbol((((Func_declContext)_localctx).id!=null?_input.getText(((Func_declContext)_localctx).id.start,((Func_declContext)_localctx).id.stop):null),"FUNCTION",null)) throw new RuntimeException("DECLARATION ERROR "+(((Func_declContext)_localctx).id!=null?_input.getText(((Func_declContext)_localctx).id.start,((Func_declContext)_localctx).id.stop):null)); Micro.symbolTables.createNewScope(ScopeType.Fun,(((Func_declContext)_localctx).id!=null?_input.getText(((Func_declContext)_localctx).id.start,((Func_declContext)_localctx).id.stop):null));  Micro.program.createFun(Micro.symbolTables.currTable);
+			if(!Micro.symbolTables.defineSymbol((((Func_declContext)_localctx).id!=null?_input.getText(((Func_declContext)_localctx).id.start,((Func_declContext)_localctx).id.stop):null),"FUNCTION",null)) throw new DeclartionException("DECLARATION ERROR "+(((Func_declContext)_localctx).id!=null?_input.getText(((Func_declContext)_localctx).id.start,((Func_declContext)_localctx).id.stop):null)); Micro.symbolTables.createNewScope(ScopeType.Fun,(((Func_declContext)_localctx).id!=null?_input.getText(((Func_declContext)_localctx).id.start,((Func_declContext)_localctx).id.stop):null));  Micro.program.createFun(Micro.symbolTables.currTable);
 			setState(187);
 			match(T__3);
 			setState(188);
@@ -1269,7 +1269,7 @@ public class MicroParser extends Parser {
 			((Id_list2Context)_localctx).ids = new ArrayList<id>();
 			setState(227);
 			((Id_list2Context)_localctx).id = id();
-			id tmp=new id(); tmp.type=NodeType.id; Symbol symbol= Micro.symbolTables.Lookup((((Id_list2Context)_localctx).id!=null?_input.getText(((Id_list2Context)_localctx).id.start,((Id_list2Context)_localctx).id.stop):null)); if(symbol==null) throw new RuntimeException("Varaiable not  decleared  "+(((Id_list2Context)_localctx).id!=null?_input.getText(((Id_list2Context)_localctx).id.start,((Id_list2Context)_localctx).id.stop):null)); tmp.setSymbol(symbol); _localctx.ids.add(tmp);
+			id tmp=new id(); tmp.type=NodeType.id; Symbol symbol= Micro.symbolTables.Lookup((((Id_list2Context)_localctx).id!=null?_input.getText(((Id_list2Context)_localctx).id.start,((Id_list2Context)_localctx).id.stop):null)); if(symbol==null) throw new DeclartionException("Varaiable not  decleared  "+(((Id_list2Context)_localctx).id!=null?_input.getText(((Id_list2Context)_localctx).id.start,((Id_list2Context)_localctx).id.stop):null)); tmp.setSymbol(symbol); _localctx.ids.add(tmp);
 			setState(229);
 			id_tail2();
 			 for(int i=0;i<_localctx._ids.size();i++) _localctx.ids.add(_localctx._ids.get(i));  
@@ -1321,7 +1321,7 @@ public class MicroParser extends Parser {
 				match(T__2);
 				setState(233);
 				((Id_tail2Context)_localctx).id = id();
-				 id tmp=new id(); tmp.type=NodeType.id; Symbol symbol= Micro.symbolTables.Lookup((((Id_tail2Context)_localctx).id!=null?_input.getText(((Id_tail2Context)_localctx).id.start,((Id_tail2Context)_localctx).id.stop):null)); if(symbol==null) throw new RuntimeException("Varaiable not  decleared  "+(((Id_tail2Context)_localctx).id!=null?_input.getText(((Id_tail2Context)_localctx).id.start,((Id_tail2Context)_localctx).id.stop):null)); tmp.setSymbol(symbol);    ((Id_list2Context)getInvokingContext(20))._ids.add(tmp);
+				 id tmp=new id(); tmp.type=NodeType.id; Symbol symbol= Micro.symbolTables.Lookup((((Id_tail2Context)_localctx).id!=null?_input.getText(((Id_tail2Context)_localctx).id.start,((Id_tail2Context)_localctx).id.stop):null)); if(symbol==null) throw new DeclartionException("Varaiable not  decleared  "+(((Id_tail2Context)_localctx).id!=null?_input.getText(((Id_tail2Context)_localctx).id.start,((Id_tail2Context)_localctx).id.stop):null)); tmp.setSymbol(symbol);    ((Id_list2Context)getInvokingContext(20))._ids.add(tmp);
 				setState(235);
 				id_tail2();
 				}
@@ -1428,7 +1428,7 @@ public class MicroParser extends Parser {
 			match(T__0);
 			setState(247);
 			((Assign_exprContext)_localctx).t2 = expr();
-			 id id_var =new id(); id_var.type=NodeType.id; Symbol symbol= Micro.symbolTables.Lookup((((Assign_exprContext)_localctx).id!=null?_input.getText(((Assign_exprContext)_localctx).id.start,((Assign_exprContext)_localctx).id.stop):null));     if(symbol==null) throw new RuntimeException("Varaiable not  decleared  "+(((Assign_exprContext)_localctx).id!=null?_input.getText(((Assign_exprContext)_localctx).id.start,((Assign_exprContext)_localctx).id.stop):null)); ((id)id_var).setSymbol(symbol);  assign_op.left=id_var; assign_op.right=((Assign_exprContext)_localctx).t2.node; ((Assign_exprContext)_localctx).node = assign_op;  
+			 id id_var =new id(); id_var.type=NodeType.id; Symbol symbol= Micro.symbolTables.Lookup((((Assign_exprContext)_localctx).id!=null?_input.getText(((Assign_exprContext)_localctx).id.start,((Assign_exprContext)_localctx).id.stop):null));     if(symbol==null) throw new DeclartionException("Varaiable not  decleared  "+(((Assign_exprContext)_localctx).id!=null?_input.getText(((Assign_exprContext)_localctx).id.start,((Assign_exprContext)_localctx).id.stop):null)); ((id)id_var).setSymbol(symbol);  assign_op.left=id_var; assign_op.right=((Assign_exprContext)_localctx).t2.node; ((Assign_exprContext)_localctx).node = assign_op;  
 			}
 		}
 		catch (RecognitionException re) {
@@ -1961,14 +1961,14 @@ public class MicroParser extends Parser {
 			match(T__4);
 			 call_exp var = new call_exp(); var.type=NodeType.call_exp;
 			 Symbol symbol= Micro.symbolTables.Lookup((((Call_exprContext)_localctx).id!=null?_input.getText(((Call_exprContext)_localctx).id.start,((Call_exprContext)_localctx).id.stop):null)); 
-			if(symbol==null)throw new RuntimeException("Function not  decleared  "+(((Call_exprContext)_localctx).id!=null?_input.getText(((Call_exprContext)_localctx).id.start,((Call_exprContext)_localctx).id.stop):null)); 
-			if(symbol.getType()!=Type.FUN) throw new RuntimeException((((Call_exprContext)_localctx).id!=null?_input.getText(((Call_exprContext)_localctx).id.start,((Call_exprContext)_localctx).id.stop):null) + "is not a function !!");  
+			if(symbol==null)throw new DeclartionException("Function not  decleared  "+(((Call_exprContext)_localctx).id!=null?_input.getText(((Call_exprContext)_localctx).id.start,((Call_exprContext)_localctx).id.stop):null)); 
+			if(symbol.getType()!=Type.FUN) throw new DeclartionException((((Call_exprContext)_localctx).id!=null?_input.getText(((Call_exprContext)_localctx).id.start,((Call_exprContext)_localctx).id.stop):null) + "is not a function !!");  
 			var.funSymbol=symbol;   
 			FunctionUnit tmp= Micro.program.getFunFromName((((Call_exprContext)_localctx).id!=null?_input.getText(((Call_exprContext)_localctx).id.start,((Call_exprContext)_localctx).id.stop):null));  
 			if(((Call_exprContext)_localctx).t1.node!=null){
-			if(!(tmp.checkFunParNum(((Call_exprContext)_localctx).t1.node.size()))) throw new RuntimeException((((Call_exprContext)_localctx).id!=null?_input.getText(((Call_exprContext)_localctx).id.start,((Call_exprContext)_localctx).id.stop):null)+ ": check number of parameters");   
+			if(!(tmp.checkFunParNum(((Call_exprContext)_localctx).t1.node.size()))) throw new DeclartionException((((Call_exprContext)_localctx).id!=null?_input.getText(((Call_exprContext)_localctx).id.start,((Call_exprContext)_localctx).id.stop):null)+ ": check number of parameters");   
 			}else {
-			if(!(tmp.checkFunParNum(0))) throw new RuntimeException((((Call_exprContext)_localctx).id!=null?_input.getText(((Call_exprContext)_localctx).id.start,((Call_exprContext)_localctx).id.stop):null)+ ": check number of parameters"); 
+			if(!(tmp.checkFunParNum(0))) throw new DeclartionException((((Call_exprContext)_localctx).id!=null?_input.getText(((Call_exprContext)_localctx).id.start,((Call_exprContext)_localctx).id.stop):null)+ ": check number of parameters"); 
 			}
 			var.funObj=tmp; var.parList=((Call_exprContext)_localctx).t1.node; ((Call_exprContext)_localctx).node = var; 
 			}
@@ -2157,7 +2157,7 @@ public class MicroParser extends Parser {
 				{
 				setState(339);
 				((PrimaryContext)_localctx).t2 = ((PrimaryContext)_localctx).id = id();
-				 ((PrimaryContext)_localctx).node = new id(); _localctx.node.type=NodeType.id; Symbol symbol= Micro.symbolTables.Lookup((((PrimaryContext)_localctx).id!=null?_input.getText(((PrimaryContext)_localctx).id.start,((PrimaryContext)_localctx).id.stop):null));  if(symbol==null) throw new RuntimeException("Varaiable not  decleared  "+(((PrimaryContext)_localctx).id!=null?_input.getText(((PrimaryContext)_localctx).id.start,((PrimaryContext)_localctx).id.stop):null));    ((id)_localctx.node).setSymbol(symbol);
+				 ((PrimaryContext)_localctx).node = new id(); _localctx.node.type=NodeType.id; Symbol symbol= Micro.symbolTables.Lookup((((PrimaryContext)_localctx).id!=null?_input.getText(((PrimaryContext)_localctx).id.start,((PrimaryContext)_localctx).id.stop):null));  if(symbol==null) throw new DeclartionException("Varaiable not  decleared  "+(((PrimaryContext)_localctx).id!=null?_input.getText(((PrimaryContext)_localctx).id.start,((PrimaryContext)_localctx).id.stop):null));    ((id)_localctx.node).setSymbol(symbol);
 				}
 				break;
 			case INTLITERAL:
@@ -3101,7 +3101,8 @@ public class MicroParser extends Parser {
 			setState(457);
 			match(ENDFOR);
 			    
-														if(((For_stmtContext)_localctx).t8.tree!=null){
+														
+															{
 
 
 															AstNode incLabelNode=new AstNode();
@@ -3110,6 +3111,7 @@ public class MicroParser extends Parser {
 															incLabelTree.root=incLabelNode;
 															incLabelTree.label=_localctx.incLab;
 															Micro.program.addAstTreetoCurr(incLabelTree);
+															if(((For_stmtContext)_localctx).t8.tree!=null)
 															Micro.program.addAstTreetoCurr(((For_stmtContext)_localctx).t8.tree);
 															}
 																AstTree jumpTree = new AstTree();

@@ -20,6 +20,7 @@ public class Register{
 	public void freeReg(){
 		inUse=false;
 		isDirty=false;
+		varName=null;	
 	}
 	public void allocReg(String varName){
 		inUse=true;

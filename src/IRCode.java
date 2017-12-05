@@ -21,10 +21,16 @@ public class IRCode{
 	public boolean isCondBranch=false;
 	public boolean isLeader=false;
 	public boolean isEndOfBlock=false;
+	public AstTree codeTree;
+	public int index;
 	public Set<String> genSet= new HashSet<String>();
 	public Set<String> killSet=new HashSet<String>();
 	public Set<String> inSet = new HashSet<String>();
 	public Set<String> outSet = new HashSet<String>();
+	public Set<IRCode> genSet_def	=new HashSet<IRCode>();
+	public Set<IRCode> killSet_def	=new HashSet<IRCode>();
+	public Set<IRCode> inSet_def 	=new HashSet<IRCode>();
+	public Set<IRCode> outSet_def 	=new HashSet<IRCode>();
 	public void addPre(IRCode var){
 		if(pre==null) pre = new ArrayList<IRCode>();
 		pre.add(var);
@@ -41,6 +47,65 @@ public class IRCode{
 		for(int i=0;i<succ.size();i++)
 			outSet.addAll(succ.get(i).inSet);
 
+
+	}
+	public boolean calIn(){
+
+
+		Set<String> newInSet= new HashSet<String>(outSet);
+		newInSet.removeAll(killSet);
+		newInSet.addAll(genSet);
+
+		if(!equals(newInSet,inSet)){
+			inSet=newInSet;
+			return true;
+		}
+		return false;
+
+
+	}
+	public void calIn_def(){
+		if(pre==null) return;
+		for(int i=0;i<pre.size();i++)
+			inSet_def.addAll(pre.get(i).outSet_def);
+
+
+	}
+	public boolean calOut_def(){
+
+
+		Set<IRCode> newOutSet= new HashSet<IRCode>(inSet_def);
+
+		Set<IRCode> kill= new HashSet<IRCode>();
+		for (IRCode curr : genSet_def) {
+			String output=curr.result;
+			for( IRCode curr2: newOutSet){
+			if(curr2.result.equals(output))
+				kill.add(curr2);
+			}
+		}
+		
+		newOutSet.removeAll(kill);
+		newOutSet.addAll(genSet_def);
+
+		if(!equals2(newOutSet,outSet_def)){
+			outSet_def=newOutSet;
+			return true;
+		}
+		return false;
+
+
+	}
+	public ArrayList<Integer> findDefintions(String op){
+		ArrayList <Integer> returnList= new ArrayList<Integer>();
+			
+		for (IRCode curr : outSet_def) {
+			
+			if(curr.result.equals(op))
+				returnList.add(curr.index);
+			
+		}
+	return returnList;
 
 	}
 	public static opType defineType(String op1){
@@ -135,19 +200,17 @@ if(op1.charAt(1)=='T')
 
 
 	}
-	public boolean calIn(){
+		public static boolean equals2(Set<IRCode> set1, Set<IRCode> set2){
 
-
-		Set<String> newInSet= new HashSet<String>(outSet);
-		newInSet.removeAll(killSet);
-		newInSet.addAll(genSet);
-
-		if(!equals(newInSet,inSet)){
-			inSet=newInSet;
-			return true;
+		if(set1 == null || set2 ==null){
+			return false;
 		}
-		return false;
 
+		if(set1.size()!=set2.size()){
+			return false;
+		}
+
+		return set1.containsAll(set2);
 
 	}
 	public static boolean equals(Set<String> set1, Set<String> set2){
@@ -205,7 +268,23 @@ if(op1.charAt(1)=='T')
 
 		}
 	}
-
+	public void setGenKill_def(){
+		if(isALU){
+			genSet_def.add(this);
+		}
+		if(ins==IRIns.READI || ins==IRIns.READF){
+			genSet_def.add(this);
+		}
+		if(ins==IRIns.STOREI || ins==IRIns.STOREF){
+			genSet_def.add(this);
+		}
+		if(ins==IRIns.POP){
+			if(result!=null)
+			genSet_def.add(this);
+		}
+		
+		
+	}
 	public void setOperand(String _op1,String _op2,String _op3){
 		op1=_op1;
 		op2=_op2;

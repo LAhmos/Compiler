@@ -1,0 +1,280 @@
+;LABEL main
+;LINK 
+;STOREI 0 $T1
+;STOREI $T1 $L1
+;LABEL BLOCK_1_Loop
+;STOREI 100 $T2
+;GE $L1 $T2 BLOCK_1_OUT
+;STOREI 29 $T3
+;STOREI $T3 $L2
+;STOREI 4 $T4
+;ADDI $L3 $T4 $T5
+;STOREI $T5 $L3
+;LABEL BLOCK_1_INC
+;STOREI 1 $T6
+;ADDI $L1 $T6 $T7
+;STOREI $T7 $L1
+;JUMP BLOCK_1_Loop
+;LABEL BLOCK_1_OUT
+;WRITEI $L2
+;WRITEI $L3
+;RET 
+;;; out;;;; BLOCK_1_OUT
+;isLead:true
+;LABEL main
+;[]
+;[]
+;in:[]
+;out:[]
+;isLead:false
+;LINK 
+;[]
+;[]
+;in:[]
+;out:[]
+;isLead:false
+;STOREI 0 $T1
+;[IRCode@3f8f9dd6]
+;[]
+;in:[]
+;out:[IRCode@3f8f9dd6]
+;isLead:false
+;STOREI $T1 $L1
+;[IRCode@7e774085]
+;[]
+;in:[IRCode@3f8f9dd6]
+;out:[IRCode@7e774085, IRCode@3f8f9dd6]
+;isLead:true
+;LABEL BLOCK_1_Loop
+;[]
+;[]
+;in:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;out:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;isLead:false
+;STOREI 100 $T2
+;[IRCode@73a8dfcc]
+;[]
+;in:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;out:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@4c98385c, IRCode@73a8dfcc, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;isLead:false
+;GE $L1 $T2 BLOCK_1_OUT
+;[]
+;[]
+;in:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;out:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;isLead:true
+;STOREI 29 $T3
+;[IRCode@5eb5c224]
+;[]
+;in:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;out:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;isLead:false
+;STOREI $T3 $L2
+;[IRCode@6bf2d08e]
+;[]
+;in:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;out:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;isLead:false
+;STOREI 4 $T4
+;[IRCode@5fcfe4b2]
+;[]
+;in:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;out:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;isLead:false
+;ADDI $L3 $T4 $T5
+;[IRCode@4c98385c]
+;[]
+;in:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;out:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;isLead:false
+;STOREI $T5 $L3
+;[IRCode@4cdf35a9]
+;[]
+;in:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;out:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;isLead:false
+;LABEL BLOCK_1_INC
+;[]
+;[]
+;in:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;out:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;isLead:false
+;STOREI 1 $T6
+;[IRCode@484b61fc]
+;[]
+;in:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;out:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;isLead:false
+;ADDI $L1 $T6 $T7
+;[IRCode@759ebb3d]
+;[]
+;in:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;out:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;isLead:false
+;STOREI $T7 $L1
+;[IRCode@3b764bce]
+;[]
+;in:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;out:[IRCode@5eb5c224, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;isLead:false
+;JUMP BLOCK_1_Loop
+;[]
+;[]
+;in:[IRCode@5eb5c224, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;out:[IRCode@5eb5c224, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;isLead:true
+;LABEL BLOCK_1_OUT
+;[]
+;[]
+;in:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;out:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;isLead:false
+;WRITEI $L2
+;[]
+;[]
+;in:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;out:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;isLead:false
+;WRITEI $L3
+;[]
+;[]
+;in:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;out:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;isLead:false
+;RET 
+;[]
+;[]
+;in:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;out:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;Loop@58d25a40
+;start:LABEL BLOCK_1_Loop4
+;end:LABEL BLOCK_1_OUT17
+;---------
+;LABEL main
+;LINK 
+;STOREI 0 $T1
+;$T1 gets reg:r0
+;STOREI $T1 $L1
+;enuse()
+;{r0->$T1    r1->null    r2->null    r3->null    }
+;$T1 has reg:r0
+;$L1 gets reg:r1
+; freeing  reg:r0 is dirty: true
+;spill end of basic
+;LABEL BLOCK_1_Loop
+;STOREI 100 $T2
+;$T2 gets reg:r0
+;GE $L1 $T2 BLOCK_1_OUT
+;enuse()
+;{r0->$T2    r1->null    r2->null    r3->null    }
+; $L1 gets reg:r1
+;enuse()
+;{r0->$T2    r1->$L1    r2->null    r3->null    }
+;$T2 has reg:r0
+; freeing  reg:r0 is dirty: true
+;spill end of basic
+;STOREI 29 $T3
+;$T3 gets reg:r0
+;STOREI $T3 $L2
+;enuse()
+;{r0->$T3    r1->null    r2->null    r3->null    }
+;$T3 has reg:r0
+;$L2 gets reg:r1
+; freeing  reg:r0 is dirty: true
+;STOREI 4 $T4
+;$T4 gets reg:r0
+;ADDI $L3 $T4 $T5
+;enuse()
+;{r0->$T4    r1->$L2    r2->null    r3->null    }
+; $L3 gets reg:r2
+;enuse()
+;{r0->$T4    r1->$L2    r2->$L3    r3->null    }
+;$T4 has reg:r0
+; changing reg r2 from $L3to $T5
+; freeing  reg:r2 is dirty: false
+; freeing  reg:r0 is dirty: true
+;STOREI $T5 $L3
+;enuse()
+;{r0->null    r1->$L2    r2->$T5    r3->null    }
+;$T5 has reg:r2
+;$L3 gets reg:r0
+; freeing  reg:r2 is dirty: true
+;LABEL BLOCK_1_INC
+;STOREI 1 $T6
+;$T6 gets reg:r2
+;ADDI $L1 $T6 $T7
+;enuse()
+;{r0->$L3    r1->$L2    r2->$T6    r3->null    }
+; $L1 gets reg:r3
+;enuse()
+;{r0->$L3    r1->$L2    r2->$T6    r3->$L1    }
+;$T6 has reg:r2
+; changing reg r3 from $L1to $T7
+; freeing  reg:r3 is dirty: false
+; freeing  reg:r2 is dirty: true
+;STOREI $T7 $L1
+;enuse()
+;{r0->$L3    r1->$L2    r2->null    r3->$T7    }
+;$T7 has reg:r3
+;$L1 gets reg:r2
+; freeing  reg:r3 is dirty: true
+;JUMP BLOCK_1_Loop
+;spill end of basic
+;LABEL BLOCK_1_OUT
+;WRITEI $L2
+;enuse()
+;{r0->null    r1->null    r2->null    r3->null    }
+; $L2 gets reg:r0
+; freeing  reg:r0 is dirty: false
+;WRITEI $L3
+;enuse()
+;{r0->null    r1->null    r2->null    r3->null    }
+; $L3 gets reg:r0
+; freeing  reg:r0 is dirty: false
+;RET 
+push 
+push r0
+push r1
+push r2
+push r3
+jsr main
+sys halt
+label main
+link 10
+move 0 r0
+move r0 r1
+move r0 $-4
+move r1 $-1
+label BLOCK_1_Loop
+move 100 r0
+move $-1 r1
+cmpi r1 r0
+move r0 $-5
+jge BLOCK_1_OUT
+move 29 r0
+move r0 r1
+move r0 $-6
+move 4 r0
+move $-3 r2
+addi r0 r2
+move r0 $-7
+move r2 r0
+move r2 $-8
+label BLOCK_1_INC
+move 1 r2
+move $-1 r3
+addi r2 r3
+move r2 $-9
+move r3 r2
+move r3 $-10
+move r0 $-3
+move r1 $-2
+move r2 $-1
+jmp BLOCK_1_Loop
+label BLOCK_1_OUT
+move $-2 r0
+sys writei r0
+move $-3 r0
+sys writei r0
+unlnk
+ret 

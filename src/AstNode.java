@@ -3,7 +3,7 @@ import java.io.InputStream;
 import java.util.Stack;
 import java.util.*;  
 
-enum NodeType  {exp,id,literal,read,write,cond,ifSta,elseIf,elseSta,forSta,contSta,breakSta,outLab,jumpOut,skip,call_exp,return_sta;};
+enum NodeType  {exp,id,literal,read,write,cond,ifSta,elseIf,elseSta,forSta,forStaEnd,contSta,breakSta,outLab,jumpOut,skip,call_exp,return_sta;};
 enum OpType {add,sub,mul,div,assign;};
 enum LogicOp {and,or,not,noOp;};
 enum CompOp {less,lessOrEqual,greater,greaterOrEqual,equal, notEqual,True,False,error;};

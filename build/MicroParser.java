@@ -2677,7 +2677,7 @@ public class MicroParser extends Parser {
 				match(OR);
 				setState(395);
 				((Cond_suffixContext)_localctx).t1 = lit();
-				  boolExp tmp=new boolExp(); tmp.right=((Cond_suffixContext)_localctx).t1.node; tmp.left=_localctx.in_node; tmp.type=NodeType.cond; tmp.opType=LogicOp.or; ((Cond_suffixContext)_localctx).node = tmp; 
+				  boolExp tmp=new boolExp(); tmp.right=((Cond_suffixContext)_localctx).t1.node; tmp.left=_localctx.in_node; tmp.type=NodeType.cond; tmp.opType=LogicOp.or;tmp.compOp=CompOp.True; ((Cond_suffixContext)_localctx).node = tmp; 
 				setState(397);
 				((Cond_suffixContext)_localctx).t2 = cond_suffix(_localctx.node);
 
@@ -2691,7 +2691,7 @@ public class MicroParser extends Parser {
 				match(AND);
 				setState(401);
 				((Cond_suffixContext)_localctx).t3 = lit();
-				  boolExp tmp=new boolExp(); tmp.right=((Cond_suffixContext)_localctx).t3.node;  tmp.left=_localctx.in_node; tmp.type=NodeType.cond; tmp.opType=LogicOp.and; ((Cond_suffixContext)_localctx).node = tmp; 
+				  boolExp tmp=new boolExp(); tmp.right=((Cond_suffixContext)_localctx).t3.node;  tmp.left=_localctx.in_node; tmp.type=NodeType.cond; tmp.opType=LogicOp.and; tmp.compOp=CompOp.True; ((Cond_suffixContext)_localctx).node = tmp; 
 				setState(403);
 				((Cond_suffixContext)_localctx).t4 = cond_suffix(_localctx.node);
 

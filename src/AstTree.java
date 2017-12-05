@@ -9,6 +9,13 @@ public class AstTree{
 	public String label;
 	private FunctionUnit fun;
 	public Set<String> usedVar= new HashSet<String>();
+	public static int counter=0;
+	public static String getLabel(){
+		String label="cond_Label"+counter;
+		counter++;
+		return label;
+
+	}
 	public void setFun(FunctionUnit var){
 		fun=var;
 
@@ -38,10 +45,10 @@ public class AstTree{
 
 
 	}
-public void findUsedVar(){
-findUsedVar2(root);
+	public void findUsedVar(){
+		findUsedVar2(root);
 
-}
+	}
 
 	public void findUsedVar2(AstNode _base){
 
@@ -221,49 +228,143 @@ findUsedVar2(root);
 		} else if(base.type==NodeType.cond){
 			boolExp tmp=(boolExp)base;
 			IRCode leftCode,rightCode,expCode;
-			if(tmp.compOp!=CompOp.True && tmp.compOp!=CompOp.False){
+			if(root==base && (tmp.opType==LogicOp.noOp || tmp.opType==LogicOp.not ) &&  (tmp.compOp!=CompOp.False) && (tmp.compOp!=CompOp.True)){
 				leftCode=convertToIR(((boolExp)base).left);
 				rightCode=convertToIR (((boolExp)base).right);
 				IRCode tmp2= new IRCode();
+				if(tmp.opType!=LogicOp.not){
 				tmp2.ins=boolExp.getInsFromComOp(tmp.compOp);
-				if(leftCode.result.charAt(0)!='$')	{
-					if(Character.isDigit(leftCode.result.charAt(0))){
-						String reg=fun.getTmp();
-						GenerateLoad(leftCode,reg);
-						leftCode.result=reg;
-
-					}
+						tmp2.isCondBranch=true;		
 				}
-				if(rightCode.result.charAt(0)!='$'){
-					if(Character.isDigit(rightCode.result.charAt(0))){
-						String reg=fun.getTmp();
-						GenerateLoad(rightCode,reg);
-						rightCode.result=reg;
-
-					}
-				}
+				else
+				tmp2.ins=boolExp.getInsFromComOpWithNot(tmp.compOp);
 				tmp2.resultType=leftCode.resultType;
 				tmp2.op1=leftCode.result;
 				tmp2.op2=rightCode.result;
-				//tmp2.setOperand(leftCode.result, rightCode.result, _);
+			
 				tmp2.result="-*f";
-				fun.addIR(this,tmp2);	
+				fun.addIR(this,tmp2);
 
+				return null;
 			}
-			else {
-
-
 				if(tmp.compOp==CompOp.False){
 					IRCode tmp2 = new IRCode();
-					tmp2.ins=IRIns.JUMP;
+					tmp2.ins=IRIns.STOREI;
+					tmp2.op1="0";
+					String reg=fun.getTmp();
 					//tmp2.setIR();
-					tmp2.result="-*f";
+					tmp2.resultType=Type.INT;
+					tmp2.result=reg;
 					fun.addIR(this,tmp2);	
-
+					return tmp2;
 
 
 				}
+
+			else	if(tmp.compOp==CompOp.True){
+					IRCode tmp2 = new IRCode();
+					tmp2.ins=IRIns.STOREI;
+					tmp2.op1="1";
+					String reg=fun.getTmp();
+					//tmp2.setIR();
+					tmp2.resultType=Type.INT;
+					tmp2.result=reg;
+					fun.addIR(this,tmp2);	
+					return tmp2;
+
+
+				}
+			else if(tmp.opType==LogicOp.noOp || tmp.opType==LogicOp.not ){
+				leftCode=convertToIR(((boolExp)base).left);
+				rightCode=convertToIR (((boolExp)base).right);
+				IRCode tmp2= new IRCode();
+				if(tmp.opType!=LogicOp.not){
+				tmp2.ins=boolExp.getInsFromComOp(tmp.compOp);
+								
+				}
+				else
+				tmp2.ins=boolExp.getInsFromComOpWithNot(tmp.compOp);
+				String label1,label2;
+				tmp2.isCondBranch=true;
+				tmp2.resultType=Type.INT;
+				tmp2.op1=leftCode.result;
+				tmp2.op2=rightCode.result;
+			
+				tmp2.result=label1=getLabel();
+				label2=getLabel();
+				fun.addIR(this,tmp2);
+
+				IRCode tmp3= new IRCode();
+				tmp3.ins=IRIns.STOREI;
+				tmp3.op1="1";
+				String reg=fun.getTmp();
+
+				tmp3.resultType=Type.INT;
+				tmp3.result=reg;
+				fun.addIR(this,tmp3);
+
+				tmp3= new IRCode();
+				tmp3.ins=IRIns.JUMP;
+				tmp3.result=label2;
+				fun.addIR(this,tmp3);
+
+
+				tmp3= new IRCode();
+				tmp3.ins=IRIns.LABEL;
+				tmp3.result=tmp2.result;
+				fun.addIR(this,tmp3);
+				tmp3= new IRCode();
+				tmp3.ins=IRIns.STOREI;
+				tmp3.op1="0";
+				tmp3.resultType=Type.INT;
+				tmp3.result=reg;
+				fun.addIR(this,tmp3);
+				IRCode tmp4= new IRCode();
+				tmp4.ins=IRIns.LABEL;
+				tmp4.result=label2;
+				fun.addIR(this,tmp4);
+				return tmp3;
+
+
 			}
+			else if(tmp.opType==LogicOp.and ){
+				leftCode=convertToIR(((boolExp)base).left);
+				rightCode=convertToIR (((boolExp)base).right);
+				IRCode tmp2= new IRCode();
+			
+				tmp2.ins=IRIns.MULI;
+				tmp2.isALU=true;
+				
+				tmp2.resultType=Type.INT;
+				tmp2.op1=leftCode.result;
+				tmp2.op2=rightCode.result;
+				String reg=fun.getTmp();
+				tmp2.result=reg;
+				fun.addIR(this,tmp2);
+				return tmp2;
+
+			}
+			else if(tmp.opType==LogicOp.or ){
+				leftCode=convertToIR(((boolExp)base).left);
+				rightCode=convertToIR (((boolExp)base).right);
+				IRCode tmp2= new IRCode();
+			
+				tmp2.ins=IRIns.ADDI;
+				tmp2.isALU=true;
+				
+				tmp2.resultType=Type.INT;
+				tmp2.op1=leftCode.result;
+				tmp2.op2=rightCode.result;
+				String reg=fun.getTmp();
+				tmp2.result=reg;
+				fun.addIR(this,tmp2);
+				return tmp2;
+
+			}
+			
+			
+
+			
 
 
 
@@ -281,15 +382,36 @@ findUsedVar2(root);
 				fun.addIR(this,lab);	
 
 			}
-			/*ArrayList<IRCode> condCode=*/((boolExp)(tmp.cond)).genIR(fun);
+			IRCode condResult=((boolExp)(tmp.cond)).genIR(fun);
+			if(condResult!=null){			
+			IRCode tmp2= new IRCode();
+			IRCode tmp3= new IRCode();
+				tmp3.ins=IRIns.STOREI;
+				tmp3.op1="0";
+				String reg=fun.getTmp();
+				tmp3.result=reg;
+				fun.addIR(this,tmp3);
+				tmp2.ins=IRIns.EQ;
+				tmp2.isCondBranch=true;
+				tmp2.resultType=Type.INT;
+				tmp2.op1=reg;
+				tmp2.op2=condResult.result;
+			
+				tmp2.result=tmp.ifLabel;
+				fun.addIR(this,tmp2);
+			}
+else{
+				if(fun.getIR(fun.getIRSize()-1).result.equals("-*f"));
+				fun.getIR(fun.getIRSize()-1).result=tmp.ifLabel;
 
-			if(fun.getIRSize()!=0){
+}
+			/*if(fun.getIRSize()!=0){
 				if(fun.getIR(fun.getIRSize()-1).result.equals("-*f"));
 				fun.getIR(fun.getIRSize()-1).result=tmp.ifLabel;
 				if(fun.getIR(fun.getIRSize()-1).ins!=IRIns.JUMP)
 					fun.getIR(fun.getIRSize()-1).isCondBranch=true;
 
-			}
+			}*/
 			/*	for(int i=0;i<condCode.size();i++){
 
 
@@ -308,16 +430,39 @@ findUsedVar2(root);
 			FOR tmp=(FOR)base;
 
 
-			((boolExp)(tmp.cond)).genIR(fun);
+			IRCode condResult=((boolExp)(tmp.cond)).genIR(fun);
+			if(condResult!=null){			
+			IRCode tmp2= new IRCode();
+			IRCode tmp3= new IRCode();
+				tmp3.ins=IRIns.STOREI;
+				tmp3.op1="0";
+				String reg=fun.getTmp();
+				tmp3.result=reg;
+				fun.addIR(this,tmp3);
+				tmp2.ins=IRIns.EQ;
+				tmp2.isCondBranch=true;
+				tmp2.resultType=Type.INT;
+				tmp2.op1=reg;
+				tmp2.op2=condResult.result;
+			
+				tmp2.result=tmp.forLabel;
+				fun.addIR(this,tmp2);
+			}
+else{
+				if(fun.getIR(fun.getIRSize()-1).result.equals("-*f"));
+				fun.getIR(fun.getIRSize()-1).result=tmp.forLabel;
+
+}
 
 
-			if(fun.getIRSize()!=0){
+			/*if(fun.getIRSize()!=0){
 				if(fun.getIR(fun.getIRSize()-1).result.equals("-*f"));
 				fun.getIR(fun.getIRSize()-1).result=tmp.forLabel;
 				if(fun.getIR(fun.getIRSize()-1).ins!=IRIns.JUMP)
 					fun.getIR(fun.getIRSize()-1).isCondBranch=true;
 
 			}
+			*/
 			/*	for(int i=0;i<condCode.size();i++){
 				fun.addIR(this,condCode.get(i));	
 

@@ -240,7 +240,7 @@ public class FunctionUnit{
 			System.out. println ( ";---------" );
 		}
 
-		optmizeLoop(0);
+		//optmizeLoop(0);
 	}
 	public void optmizeLoop(int r){
 
@@ -587,7 +587,8 @@ liveAnalysis();
 		funTrees.add(var);
 	}
 	public void genFunIR(){
-		for(int i=0;i<funTrees.size();i++){
+		for(int i=0;i<funTrees.size();i++){	
+			//funTrees.get(i).printroot();
 			funTrees.get(i).ConvertToIR();
 			funTrees.get(i).findUsedVar();
 

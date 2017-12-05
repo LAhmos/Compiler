@@ -132,13 +132,13 @@ class boolExp extends AstNode{
 		{
 			return opType+":"+compOp;
 		}
-	public void genIR (FunctionUnit fun){
+	public IRCode genIR (FunctionUnit fun){
 
 		AstTree tree= new AstTree();
 		tree.root =this;
 		tree.setFun(fun);
 		//tree.printroot();
-		tree.ConvertToIR();
+		return tree.convertToIR(this);
 	//	tree.printIR();
 		//return tree.code;
 
@@ -164,7 +164,26 @@ class boolExp extends AstNode{
 	return IRIns.EQ;
 
 	}
+public static  IRIns getInsFromComOpWithNot(CompOp op){
+		
+		switch (op){
+		case less:
+		return IRIns.LT;
+		case lessOrEqual:
+		return IRIns.LE;
+		case greater:
+		return IRIns.GT;
+		case greaterOrEqual:
+		return IRIns.GE;
+		case equal:
+		return IRIns.EQ;
+		case notEqual:
+		return IRIns.NE;
 
+		}
+	return IRIns.EQ;
+
+	}
 }
 class id extends AstNode{
 

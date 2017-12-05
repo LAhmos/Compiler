@@ -1,25 +1,100 @@
 ;LABEL main
 ;LINK 
-;STOREI 0 $T1
-;STOREI $T1 $L1
-;LABEL BLOCK_1_Loop
-;STOREI 100 $T2
-;GE $L1 $T2 BLOCK_1_OUT
-;STOREI 29 $T3
-;STOREI $T3 $L2
-;STOREI 4 $T4
-;ADDI $L3 $T4 $T5
-;STOREI $T5 $L3
-;LABEL BLOCK_1_INC
-;STOREI 1 $T6
-;ADDI $L1 $T6 $T7
-;STOREI $T7 $L1
-;JUMP BLOCK_1_Loop
-;LABEL BLOCK_1_OUT
-;WRITEI $L2
-;WRITEI $L3
+;STOREI 1 $T1
+;STOREI $T1 a
+;STOREI 2 $T2
+;STOREI $T2 b
+;STOREI 10 $T3
+;STOREI $T3 c
+;STOREI 20 $T4
+;STOREI $T4 d
+;WRITEI a
+;WRITEI b
+;WRITEI c
+;WRITEI d
+;ADDI a b $T5
+;STOREI $T5 a
+;WRITEI a
+;MULI a c $T6
+;STOREI $T6 b
+;WRITEI b
+;STOREI 0 $T7
+;SUBI $T7 a $T8
+;ADDI $T8 b $T9
+;STOREI $T9 c
+;WRITEI c
+;STOREI 0 $T10
+;SUBI $T10 d $T11
+;STOREI $T11 d
+;WRITEI d
+;ADDI a b $T12
+;ADDI d c $T13
+;MULI $T12 $T13 $T14
+;ADDI a b $T15
+;ADDI $T15 c $T16
+;ADDI $T16 d $T17
+;DIVI $T17 a $T18
+;SUBI $T14 $T18 $T19
+;STOREI $T19 a
+;WRITEI a
+;STOREI 10 $T20
+;ADDI a $T20 $T21
+;STOREI $T21 a
+;WRITEI a
+;ADDI b a $T22
+;STOREI 10 $T23
+;ADDI $T22 $T23 $T24
+;STOREI $T24 b
+;WRITEI b
+;STOREI 0 $T25
+;STOREI 10 $T26
+;SUBI $T25 $T26 $T27
+;STOREI $T27 c
+;WRITEI c
+;STOREF 1 $T28
+;STOREF $T28 x
+;STOREF 2 $T29
+;STOREF $T29 y
+;STOREF 3.14159 $T30
+;STOREF $T30 z
+;WRITEF x
+;WRITEF z
+;WRITEF y
+;STOREF 2 $T31
+;DIVF z $T31 $T32
+;STOREF $T32 x
+;DIVF z y $T33
+;STOREF $T33 y
+;WRITEF x
+;WRITEF y
+;ADDF x y $T34
+;ADDF $T34 z $T35
+;DIVF $T35 z $T36
+;STOREF $T36 t
+;WRITEF t
+;MULF t t $T37
+;STOREF $T37 t
+;WRITEF t
+;ADDF t z $T38
+;ADDF $T38 t $T39
+;STOREF 2 $T40
+;DIVF t $T40 $T41
+;ADDF $T39 $T41 $T42
+;STOREF 4 $T43
+;DIVF z $T43 $T44
+;ADDF $T42 $T44 $T45
+;STOREF 5 $T46
+;DIVF z $T46 $T47
+;ADDF $T45 $T47 $T48
+;STOREF 6 $T49
+;DIVF z $T49 $T50
+;ADDF $T48 $T50 $T51
+;STOREF 7 $T52
+;DIVF z $T52 $T53
+;ADDF $T51 $T53 $T54
+;STOREF $T54 t
+;WRITEF t
 ;RET 
-;;; out;;;; BLOCK_1_OUT
 ;isLead:true
 ;LABEL main
 ;[]
@@ -33,205 +108,1174 @@
 ;in:[]
 ;out:[]
 ;isLead:false
-;STOREI 0 $T1
+;STOREI 1 $T1
+;[IRCode@311d617d]
+;[]
+;in:[]
+;out:[IRCode@311d617d]
+;isLead:false
+;STOREI $T1 a
+;[IRCode@16f65612]
+;[]
+;in:[IRCode@311d617d]
+;out:[IRCode@311d617d, IRCode@16f65612]
+;isLead:false
+;STOREI 2 $T2
+;[IRCode@3b192d32]
+;[]
+;in:[IRCode@311d617d, IRCode@16f65612]
+;out:[IRCode@311d617d, IRCode@16f65612, IRCode@3b192d32]
+;isLead:false
+;STOREI $T2 b
+;[IRCode@9e89d68]
+;[]
+;in:[IRCode@311d617d, IRCode@16f65612, IRCode@3b192d32]
+;out:[IRCode@311d617d, IRCode@9e89d68, IRCode@16f65612, IRCode@3b192d32]
+;isLead:false
+;STOREI 10 $T3
+;[IRCode@368239c8]
+;[]
+;in:[IRCode@311d617d, IRCode@9e89d68, IRCode@16f65612, IRCode@3b192d32]
+;out:[IRCode@311d617d, IRCode@9e89d68, IRCode@16f65612, IRCode@368239c8, IRCode@3b192d32]
+;isLead:false
+;STOREI $T3 c
+;[IRCode@77556fd]
+;[]
+;in:[IRCode@311d617d, IRCode@9e89d68, IRCode@16f65612, IRCode@368239c8, IRCode@3b192d32]
+;out:[IRCode@311d617d, IRCode@9e89d68, IRCode@16f65612, IRCode@77556fd, IRCode@368239c8, IRCode@3b192d32]
+;isLead:false
+;STOREI 20 $T4
+;[IRCode@2c13da15]
+;[]
+;in:[IRCode@311d617d, IRCode@9e89d68, IRCode@16f65612, IRCode@77556fd, IRCode@368239c8, IRCode@3b192d32]
+;out:[IRCode@311d617d, IRCode@9e89d68, IRCode@16f65612, IRCode@2c13da15, IRCode@77556fd, IRCode@368239c8, IRCode@3b192d32]
+;isLead:false
+;STOREI $T4 d
+;[IRCode@512ddf17]
+;[]
+;in:[IRCode@311d617d, IRCode@9e89d68, IRCode@16f65612, IRCode@2c13da15, IRCode@77556fd, IRCode@368239c8, IRCode@3b192d32]
+;out:[IRCode@311d617d, IRCode@9e89d68, IRCode@16f65612, IRCode@2c13da15, IRCode@77556fd, IRCode@368239c8, IRCode@512ddf17, IRCode@3b192d32]
+;isLead:false
+;WRITEI a
+;[]
+;[]
+;in:[IRCode@311d617d, IRCode@9e89d68, IRCode@16f65612, IRCode@2c13da15, IRCode@77556fd, IRCode@368239c8, IRCode@512ddf17, IRCode@3b192d32]
+;out:[IRCode@311d617d, IRCode@9e89d68, IRCode@16f65612, IRCode@2c13da15, IRCode@77556fd, IRCode@368239c8, IRCode@512ddf17, IRCode@3b192d32]
+;isLead:false
+;WRITEI b
+;[]
+;[]
+;in:[IRCode@311d617d, IRCode@9e89d68, IRCode@16f65612, IRCode@2c13da15, IRCode@77556fd, IRCode@368239c8, IRCode@512ddf17, IRCode@3b192d32]
+;out:[IRCode@311d617d, IRCode@9e89d68, IRCode@16f65612, IRCode@2c13da15, IRCode@77556fd, IRCode@368239c8, IRCode@512ddf17, IRCode@3b192d32]
+;isLead:false
+;WRITEI c
+;[]
+;[]
+;in:[IRCode@311d617d, IRCode@9e89d68, IRCode@16f65612, IRCode@2c13da15, IRCode@77556fd, IRCode@368239c8, IRCode@512ddf17, IRCode@3b192d32]
+;out:[IRCode@311d617d, IRCode@9e89d68, IRCode@16f65612, IRCode@2c13da15, IRCode@77556fd, IRCode@368239c8, IRCode@512ddf17, IRCode@3b192d32]
+;isLead:false
+;WRITEI d
+;[]
+;[]
+;in:[IRCode@311d617d, IRCode@9e89d68, IRCode@16f65612, IRCode@2c13da15, IRCode@77556fd, IRCode@368239c8, IRCode@512ddf17, IRCode@3b192d32]
+;out:[IRCode@311d617d, IRCode@9e89d68, IRCode@16f65612, IRCode@2c13da15, IRCode@77556fd, IRCode@368239c8, IRCode@512ddf17, IRCode@3b192d32]
+;isLead:false
+;ADDI a b $T5
+;[IRCode@5ccd43c2]
+;[]
+;in:[IRCode@311d617d, IRCode@9e89d68, IRCode@16f65612, IRCode@2c13da15, IRCode@77556fd, IRCode@368239c8, IRCode@512ddf17, IRCode@3b192d32]
+;out:[IRCode@311d617d, IRCode@9e89d68, IRCode@16f65612, IRCode@2c13da15, IRCode@77556fd, IRCode@368239c8, IRCode@512ddf17, IRCode@3b192d32, IRCode@5ccd43c2]
+;isLead:false
+;STOREI $T5 a
+;[IRCode@59f95c5d]
+;[]
+;in:[IRCode@311d617d, IRCode@9e89d68, IRCode@16f65612, IRCode@2c13da15, IRCode@77556fd, IRCode@368239c8, IRCode@512ddf17, IRCode@3b192d32, IRCode@5ccd43c2]
+;out:[IRCode@311d617d, IRCode@9e89d68, IRCode@59f95c5d, IRCode@2c13da15, IRCode@77556fd, IRCode@368239c8, IRCode@512ddf17, IRCode@3b192d32, IRCode@5ccd43c2]
+;isLead:false
+;WRITEI a
+;[]
+;[]
+;in:[IRCode@311d617d, IRCode@9e89d68, IRCode@59f95c5d, IRCode@2c13da15, IRCode@77556fd, IRCode@368239c8, IRCode@512ddf17, IRCode@3b192d32, IRCode@5ccd43c2]
+;out:[IRCode@311d617d, IRCode@9e89d68, IRCode@59f95c5d, IRCode@2c13da15, IRCode@77556fd, IRCode@368239c8, IRCode@512ddf17, IRCode@3b192d32, IRCode@5ccd43c2]
+;isLead:false
+;MULI a c $T6
+;[IRCode@65ae6ba4]
+;[]
+;in:[IRCode@311d617d, IRCode@9e89d68, IRCode@59f95c5d, IRCode@2c13da15, IRCode@77556fd, IRCode@368239c8, IRCode@512ddf17, IRCode@3b192d32, IRCode@5ccd43c2]
+;out:[IRCode@311d617d, IRCode@9e89d68, IRCode@59f95c5d, IRCode@2c13da15, IRCode@77556fd, IRCode@368239c8, IRCode@512ddf17, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@5ccd43c2]
+;isLead:false
+;STOREI $T6 b
+;[IRCode@4d591d15]
+;[]
+;in:[IRCode@311d617d, IRCode@9e89d68, IRCode@59f95c5d, IRCode@2c13da15, IRCode@77556fd, IRCode@368239c8, IRCode@512ddf17, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@5ccd43c2]
+;out:[IRCode@311d617d, IRCode@59f95c5d, IRCode@2c13da15, IRCode@77556fd, IRCode@368239c8, IRCode@512ddf17, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@5ccd43c2]
+;isLead:false
+;WRITEI b
+;[]
+;[]
+;in:[IRCode@311d617d, IRCode@59f95c5d, IRCode@2c13da15, IRCode@77556fd, IRCode@368239c8, IRCode@512ddf17, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@5ccd43c2]
+;out:[IRCode@311d617d, IRCode@59f95c5d, IRCode@2c13da15, IRCode@77556fd, IRCode@368239c8, IRCode@512ddf17, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@5ccd43c2]
+;isLead:false
+;STOREI 0 $T7
+;[IRCode@3b22cdd0]
+;[]
+;in:[IRCode@311d617d, IRCode@59f95c5d, IRCode@2c13da15, IRCode@77556fd, IRCode@368239c8, IRCode@512ddf17, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@5ccd43c2]
+;out:[IRCode@311d617d, IRCode@3b22cdd0, IRCode@59f95c5d, IRCode@2c13da15, IRCode@77556fd, IRCode@368239c8, IRCode@512ddf17, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@5ccd43c2]
+;isLead:false
+;SUBI $T7 a $T8
+;[IRCode@5fdef03a]
+;[]
+;in:[IRCode@311d617d, IRCode@3b22cdd0, IRCode@59f95c5d, IRCode@2c13da15, IRCode@77556fd, IRCode@368239c8, IRCode@512ddf17, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@5ccd43c2]
+;out:[IRCode@311d617d, IRCode@3b22cdd0, IRCode@59f95c5d, IRCode@5fdef03a, IRCode@2c13da15, IRCode@77556fd, IRCode@368239c8, IRCode@512ddf17, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@5ccd43c2]
+;isLead:false
+;ADDI $T8 b $T9
+;[IRCode@5680a178]
+;[]
+;in:[IRCode@311d617d, IRCode@3b22cdd0, IRCode@59f95c5d, IRCode@5fdef03a, IRCode@2c13da15, IRCode@77556fd, IRCode@368239c8, IRCode@512ddf17, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@5ccd43c2]
+;out:[IRCode@311d617d, IRCode@59f95c5d, IRCode@5fdef03a, IRCode@2c13da15, IRCode@77556fd, IRCode@368239c8, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@5ccd43c2, IRCode@3b22cdd0, IRCode@5680a178, IRCode@512ddf17]
+;isLead:false
+;STOREI $T9 c
+;[IRCode@244038d0]
+;[]
+;in:[IRCode@311d617d, IRCode@59f95c5d, IRCode@5fdef03a, IRCode@2c13da15, IRCode@77556fd, IRCode@368239c8, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@5ccd43c2, IRCode@3b22cdd0, IRCode@5680a178, IRCode@512ddf17]
+;out:[IRCode@311d617d, IRCode@59f95c5d, IRCode@5fdef03a, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@5ccd43c2, IRCode@244038d0, IRCode@3b22cdd0, IRCode@5680a178, IRCode@512ddf17]
+;isLead:false
+;WRITEI c
+;[]
+;[]
+;in:[IRCode@311d617d, IRCode@59f95c5d, IRCode@5fdef03a, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@5ccd43c2, IRCode@244038d0, IRCode@3b22cdd0, IRCode@5680a178, IRCode@512ddf17]
+;out:[IRCode@311d617d, IRCode@59f95c5d, IRCode@5fdef03a, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@5ccd43c2, IRCode@244038d0, IRCode@3b22cdd0, IRCode@5680a178, IRCode@512ddf17]
+;isLead:false
+;STOREI 0 $T10
+;[IRCode@16b3fc9e]
+;[]
+;in:[IRCode@311d617d, IRCode@59f95c5d, IRCode@5fdef03a, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@5ccd43c2, IRCode@244038d0, IRCode@3b22cdd0, IRCode@5680a178, IRCode@512ddf17]
+;out:[IRCode@311d617d, IRCode@59f95c5d, IRCode@5fdef03a, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@16b3fc9e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@3b22cdd0, IRCode@5680a178, IRCode@512ddf17]
+;isLead:false
+;SUBI $T10 d $T11
+;[IRCode@200a570f]
+;[]
+;in:[IRCode@311d617d, IRCode@59f95c5d, IRCode@5fdef03a, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@16b3fc9e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@3b22cdd0, IRCode@5680a178, IRCode@512ddf17]
+;out:[IRCode@311d617d, IRCode@59f95c5d, IRCode@5fdef03a, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@16b3fc9e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@3b22cdd0, IRCode@5680a178, IRCode@512ddf17]
+;isLead:false
+;STOREI $T11 d
+;[IRCode@33833882]
+;[]
+;in:[IRCode@311d617d, IRCode@59f95c5d, IRCode@5fdef03a, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@16b3fc9e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@3b22cdd0, IRCode@5680a178, IRCode@512ddf17]
+;out:[IRCode@311d617d, IRCode@33833882, IRCode@59f95c5d, IRCode@5fdef03a, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@16b3fc9e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@3b22cdd0, IRCode@5680a178]
+;isLead:false
+;WRITEI d
+;[]
+;[]
+;in:[IRCode@311d617d, IRCode@33833882, IRCode@59f95c5d, IRCode@5fdef03a, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@16b3fc9e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@3b22cdd0, IRCode@5680a178]
+;out:[IRCode@311d617d, IRCode@33833882, IRCode@59f95c5d, IRCode@5fdef03a, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@16b3fc9e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@3b22cdd0, IRCode@5680a178]
+;isLead:false
+;ADDI a b $T12
+;[IRCode@470e2030]
+;[]
+;in:[IRCode@311d617d, IRCode@33833882, IRCode@59f95c5d, IRCode@5fdef03a, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@16b3fc9e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@3b22cdd0, IRCode@5680a178]
+;out:[IRCode@311d617d, IRCode@33833882, IRCode@59f95c5d, IRCode@5fdef03a, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@16b3fc9e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@3b22cdd0, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;ADDI d c $T13
+;[IRCode@782830e]
+;[]
+;in:[IRCode@311d617d, IRCode@33833882, IRCode@59f95c5d, IRCode@5fdef03a, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@16b3fc9e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@3b22cdd0, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@311d617d, IRCode@33833882, IRCode@59f95c5d, IRCode@5fdef03a, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@782830e, IRCode@16b3fc9e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@3b22cdd0, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;MULI $T12 $T13 $T14
+;[IRCode@606d8acf]
+;[]
+;in:[IRCode@311d617d, IRCode@33833882, IRCode@59f95c5d, IRCode@5fdef03a, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@782830e, IRCode@16b3fc9e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@3b22cdd0, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@311d617d, IRCode@33833882, IRCode@606d8acf, IRCode@59f95c5d, IRCode@5fdef03a, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@782830e, IRCode@16b3fc9e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@3b22cdd0, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;ADDI a b $T15
+;[IRCode@69222c14]
+;[]
+;in:[IRCode@311d617d, IRCode@33833882, IRCode@606d8acf, IRCode@59f95c5d, IRCode@5fdef03a, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@782830e, IRCode@16b3fc9e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@3b22cdd0, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@311d617d, IRCode@33833882, IRCode@606d8acf, IRCode@59f95c5d, IRCode@5fdef03a, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@782830e, IRCode@16b3fc9e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@3b22cdd0, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;ADDI $T15 c $T16
+;[IRCode@6f75e721]
+;[]
+;in:[IRCode@311d617d, IRCode@33833882, IRCode@606d8acf, IRCode@59f95c5d, IRCode@5fdef03a, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@782830e, IRCode@16b3fc9e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@3b22cdd0, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@311d617d, IRCode@33833882, IRCode@606d8acf, IRCode@59f95c5d, IRCode@5fdef03a, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@782830e, IRCode@16b3fc9e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@3b22cdd0, IRCode@6f75e721, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;ADDI $T16 d $T17
+;[IRCode@73a28541]
+;[]
+;in:[IRCode@311d617d, IRCode@33833882, IRCode@606d8acf, IRCode@59f95c5d, IRCode@5fdef03a, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@782830e, IRCode@16b3fc9e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@3b22cdd0, IRCode@6f75e721, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@311d617d, IRCode@33833882, IRCode@606d8acf, IRCode@73a28541, IRCode@59f95c5d, IRCode@5fdef03a, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@782830e, IRCode@16b3fc9e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@3b22cdd0, IRCode@6f75e721, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;DIVI $T17 a $T18
+;[IRCode@5aaa6d82]
+;[]
+;in:[IRCode@311d617d, IRCode@33833882, IRCode@606d8acf, IRCode@73a28541, IRCode@59f95c5d, IRCode@5fdef03a, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@782830e, IRCode@16b3fc9e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@3b22cdd0, IRCode@6f75e721, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@311d617d, IRCode@33833882, IRCode@606d8acf, IRCode@73a28541, IRCode@59f95c5d, IRCode@5fdef03a, IRCode@200a570f, IRCode@2c13da15, IRCode@5aaa6d82, IRCode@368239c8, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@782830e, IRCode@16b3fc9e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@3b22cdd0, IRCode@6f75e721, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;SUBI $T14 $T18 $T19
+;[IRCode@7d6f77cc]
+;[]
+;in:[IRCode@311d617d, IRCode@33833882, IRCode@606d8acf, IRCode@73a28541, IRCode@59f95c5d, IRCode@5fdef03a, IRCode@200a570f, IRCode@2c13da15, IRCode@5aaa6d82, IRCode@368239c8, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@782830e, IRCode@16b3fc9e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@3b22cdd0, IRCode@6f75e721, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@311d617d, IRCode@33833882, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@59f95c5d, IRCode@5fdef03a, IRCode@200a570f, IRCode@2c13da15, IRCode@5aaa6d82, IRCode@368239c8, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@782830e, IRCode@16b3fc9e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@3b22cdd0, IRCode@6f75e721, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;STOREI $T19 a
+;[IRCode@2d363fb3]
+;[]
+;in:[IRCode@311d617d, IRCode@33833882, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@59f95c5d, IRCode@5fdef03a, IRCode@200a570f, IRCode@2c13da15, IRCode@5aaa6d82, IRCode@368239c8, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@782830e, IRCode@16b3fc9e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@3b22cdd0, IRCode@6f75e721, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@311d617d, IRCode@33833882, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@200a570f, IRCode@2d363fb3, IRCode@2c13da15, IRCode@5aaa6d82, IRCode@368239c8, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@782830e, IRCode@16b3fc9e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@3b22cdd0, IRCode@6f75e721, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;WRITEI a
+;[]
+;[]
+;in:[IRCode@311d617d, IRCode@33833882, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@200a570f, IRCode@2d363fb3, IRCode@2c13da15, IRCode@5aaa6d82, IRCode@368239c8, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@782830e, IRCode@16b3fc9e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@3b22cdd0, IRCode@6f75e721, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@311d617d, IRCode@33833882, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@200a570f, IRCode@2d363fb3, IRCode@2c13da15, IRCode@5aaa6d82, IRCode@368239c8, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@782830e, IRCode@16b3fc9e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@3b22cdd0, IRCode@6f75e721, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;STOREI 10 $T20
+;[IRCode@71dac704]
+;[]
+;in:[IRCode@311d617d, IRCode@33833882, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@200a570f, IRCode@2d363fb3, IRCode@2c13da15, IRCode@5aaa6d82, IRCode@368239c8, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@782830e, IRCode@16b3fc9e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@3b22cdd0, IRCode@6f75e721, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@311d617d, IRCode@33833882, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@200a570f, IRCode@2d363fb3, IRCode@2c13da15, IRCode@5aaa6d82, IRCode@368239c8, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@782830e, IRCode@16b3fc9e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@3b22cdd0, IRCode@6f75e721, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030, IRCode@71dac704]
+;isLead:false
+;ADDI a $T20 $T21
+;[IRCode@39ed3c8d]
+;[]
+;in:[IRCode@311d617d, IRCode@33833882, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@200a570f, IRCode@2d363fb3, IRCode@2c13da15, IRCode@5aaa6d82, IRCode@368239c8, IRCode@65ae6ba4, IRCode@3b192d32, IRCode@4d591d15, IRCode@782830e, IRCode@16b3fc9e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@3b22cdd0, IRCode@6f75e721, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030, IRCode@71dac704]
+;out:[IRCode@33833882, IRCode@200a570f, IRCode@2d363fb3, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@4d591d15, IRCode@782830e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@6f75e721, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@5aaa6d82, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@3b22cdd0, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;STOREI $T21 a
+;[IRCode@3830f1c0]
+;[]
+;in:[IRCode@33833882, IRCode@200a570f, IRCode@2d363fb3, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@4d591d15, IRCode@782830e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@6f75e721, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@5aaa6d82, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@3b22cdd0, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@4d591d15, IRCode@782830e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@6f75e721, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@5aaa6d82, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;WRITEI a
+;[]
+;[]
+;in:[IRCode@33833882, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@4d591d15, IRCode@782830e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@6f75e721, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@5aaa6d82, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@4d591d15, IRCode@782830e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@6f75e721, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@5aaa6d82, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;ADDI b a $T22
+;[IRCode@5d22bbb7]
+;[]
+;in:[IRCode@33833882, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@4d591d15, IRCode@782830e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@6f75e721, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@5aaa6d82, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@4d591d15, IRCode@782830e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@5aaa6d82, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;STOREI 10 $T23
+;[IRCode@762efe5d]
+;[]
+;in:[IRCode@33833882, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@4d591d15, IRCode@782830e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@5aaa6d82, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@4d591d15, IRCode@782830e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@5aaa6d82, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@762efe5d, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;ADDI $T22 $T23 $T24
+;[IRCode@4926097b]
+;[]
+;in:[IRCode@33833882, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@4d591d15, IRCode@782830e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@5aaa6d82, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@762efe5d, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@4d591d15, IRCode@782830e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@5aaa6d82, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@762efe5d, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;STOREI $T24 b
+;[IRCode@7637f22]
+;[]
+;in:[IRCode@33833882, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@4d591d15, IRCode@782830e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@5aaa6d82, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@762efe5d, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@7637f22, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@5aaa6d82, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@762efe5d, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;WRITEI b
+;[]
+;[]
+;in:[IRCode@33833882, IRCode@7637f22, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@5aaa6d82, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@762efe5d, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@7637f22, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@5aaa6d82, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@762efe5d, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;STOREI 0 $T25
+;[IRCode@53bd815b]
+;[]
+;in:[IRCode@33833882, IRCode@7637f22, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@5aaa6d82, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@762efe5d, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@7637f22, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@762efe5d, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;STOREI 10 $T26
+;[IRCode@4361bd48]
+;[]
+;in:[IRCode@33833882, IRCode@7637f22, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@762efe5d, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@7637f22, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@762efe5d, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;SUBI $T25 $T26 $T27
+;[IRCode@26f0a63f]
+;[]
+;in:[IRCode@33833882, IRCode@7637f22, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@244038d0, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@762efe5d, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@7637f22, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@244038d0, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@762efe5d, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;STOREI $T27 c
+;[IRCode@182decdb]
+;[]
+;in:[IRCode@33833882, IRCode@7637f22, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@244038d0, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@762efe5d, IRCode@69222c14, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@7637f22, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;WRITEI c
+;[]
+;[]
+;in:[IRCode@33833882, IRCode@7637f22, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@7637f22, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;STOREF 1 $T28
+;[IRCode@36aa7bc2]
+;[]
+;in:[IRCode@33833882, IRCode@7637f22, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@7637f22, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;STOREF $T28 x
+;[IRCode@1175e2db]
+;[]
+;in:[IRCode@33833882, IRCode@7637f22, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@7637f22, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@1175e2db, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;STOREF 2 $T29
+;[IRCode@7de26db8]
+;[]
+;in:[IRCode@33833882, IRCode@7637f22, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@1175e2db, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@7637f22, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@1175e2db, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;STOREF $T29 y
+;[IRCode@123a439b]
+;[]
+;in:[IRCode@33833882, IRCode@7637f22, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@1175e2db, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@7637f22, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@123a439b, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@1175e2db, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;STOREF 3.14159 $T30
+;[IRCode@156643d4]
+;[]
+;in:[IRCode@33833882, IRCode@7637f22, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@123a439b, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@1175e2db, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@7637f22, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@123a439b, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@1175e2db, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@156643d4, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;STOREF $T30 z
+;[IRCode@5e265ba4]
+;[]
+;in:[IRCode@33833882, IRCode@7637f22, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@123a439b, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@1175e2db, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@156643d4, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@123a439b, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@1175e2db, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@156643d4, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;WRITEF x
+;[]
+;[]
+;in:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@123a439b, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@1175e2db, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@156643d4, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@123a439b, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@1175e2db, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@156643d4, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;WRITEF z
+;[]
+;[]
+;in:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@123a439b, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@1175e2db, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@156643d4, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@123a439b, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@1175e2db, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@156643d4, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;WRITEF y
+;[]
+;[]
+;in:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@123a439b, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@1175e2db, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@156643d4, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@123a439b, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@1175e2db, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@156643d4, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;STOREF 2 $T31
+;[IRCode@5e91993f]
+;[]
+;in:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@123a439b, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@1175e2db, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@156643d4, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@123a439b, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@1175e2db, IRCode@5e91993f, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@156643d4, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;DIVF z $T31 $T32
+;[IRCode@626b2d4a]
+;[]
+;in:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@123a439b, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@1175e2db, IRCode@5e91993f, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@156643d4, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@123a439b, IRCode@626b2d4a, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@1175e2db, IRCode@5e91993f, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@156643d4, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;STOREF $T32 x
+;[IRCode@515f550a]
+;[]
+;in:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@123a439b, IRCode@626b2d4a, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@1175e2db, IRCode@5e91993f, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@156643d4, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@123a439b, IRCode@626b2d4a, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@156643d4, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;DIVF z y $T33
+;[IRCode@6504e3b2]
+;[]
+;in:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@123a439b, IRCode@626b2d4a, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@156643d4, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@123a439b, IRCode@626b2d4a, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@156643d4, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@6504e3b2, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;STOREF $T33 y
+;[IRCode@1eb44e46]
+;[]
+;in:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@123a439b, IRCode@626b2d4a, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@156643d4, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@6504e3b2, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@626b2d4a, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@156643d4, IRCode@1eb44e46, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@6504e3b2, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;WRITEF x
+;[]
+;[]
+;in:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@626b2d4a, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@156643d4, IRCode@1eb44e46, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@6504e3b2, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@626b2d4a, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@156643d4, IRCode@1eb44e46, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@6504e3b2, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;WRITEF y
+;[]
+;[]
+;in:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@626b2d4a, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@156643d4, IRCode@1eb44e46, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@6504e3b2, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@626b2d4a, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@156643d4, IRCode@1eb44e46, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@6504e3b2, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;ADDF x y $T34
+;[IRCode@75a1cd57]
+;[]
+;in:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@626b2d4a, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@156643d4, IRCode@1eb44e46, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@6504e3b2, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@626b2d4a, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@156643d4, IRCode@1eb44e46, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@6504e3b2, IRCode@75a1cd57, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;ADDF $T34 z $T35
+;[IRCode@1ee0005]
+;[]
+;in:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@626b2d4a, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@156643d4, IRCode@1eb44e46, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@6504e3b2, IRCode@75a1cd57, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@626b2d4a, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@1ee0005, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@156643d4, IRCode@1eb44e46, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@6504e3b2, IRCode@75a1cd57, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;DIVF $T35 z $T36
+;[IRCode@7dc5e7b4]
+;[]
+;in:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@626b2d4a, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@1ee0005, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@3830f1c0, IRCode@3b22cdd0, IRCode@156643d4, IRCode@1eb44e46, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@6504e3b2, IRCode@75a1cd57, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@626b2d4a, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@1ee0005, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@156643d4, IRCode@1eb44e46, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@6504e3b2, IRCode@75a1cd57, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;STOREF $T36 t
+;[IRCode@6d9c638]
+;[]
+;in:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@626b2d4a, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@1ee0005, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@156643d4, IRCode@1eb44e46, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@6504e3b2, IRCode@75a1cd57, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@626b2d4a, IRCode@6d9c638, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@1ee0005, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@156643d4, IRCode@1eb44e46, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@6504e3b2, IRCode@75a1cd57, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;WRITEF t
+;[]
+;[]
+;in:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@626b2d4a, IRCode@6d9c638, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@1ee0005, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@156643d4, IRCode@1eb44e46, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@6504e3b2, IRCode@75a1cd57, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@626b2d4a, IRCode@6d9c638, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@1ee0005, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@156643d4, IRCode@1eb44e46, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@6504e3b2, IRCode@75a1cd57, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;MULF t t $T37
+;[IRCode@c2e1f26]
+;[]
+;in:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@626b2d4a, IRCode@6d9c638, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@1ee0005, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@156643d4, IRCode@1eb44e46, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@6504e3b2, IRCode@75a1cd57, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@626b2d4a, IRCode@6d9c638, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@1ee0005, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@156643d4, IRCode@1eb44e46, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@6504e3b2, IRCode@75a1cd57, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;STOREF $T37 t
+;[IRCode@41975e01]
+;[]
+;in:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@626b2d4a, IRCode@6d9c638, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@1ee0005, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@156643d4, IRCode@1eb44e46, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@6504e3b2, IRCode@75a1cd57, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@515f550a, IRCode@41975e01, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@626b2d4a, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@1ee0005, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@156643d4, IRCode@1eb44e46, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@6504e3b2, IRCode@75a1cd57, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;WRITEF t
+;[]
+;[]
+;in:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@515f550a, IRCode@41975e01, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@626b2d4a, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@1ee0005, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@156643d4, IRCode@1eb44e46, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@6504e3b2, IRCode@75a1cd57, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@515f550a, IRCode@41975e01, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@626b2d4a, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@1ee0005, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@156643d4, IRCode@1eb44e46, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@6504e3b2, IRCode@75a1cd57, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;ADDF t z $T38
+;[IRCode@1963006a]
+;[]
+;in:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@515f550a, IRCode@41975e01, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@626b2d4a, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@1ee0005, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@156643d4, IRCode@1eb44e46, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@6504e3b2, IRCode@75a1cd57, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@515f550a, IRCode@41975e01, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@626b2d4a, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@1ee0005, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@156643d4, IRCode@1eb44e46, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@6504e3b2, IRCode@75a1cd57, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;ADDF $T38 t $T39
+;[IRCode@6996db8]
+;[]
+;in:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@515f550a, IRCode@41975e01, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@626b2d4a, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@1ee0005, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@156643d4, IRCode@1eb44e46, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@6504e3b2, IRCode@75a1cd57, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@515f550a, IRCode@41975e01, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@1ee0005, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@156643d4, IRCode@1eb44e46, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@6504e3b2, IRCode@75a1cd57, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;STOREF 2 $T40
+;[IRCode@368102c8]
+;[]
+;in:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@515f550a, IRCode@41975e01, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@1ee0005, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@156643d4, IRCode@1eb44e46, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@6504e3b2, IRCode@75a1cd57, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@368102c8, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@515f550a, IRCode@41975e01, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@1ee0005, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@156643d4, IRCode@1eb44e46, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@6504e3b2, IRCode@75a1cd57, IRCode@5680a178, IRCode@470e2030]
+;isLead:false
+;DIVF t $T40 $T41
+;[IRCode@1edf1c96]
+;[]
+;in:[IRCode@33833882, IRCode@7637f22, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@368102c8, IRCode@368239c8, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@26f0a63f, IRCode@6f75e721, IRCode@5d22bbb7, IRCode@515f550a, IRCode@41975e01, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@73a28541, IRCode@7d6f77cc, IRCode@5fdef03a, IRCode@53bd815b, IRCode@5aaa6d82, IRCode@36aa7bc2, IRCode@4361bd48, IRCode@3b192d32, IRCode@1ee0005, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@156643d4, IRCode@1eb44e46, IRCode@762efe5d, IRCode@69222c14, IRCode@182decdb, IRCode@6504e3b2, IRCode@75a1cd57, IRCode@5680a178, IRCode@470e2030]
+;out:[IRCode@33833882, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@5d22bbb7, IRCode@41975e01, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@7d6f77cc, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@156643d4, IRCode@69222c14, IRCode@6504e3b2, IRCode@470e2030, IRCode@7637f22, IRCode@368102c8, IRCode@1edf1c96, IRCode@368239c8, IRCode@26f0a63f, IRCode@6f75e721, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@73a28541, IRCode@5fdef03a, IRCode@53bd815b, IRCode@36aa7bc2, IRCode@1ee0005, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@1eb44e46, IRCode@762efe5d, IRCode@182decdb, IRCode@75a1cd57, IRCode@5680a178]
+;isLead:false
+;ADDF $T39 $T41 $T42
+;[IRCode@15615099]
+;[]
+;in:[IRCode@33833882, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@5d22bbb7, IRCode@41975e01, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@7d6f77cc, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@156643d4, IRCode@69222c14, IRCode@6504e3b2, IRCode@470e2030, IRCode@7637f22, IRCode@368102c8, IRCode@1edf1c96, IRCode@368239c8, IRCode@26f0a63f, IRCode@6f75e721, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@73a28541, IRCode@5fdef03a, IRCode@53bd815b, IRCode@36aa7bc2, IRCode@1ee0005, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@1eb44e46, IRCode@762efe5d, IRCode@182decdb, IRCode@75a1cd57, IRCode@5680a178]
+;out:[IRCode@33833882, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@5d22bbb7, IRCode@41975e01, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@7d6f77cc, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@156643d4, IRCode@69222c14, IRCode@6504e3b2, IRCode@470e2030, IRCode@7637f22, IRCode@368102c8, IRCode@1edf1c96, IRCode@368239c8, IRCode@26f0a63f, IRCode@6f75e721, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@73a28541, IRCode@5fdef03a, IRCode@53bd815b, IRCode@36aa7bc2, IRCode@1ee0005, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@1eb44e46, IRCode@762efe5d, IRCode@182decdb, IRCode@75a1cd57, IRCode@5680a178, IRCode@15615099]
+;isLead:false
+;STOREF 4 $T43
+;[IRCode@ee7d9f1]
+;[]
+;in:[IRCode@33833882, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@5d22bbb7, IRCode@41975e01, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@7d6f77cc, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@156643d4, IRCode@69222c14, IRCode@6504e3b2, IRCode@470e2030, IRCode@7637f22, IRCode@368102c8, IRCode@1edf1c96, IRCode@368239c8, IRCode@26f0a63f, IRCode@6f75e721, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@73a28541, IRCode@5fdef03a, IRCode@53bd815b, IRCode@36aa7bc2, IRCode@1ee0005, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@1eb44e46, IRCode@762efe5d, IRCode@182decdb, IRCode@75a1cd57, IRCode@5680a178, IRCode@15615099]
+;out:[IRCode@33833882, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@5d22bbb7, IRCode@41975e01, IRCode@ee7d9f1, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@7d6f77cc, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@156643d4, IRCode@69222c14, IRCode@6504e3b2, IRCode@470e2030, IRCode@7637f22, IRCode@368102c8, IRCode@1edf1c96, IRCode@368239c8, IRCode@26f0a63f, IRCode@6f75e721, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@73a28541, IRCode@5fdef03a, IRCode@53bd815b, IRCode@36aa7bc2, IRCode@1ee0005, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@1eb44e46, IRCode@762efe5d, IRCode@182decdb, IRCode@75a1cd57, IRCode@5680a178, IRCode@15615099]
+;isLead:false
+;DIVF z $T43 $T44
+;[IRCode@442d9b6e]
+;[]
+;in:[IRCode@33833882, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@5d22bbb7, IRCode@41975e01, IRCode@ee7d9f1, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@7d6f77cc, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@156643d4, IRCode@69222c14, IRCode@6504e3b2, IRCode@470e2030, IRCode@7637f22, IRCode@368102c8, IRCode@1edf1c96, IRCode@368239c8, IRCode@26f0a63f, IRCode@6f75e721, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@73a28541, IRCode@5fdef03a, IRCode@53bd815b, IRCode@36aa7bc2, IRCode@1ee0005, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@1eb44e46, IRCode@762efe5d, IRCode@182decdb, IRCode@75a1cd57, IRCode@5680a178, IRCode@15615099]
+;out:[IRCode@33833882, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@5d22bbb7, IRCode@41975e01, IRCode@ee7d9f1, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@7d6f77cc, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@156643d4, IRCode@69222c14, IRCode@6504e3b2, IRCode@470e2030, IRCode@7637f22, IRCode@442d9b6e, IRCode@368102c8, IRCode@1edf1c96, IRCode@368239c8, IRCode@26f0a63f, IRCode@6f75e721, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@73a28541, IRCode@5fdef03a, IRCode@53bd815b, IRCode@36aa7bc2, IRCode@1ee0005, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@1eb44e46, IRCode@762efe5d, IRCode@182decdb, IRCode@75a1cd57, IRCode@5680a178, IRCode@15615099]
+;isLead:false
+;ADDF $T42 $T44 $T45
+;[IRCode@726f3b58]
+;[]
+;in:[IRCode@33833882, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@5d22bbb7, IRCode@41975e01, IRCode@ee7d9f1, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@7d6f77cc, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@156643d4, IRCode@69222c14, IRCode@6504e3b2, IRCode@470e2030, IRCode@7637f22, IRCode@442d9b6e, IRCode@368102c8, IRCode@1edf1c96, IRCode@368239c8, IRCode@26f0a63f, IRCode@6f75e721, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@73a28541, IRCode@5fdef03a, IRCode@53bd815b, IRCode@36aa7bc2, IRCode@1ee0005, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@1eb44e46, IRCode@762efe5d, IRCode@182decdb, IRCode@75a1cd57, IRCode@5680a178, IRCode@15615099]
+;out:[IRCode@33833882, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@5d22bbb7, IRCode@41975e01, IRCode@ee7d9f1, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@7d6f77cc, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@156643d4, IRCode@69222c14, IRCode@6504e3b2, IRCode@726f3b58, IRCode@470e2030, IRCode@7637f22, IRCode@442d9b6e, IRCode@368102c8, IRCode@1edf1c96, IRCode@368239c8, IRCode@26f0a63f, IRCode@6f75e721, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@73a28541, IRCode@5fdef03a, IRCode@53bd815b, IRCode@36aa7bc2, IRCode@1ee0005, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@1eb44e46, IRCode@762efe5d, IRCode@182decdb, IRCode@75a1cd57, IRCode@5680a178, IRCode@15615099]
+;isLead:false
+;STOREF 5 $T46
+;[IRCode@1b701da1]
+;[]
+;in:[IRCode@33833882, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@5d22bbb7, IRCode@41975e01, IRCode@ee7d9f1, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@7d6f77cc, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@156643d4, IRCode@69222c14, IRCode@6504e3b2, IRCode@726f3b58, IRCode@470e2030, IRCode@7637f22, IRCode@442d9b6e, IRCode@368102c8, IRCode@1edf1c96, IRCode@368239c8, IRCode@26f0a63f, IRCode@6f75e721, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@73a28541, IRCode@5fdef03a, IRCode@53bd815b, IRCode@36aa7bc2, IRCode@1ee0005, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@1eb44e46, IRCode@762efe5d, IRCode@182decdb, IRCode@75a1cd57, IRCode@5680a178, IRCode@15615099]
+;out:[IRCode@33833882, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@5d22bbb7, IRCode@41975e01, IRCode@ee7d9f1, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@7d6f77cc, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@156643d4, IRCode@69222c14, IRCode@6504e3b2, IRCode@726f3b58, IRCode@470e2030, IRCode@7637f22, IRCode@442d9b6e, IRCode@368102c8, IRCode@1edf1c96, IRCode@368239c8, IRCode@26f0a63f, IRCode@1b701da1, IRCode@6f75e721, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@73a28541, IRCode@5fdef03a, IRCode@53bd815b, IRCode@36aa7bc2, IRCode@1ee0005, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@1eb44e46, IRCode@762efe5d, IRCode@182decdb, IRCode@75a1cd57, IRCode@5680a178, IRCode@15615099]
+;isLead:false
+;DIVF z $T46 $T47
+;[IRCode@58d25a40]
+;[]
+;in:[IRCode@33833882, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@5d22bbb7, IRCode@41975e01, IRCode@ee7d9f1, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@7d6f77cc, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@156643d4, IRCode@69222c14, IRCode@6504e3b2, IRCode@726f3b58, IRCode@470e2030, IRCode@7637f22, IRCode@442d9b6e, IRCode@368102c8, IRCode@1edf1c96, IRCode@368239c8, IRCode@26f0a63f, IRCode@1b701da1, IRCode@6f75e721, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@73a28541, IRCode@5fdef03a, IRCode@53bd815b, IRCode@36aa7bc2, IRCode@1ee0005, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@1eb44e46, IRCode@762efe5d, IRCode@182decdb, IRCode@75a1cd57, IRCode@5680a178, IRCode@15615099]
+;out:[IRCode@33833882, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@58d25a40, IRCode@5d22bbb7, IRCode@41975e01, IRCode@ee7d9f1, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@7d6f77cc, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@156643d4, IRCode@69222c14, IRCode@6504e3b2, IRCode@726f3b58, IRCode@470e2030, IRCode@7637f22, IRCode@442d9b6e, IRCode@368102c8, IRCode@1edf1c96, IRCode@368239c8, IRCode@26f0a63f, IRCode@1b701da1, IRCode@6f75e721, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@73a28541, IRCode@5fdef03a, IRCode@53bd815b, IRCode@36aa7bc2, IRCode@1ee0005, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@1eb44e46, IRCode@762efe5d, IRCode@182decdb, IRCode@75a1cd57, IRCode@5680a178, IRCode@15615099]
+;isLead:false
+;ADDF $T45 $T47 $T48
+;[IRCode@1c655221]
+;[]
+;in:[IRCode@33833882, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@58d25a40, IRCode@5d22bbb7, IRCode@41975e01, IRCode@ee7d9f1, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@7d6f77cc, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@156643d4, IRCode@69222c14, IRCode@6504e3b2, IRCode@726f3b58, IRCode@470e2030, IRCode@7637f22, IRCode@442d9b6e, IRCode@368102c8, IRCode@1edf1c96, IRCode@368239c8, IRCode@26f0a63f, IRCode@1b701da1, IRCode@6f75e721, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@73a28541, IRCode@5fdef03a, IRCode@53bd815b, IRCode@36aa7bc2, IRCode@1ee0005, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@1eb44e46, IRCode@762efe5d, IRCode@182decdb, IRCode@75a1cd57, IRCode@5680a178, IRCode@15615099]
+;out:[IRCode@33833882, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@58d25a40, IRCode@5d22bbb7, IRCode@41975e01, IRCode@ee7d9f1, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@7d6f77cc, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@156643d4, IRCode@69222c14, IRCode@6504e3b2, IRCode@726f3b58, IRCode@470e2030, IRCode@7637f22, IRCode@442d9b6e, IRCode@1c655221, IRCode@368102c8, IRCode@1edf1c96, IRCode@368239c8, IRCode@26f0a63f, IRCode@1b701da1, IRCode@6f75e721, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@73a28541, IRCode@5fdef03a, IRCode@53bd815b, IRCode@36aa7bc2, IRCode@1ee0005, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@1eb44e46, IRCode@762efe5d, IRCode@182decdb, IRCode@75a1cd57, IRCode@5680a178, IRCode@15615099]
+;isLead:false
+;STOREF 6 $T49
+;[IRCode@aec6354]
+;[]
+;in:[IRCode@33833882, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@58d25a40, IRCode@5d22bbb7, IRCode@41975e01, IRCode@ee7d9f1, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@7d6f77cc, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@156643d4, IRCode@69222c14, IRCode@6504e3b2, IRCode@726f3b58, IRCode@470e2030, IRCode@7637f22, IRCode@442d9b6e, IRCode@1c655221, IRCode@368102c8, IRCode@1edf1c96, IRCode@368239c8, IRCode@26f0a63f, IRCode@1b701da1, IRCode@6f75e721, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@73a28541, IRCode@5fdef03a, IRCode@53bd815b, IRCode@36aa7bc2, IRCode@1ee0005, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@1eb44e46, IRCode@762efe5d, IRCode@182decdb, IRCode@75a1cd57, IRCode@5680a178, IRCode@15615099]
+;out:[IRCode@33833882, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@58d25a40, IRCode@5d22bbb7, IRCode@41975e01, IRCode@ee7d9f1, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@7d6f77cc, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@156643d4, IRCode@69222c14, IRCode@6504e3b2, IRCode@726f3b58, IRCode@aec6354, IRCode@470e2030, IRCode@7637f22, IRCode@442d9b6e, IRCode@1c655221, IRCode@368102c8, IRCode@1edf1c96, IRCode@368239c8, IRCode@26f0a63f, IRCode@1b701da1, IRCode@6f75e721, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@73a28541, IRCode@5fdef03a, IRCode@53bd815b, IRCode@36aa7bc2, IRCode@1ee0005, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@1eb44e46, IRCode@762efe5d, IRCode@182decdb, IRCode@75a1cd57, IRCode@5680a178, IRCode@15615099]
+;isLead:false
+;DIVF z $T49 $T50
 ;[IRCode@3f8f9dd6]
 ;[]
-;in:[]
-;out:[IRCode@3f8f9dd6]
+;in:[IRCode@33833882, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@58d25a40, IRCode@5d22bbb7, IRCode@41975e01, IRCode@ee7d9f1, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@7d6f77cc, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@156643d4, IRCode@69222c14, IRCode@6504e3b2, IRCode@726f3b58, IRCode@aec6354, IRCode@470e2030, IRCode@7637f22, IRCode@442d9b6e, IRCode@1c655221, IRCode@368102c8, IRCode@1edf1c96, IRCode@368239c8, IRCode@26f0a63f, IRCode@1b701da1, IRCode@6f75e721, IRCode@515f550a, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@73a28541, IRCode@5fdef03a, IRCode@53bd815b, IRCode@36aa7bc2, IRCode@1ee0005, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@1eb44e46, IRCode@762efe5d, IRCode@182decdb, IRCode@75a1cd57, IRCode@5680a178, IRCode@15615099]
+;out:[IRCode@33833882, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@58d25a40, IRCode@5d22bbb7, IRCode@41975e01, IRCode@ee7d9f1, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@7d6f77cc, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@156643d4, IRCode@69222c14, IRCode@6504e3b2, IRCode@726f3b58, IRCode@aec6354, IRCode@470e2030, IRCode@7637f22, IRCode@442d9b6e, IRCode@1c655221, IRCode@368102c8, IRCode@1edf1c96, IRCode@368239c8, IRCode@26f0a63f, IRCode@1b701da1, IRCode@6f75e721, IRCode@515f550a, IRCode@3f8f9dd6, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@73a28541, IRCode@5fdef03a, IRCode@53bd815b, IRCode@36aa7bc2, IRCode@1ee0005, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@1eb44e46, IRCode@762efe5d, IRCode@182decdb, IRCode@75a1cd57, IRCode@5680a178, IRCode@15615099]
 ;isLead:false
-;STOREI $T1 $L1
+;ADDF $T48 $T50 $T51
 ;[IRCode@7e774085]
 ;[]
-;in:[IRCode@3f8f9dd6]
-;out:[IRCode@7e774085, IRCode@3f8f9dd6]
-;isLead:true
-;LABEL BLOCK_1_Loop
-;[]
-;[]
-;in:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
-;out:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;in:[IRCode@33833882, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@58d25a40, IRCode@5d22bbb7, IRCode@41975e01, IRCode@ee7d9f1, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@7d6f77cc, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@156643d4, IRCode@69222c14, IRCode@6504e3b2, IRCode@726f3b58, IRCode@aec6354, IRCode@470e2030, IRCode@7637f22, IRCode@442d9b6e, IRCode@1c655221, IRCode@368102c8, IRCode@1edf1c96, IRCode@368239c8, IRCode@26f0a63f, IRCode@1b701da1, IRCode@6f75e721, IRCode@515f550a, IRCode@3f8f9dd6, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@73a28541, IRCode@5fdef03a, IRCode@53bd815b, IRCode@36aa7bc2, IRCode@1ee0005, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@1eb44e46, IRCode@762efe5d, IRCode@182decdb, IRCode@75a1cd57, IRCode@5680a178, IRCode@15615099]
+;out:[IRCode@33833882, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@58d25a40, IRCode@5d22bbb7, IRCode@41975e01, IRCode@ee7d9f1, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@7d6f77cc, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@156643d4, IRCode@69222c14, IRCode@6504e3b2, IRCode@726f3b58, IRCode@aec6354, IRCode@470e2030, IRCode@7637f22, IRCode@442d9b6e, IRCode@1c655221, IRCode@368102c8, IRCode@1edf1c96, IRCode@368239c8, IRCode@26f0a63f, IRCode@1b701da1, IRCode@6f75e721, IRCode@515f550a, IRCode@3f8f9dd6, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@73a28541, IRCode@5fdef03a, IRCode@53bd815b, IRCode@36aa7bc2, IRCode@1ee0005, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@1eb44e46, IRCode@7e774085, IRCode@762efe5d, IRCode@182decdb, IRCode@75a1cd57, IRCode@5680a178, IRCode@15615099]
 ;isLead:false
-;STOREI 100 $T2
+;STOREF 7 $T52
+;[IRCode@ea30797]
+;[]
+;in:[IRCode@33833882, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@58d25a40, IRCode@5d22bbb7, IRCode@41975e01, IRCode@ee7d9f1, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@7d6f77cc, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@156643d4, IRCode@69222c14, IRCode@6504e3b2, IRCode@726f3b58, IRCode@aec6354, IRCode@470e2030, IRCode@7637f22, IRCode@442d9b6e, IRCode@1c655221, IRCode@368102c8, IRCode@1edf1c96, IRCode@368239c8, IRCode@26f0a63f, IRCode@1b701da1, IRCode@6f75e721, IRCode@515f550a, IRCode@3f8f9dd6, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@73a28541, IRCode@5fdef03a, IRCode@53bd815b, IRCode@36aa7bc2, IRCode@1ee0005, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@1eb44e46, IRCode@7e774085, IRCode@762efe5d, IRCode@182decdb, IRCode@75a1cd57, IRCode@5680a178, IRCode@15615099]
+;out:[IRCode@33833882, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@58d25a40, IRCode@5d22bbb7, IRCode@41975e01, IRCode@ee7d9f1, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@7d6f77cc, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@156643d4, IRCode@ea30797, IRCode@69222c14, IRCode@6504e3b2, IRCode@726f3b58, IRCode@aec6354, IRCode@470e2030, IRCode@7637f22, IRCode@442d9b6e, IRCode@1c655221, IRCode@368102c8, IRCode@1edf1c96, IRCode@368239c8, IRCode@26f0a63f, IRCode@1b701da1, IRCode@6f75e721, IRCode@515f550a, IRCode@3f8f9dd6, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@73a28541, IRCode@5fdef03a, IRCode@53bd815b, IRCode@36aa7bc2, IRCode@1ee0005, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@1eb44e46, IRCode@7e774085, IRCode@762efe5d, IRCode@182decdb, IRCode@75a1cd57, IRCode@5680a178, IRCode@15615099]
+;isLead:false
+;DIVF z $T52 $T53
 ;[IRCode@73a8dfcc]
 ;[]
-;in:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
-;out:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@4c98385c, IRCode@73a8dfcc, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;in:[IRCode@33833882, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@58d25a40, IRCode@5d22bbb7, IRCode@41975e01, IRCode@ee7d9f1, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@7d6f77cc, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@156643d4, IRCode@ea30797, IRCode@69222c14, IRCode@6504e3b2, IRCode@726f3b58, IRCode@aec6354, IRCode@470e2030, IRCode@7637f22, IRCode@442d9b6e, IRCode@1c655221, IRCode@368102c8, IRCode@1edf1c96, IRCode@368239c8, IRCode@26f0a63f, IRCode@1b701da1, IRCode@6f75e721, IRCode@515f550a, IRCode@3f8f9dd6, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@73a28541, IRCode@5fdef03a, IRCode@53bd815b, IRCode@36aa7bc2, IRCode@1ee0005, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@1eb44e46, IRCode@7e774085, IRCode@762efe5d, IRCode@182decdb, IRCode@75a1cd57, IRCode@5680a178, IRCode@15615099]
+;out:[IRCode@33833882, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@58d25a40, IRCode@5d22bbb7, IRCode@41975e01, IRCode@ee7d9f1, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@7d6f77cc, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@156643d4, IRCode@ea30797, IRCode@69222c14, IRCode@6504e3b2, IRCode@726f3b58, IRCode@aec6354, IRCode@470e2030, IRCode@7637f22, IRCode@442d9b6e, IRCode@1c655221, IRCode@368102c8, IRCode@1edf1c96, IRCode@368239c8, IRCode@26f0a63f, IRCode@1b701da1, IRCode@6f75e721, IRCode@515f550a, IRCode@3f8f9dd6, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@73a28541, IRCode@5fdef03a, IRCode@73a8dfcc, IRCode@53bd815b, IRCode@36aa7bc2, IRCode@1ee0005, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@1eb44e46, IRCode@7e774085, IRCode@762efe5d, IRCode@182decdb, IRCode@75a1cd57, IRCode@5680a178, IRCode@15615099]
 ;isLead:false
-;GE $L1 $T2 BLOCK_1_OUT
+;ADDF $T51 $T53 $T54
+;[IRCode@53e25b76]
 ;[]
-;[]
-;in:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
-;out:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
-;isLead:true
-;STOREI 29 $T3
+;in:[IRCode@33833882, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@58d25a40, IRCode@5d22bbb7, IRCode@41975e01, IRCode@ee7d9f1, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@7d6f77cc, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@156643d4, IRCode@ea30797, IRCode@69222c14, IRCode@6504e3b2, IRCode@726f3b58, IRCode@aec6354, IRCode@470e2030, IRCode@7637f22, IRCode@442d9b6e, IRCode@1c655221, IRCode@368102c8, IRCode@1edf1c96, IRCode@368239c8, IRCode@26f0a63f, IRCode@1b701da1, IRCode@6f75e721, IRCode@515f550a, IRCode@3f8f9dd6, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@73a28541, IRCode@5fdef03a, IRCode@73a8dfcc, IRCode@53bd815b, IRCode@36aa7bc2, IRCode@1ee0005, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@1eb44e46, IRCode@7e774085, IRCode@762efe5d, IRCode@182decdb, IRCode@75a1cd57, IRCode@5680a178, IRCode@15615099]
+;out:[IRCode@33833882, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@58d25a40, IRCode@53e25b76, IRCode@5d22bbb7, IRCode@41975e01, IRCode@ee7d9f1, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@7d6f77cc, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@156643d4, IRCode@ea30797, IRCode@69222c14, IRCode@6504e3b2, IRCode@726f3b58, IRCode@aec6354, IRCode@470e2030, IRCode@7637f22, IRCode@442d9b6e, IRCode@1c655221, IRCode@368102c8, IRCode@1edf1c96, IRCode@368239c8, IRCode@26f0a63f, IRCode@1b701da1, IRCode@6f75e721, IRCode@515f550a, IRCode@3f8f9dd6, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@73a28541, IRCode@5fdef03a, IRCode@73a8dfcc, IRCode@53bd815b, IRCode@36aa7bc2, IRCode@1ee0005, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@1eb44e46, IRCode@7e774085, IRCode@762efe5d, IRCode@182decdb, IRCode@75a1cd57, IRCode@5680a178, IRCode@15615099]
+;isLead:false
+;STOREF $T54 t
 ;[IRCode@5eb5c224]
 ;[]
-;in:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
-;out:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;in:[IRCode@33833882, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@58d25a40, IRCode@53e25b76, IRCode@5d22bbb7, IRCode@41975e01, IRCode@ee7d9f1, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@7d6f77cc, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@156643d4, IRCode@ea30797, IRCode@69222c14, IRCode@6504e3b2, IRCode@726f3b58, IRCode@aec6354, IRCode@470e2030, IRCode@7637f22, IRCode@442d9b6e, IRCode@1c655221, IRCode@368102c8, IRCode@1edf1c96, IRCode@368239c8, IRCode@26f0a63f, IRCode@1b701da1, IRCode@6f75e721, IRCode@515f550a, IRCode@3f8f9dd6, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@73a28541, IRCode@5fdef03a, IRCode@73a8dfcc, IRCode@53bd815b, IRCode@36aa7bc2, IRCode@1ee0005, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@1eb44e46, IRCode@7e774085, IRCode@762efe5d, IRCode@182decdb, IRCode@75a1cd57, IRCode@5680a178, IRCode@15615099]
+;out:[IRCode@33833882, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@5eb5c224, IRCode@58d25a40, IRCode@53e25b76, IRCode@5d22bbb7, IRCode@ee7d9f1, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@7d6f77cc, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@156643d4, IRCode@ea30797, IRCode@69222c14, IRCode@6504e3b2, IRCode@726f3b58, IRCode@aec6354, IRCode@470e2030, IRCode@7637f22, IRCode@442d9b6e, IRCode@1c655221, IRCode@368102c8, IRCode@1edf1c96, IRCode@368239c8, IRCode@26f0a63f, IRCode@1b701da1, IRCode@6f75e721, IRCode@515f550a, IRCode@3f8f9dd6, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@73a28541, IRCode@5fdef03a, IRCode@73a8dfcc, IRCode@53bd815b, IRCode@36aa7bc2, IRCode@1ee0005, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@1eb44e46, IRCode@7e774085, IRCode@762efe5d, IRCode@182decdb, IRCode@75a1cd57, IRCode@5680a178, IRCode@15615099]
 ;isLead:false
-;STOREI $T3 $L2
-;[IRCode@6bf2d08e]
-;[]
-;in:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
-;out:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
-;isLead:false
-;STOREI 4 $T4
-;[IRCode@5fcfe4b2]
-;[]
-;in:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
-;out:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
-;isLead:false
-;ADDI $L3 $T4 $T5
-;[IRCode@4c98385c]
-;[]
-;in:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
-;out:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
-;isLead:false
-;STOREI $T5 $L3
-;[IRCode@4cdf35a9]
-;[]
-;in:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
-;out:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
-;isLead:false
-;LABEL BLOCK_1_INC
+;WRITEF t
 ;[]
 ;[]
-;in:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
-;out:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
-;isLead:false
-;STOREI 1 $T6
-;[IRCode@484b61fc]
-;[]
-;in:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
-;out:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
-;isLead:false
-;ADDI $L1 $T6 $T7
-;[IRCode@759ebb3d]
-;[]
-;in:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
-;out:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
-;isLead:false
-;STOREI $T7 $L1
-;[IRCode@3b764bce]
-;[]
-;in:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
-;out:[IRCode@5eb5c224, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
-;isLead:false
-;JUMP BLOCK_1_Loop
-;[]
-;[]
-;in:[IRCode@5eb5c224, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
-;out:[IRCode@5eb5c224, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
-;isLead:true
-;LABEL BLOCK_1_OUT
-;[]
-;[]
-;in:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
-;out:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
-;isLead:false
-;WRITEI $L2
-;[]
-;[]
-;in:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
-;out:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
-;isLead:false
-;WRITEI $L3
-;[]
-;[]
-;in:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
-;out:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
+;in:[IRCode@33833882, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@5eb5c224, IRCode@58d25a40, IRCode@53e25b76, IRCode@5d22bbb7, IRCode@ee7d9f1, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@7d6f77cc, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@156643d4, IRCode@ea30797, IRCode@69222c14, IRCode@6504e3b2, IRCode@726f3b58, IRCode@aec6354, IRCode@470e2030, IRCode@7637f22, IRCode@442d9b6e, IRCode@1c655221, IRCode@368102c8, IRCode@1edf1c96, IRCode@368239c8, IRCode@26f0a63f, IRCode@1b701da1, IRCode@6f75e721, IRCode@515f550a, IRCode@3f8f9dd6, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@73a28541, IRCode@5fdef03a, IRCode@73a8dfcc, IRCode@53bd815b, IRCode@36aa7bc2, IRCode@1ee0005, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@1eb44e46, IRCode@7e774085, IRCode@762efe5d, IRCode@182decdb, IRCode@75a1cd57, IRCode@5680a178, IRCode@15615099]
+;out:[IRCode@33833882, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@5eb5c224, IRCode@58d25a40, IRCode@53e25b76, IRCode@5d22bbb7, IRCode@ee7d9f1, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@7d6f77cc, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@156643d4, IRCode@ea30797, IRCode@69222c14, IRCode@6504e3b2, IRCode@726f3b58, IRCode@aec6354, IRCode@470e2030, IRCode@7637f22, IRCode@442d9b6e, IRCode@1c655221, IRCode@368102c8, IRCode@1edf1c96, IRCode@368239c8, IRCode@26f0a63f, IRCode@1b701da1, IRCode@6f75e721, IRCode@515f550a, IRCode@3f8f9dd6, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@73a28541, IRCode@5fdef03a, IRCode@73a8dfcc, IRCode@53bd815b, IRCode@36aa7bc2, IRCode@1ee0005, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@1eb44e46, IRCode@7e774085, IRCode@762efe5d, IRCode@182decdb, IRCode@75a1cd57, IRCode@5680a178, IRCode@15615099]
 ;isLead:false
 ;RET 
 ;[]
 ;[]
-;in:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
-;out:[IRCode@5eb5c224, IRCode@7e774085, IRCode@759ebb3d, IRCode@73a8dfcc, IRCode@4c98385c, IRCode@4cdf35a9, IRCode@484b61fc, IRCode@3b764bce, IRCode@3f8f9dd6, IRCode@6bf2d08e, IRCode@5fcfe4b2]
-;Loop@58d25a40
-;start:LABEL BLOCK_1_Loop4
-;end:LABEL BLOCK_1_OUT17
-;---------
+;in:[IRCode@33833882, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@5eb5c224, IRCode@58d25a40, IRCode@53e25b76, IRCode@5d22bbb7, IRCode@ee7d9f1, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@7d6f77cc, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@156643d4, IRCode@ea30797, IRCode@69222c14, IRCode@6504e3b2, IRCode@726f3b58, IRCode@aec6354, IRCode@470e2030, IRCode@7637f22, IRCode@442d9b6e, IRCode@1c655221, IRCode@368102c8, IRCode@1edf1c96, IRCode@368239c8, IRCode@26f0a63f, IRCode@1b701da1, IRCode@6f75e721, IRCode@515f550a, IRCode@3f8f9dd6, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@73a28541, IRCode@5fdef03a, IRCode@73a8dfcc, IRCode@53bd815b, IRCode@36aa7bc2, IRCode@1ee0005, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@1eb44e46, IRCode@7e774085, IRCode@762efe5d, IRCode@182decdb, IRCode@75a1cd57, IRCode@5680a178, IRCode@15615099]
+;out:[IRCode@33833882, IRCode@5e265ba4, IRCode@200a570f, IRCode@2c13da15, IRCode@c2e1f26, IRCode@1963006a, IRCode@65ae6ba4, IRCode@782830e, IRCode@5ccd43c2, IRCode@5eb5c224, IRCode@58d25a40, IRCode@53e25b76, IRCode@5d22bbb7, IRCode@ee7d9f1, IRCode@626b2d4a, IRCode@6996db8, IRCode@606d8acf, IRCode@7d6f77cc, IRCode@5aaa6d82, IRCode@4361bd48, IRCode@3b192d32, IRCode@16b3fc9e, IRCode@5e91993f, IRCode@156643d4, IRCode@ea30797, IRCode@69222c14, IRCode@6504e3b2, IRCode@726f3b58, IRCode@aec6354, IRCode@470e2030, IRCode@7637f22, IRCode@442d9b6e, IRCode@1c655221, IRCode@368102c8, IRCode@1edf1c96, IRCode@368239c8, IRCode@26f0a63f, IRCode@1b701da1, IRCode@6f75e721, IRCode@515f550a, IRCode@3f8f9dd6, IRCode@7de26db8, IRCode@4926097b, IRCode@71dac704, IRCode@311d617d, IRCode@39ed3c8d, IRCode@73a28541, IRCode@5fdef03a, IRCode@73a8dfcc, IRCode@53bd815b, IRCode@36aa7bc2, IRCode@1ee0005, IRCode@3830f1c0, IRCode@7dc5e7b4, IRCode@3b22cdd0, IRCode@1eb44e46, IRCode@7e774085, IRCode@762efe5d, IRCode@182decdb, IRCode@75a1cd57, IRCode@5680a178, IRCode@15615099]
 ;LABEL main
 ;LINK 
-;STOREI 0 $T1
+;STOREI 1 $T1
 ;$T1 gets reg:r0
-;STOREI $T1 $L1
+;STOREI $T1 a
 ;enuse()
 ;{r0->$T1    r1->null    r2->null    r3->null    }
 ;$T1 has reg:r0
-;$L1 gets reg:r1
+;a gets reg:r1
 ; freeing  reg:r0 is dirty: true
-;spill end of basic
-;LABEL BLOCK_1_Loop
-;STOREI 100 $T2
+;STOREI 2 $T2
 ;$T2 gets reg:r0
-;GE $L1 $T2 BLOCK_1_OUT
+;STOREI $T2 b
 ;enuse()
-;{r0->$T2    r1->null    r2->null    r3->null    }
-; $L1 gets reg:r1
-;enuse()
-;{r0->$T2    r1->$L1    r2->null    r3->null    }
+;{r0->$T2    r1->a    r2->null    r3->null    }
 ;$T2 has reg:r0
+;b gets reg:r2
 ; freeing  reg:r0 is dirty: true
-;spill end of basic
-;STOREI 29 $T3
+;STOREI 10 $T3
 ;$T3 gets reg:r0
-;STOREI $T3 $L2
+;STOREI $T3 c
 ;enuse()
-;{r0->$T3    r1->null    r2->null    r3->null    }
+;{r0->$T3    r1->a    r2->b    r3->null    }
 ;$T3 has reg:r0
-;$L2 gets reg:r1
+;c gets reg:r3
 ; freeing  reg:r0 is dirty: true
-;STOREI 4 $T4
+;STOREI 20 $T4
 ;$T4 gets reg:r0
-;ADDI $L3 $T4 $T5
+;STOREI $T4 d
 ;enuse()
-;{r0->$T4    r1->$L2    r2->null    r3->null    }
-; $L3 gets reg:r2
-;enuse()
-;{r0->$T4    r1->$L2    r2->$L3    r3->null    }
+;{r0->$T4    r1->a    r2->b    r3->c    }
 ;$T4 has reg:r0
-; changing reg r2 from $L3to $T5
-; freeing  reg:r2 is dirty: false
-; freeing  reg:r0 is dirty: true
-;STOREI $T5 $L3
-;enuse()
-;{r0->null    r1->$L2    r2->$T5    r3->null    }
-;$T5 has reg:r2
-;$L3 gets reg:r0
-; freeing  reg:r2 is dirty: true
-;LABEL BLOCK_1_INC
-;STOREI 1 $T6
-;$T6 gets reg:r2
-;ADDI $L1 $T6 $T7
-;enuse()
-;{r0->$L3    r1->$L2    r2->$T6    r3->null    }
-; $L1 gets reg:r3
-;enuse()
-;{r0->$L3    r1->$L2    r2->$T6    r3->$L1    }
-;$T6 has reg:r2
-; changing reg r3 from $L1to $T7
-; freeing  reg:r3 is dirty: false
-; freeing  reg:r2 is dirty: true
-;STOREI $T7 $L1
-;enuse()
-;{r0->$L3    r1->$L2    r2->null    r3->$T7    }
-;$T7 has reg:r3
-;$L1 gets reg:r2
+;all full
+;reg: 3 to be kicked old var : c
 ; freeing  reg:r3 is dirty: true
-;JUMP BLOCK_1_Loop
-;spill end of basic
-;LABEL BLOCK_1_OUT
-;WRITEI $L2
+;d gets reg:r3
+; freeing  reg:r0 is dirty: true
+;WRITEI a
 ;enuse()
-;{r0->null    r1->null    r2->null    r3->null    }
-; $L2 gets reg:r0
-; freeing  reg:r0 is dirty: false
-;WRITEI $L3
+;{r0->null    r1->a    r2->b    r3->d    }
+;a has reg:r1
+;WRITEI b
 ;enuse()
-;{r0->null    r1->null    r2->null    r3->null    }
-; $L3 gets reg:r0
+;{r0->null    r1->a    r2->b    r3->d    }
+;b has reg:r2
+;WRITEI c
+;enuse()
+;{r0->null    r1->a    r2->b    r3->d    }
+; c gets reg:r0
+;WRITEI d
+;enuse()
+;{r0->c    r1->a    r2->b    r3->d    }
+;d has reg:r3
+;ADDI a b $T5
+;enuse()
+;{r0->c    r1->a    r2->b    r3->d    }
+;a has reg:r1
+;enuse()
+;{r0->c    r1->a    r2->b    r3->d    }
+;b has reg:r2
+; changing reg r1 from ato $T5
+; freeing  reg:r1 is dirty: true
+; freeing  reg:r2 is dirty: true
+;STOREI $T5 a
+;enuse()
+;{r0->c    r1->$T5    r2->null    r3->d    }
+;$T5 has reg:r1
+;a gets reg:r2
+; freeing  reg:r1 is dirty: true
+;WRITEI a
+;enuse()
+;{r0->c    r1->null    r2->a    r3->d    }
+;a has reg:r2
+;MULI a c $T6
+;enuse()
+;{r0->c    r1->null    r2->a    r3->d    }
+;a has reg:r2
+;enuse()
+;{r0->c    r1->null    r2->a    r3->d    }
+;c has reg:r0
+; changing reg r2 from ato $T6
+; freeing  reg:r2 is dirty: true
 ; freeing  reg:r0 is dirty: false
+;STOREI $T6 b
+;enuse()
+;{r0->null    r1->null    r2->$T6    r3->d    }
+;$T6 has reg:r2
+;b gets reg:r0
+; freeing  reg:r2 is dirty: true
+;WRITEI b
+;enuse()
+;{r0->b    r1->null    r2->null    r3->d    }
+;b has reg:r0
+;STOREI 0 $T7
+;$T7 gets reg:r1
+;SUBI $T7 a $T8
+;enuse()
+;{r0->b    r1->$T7    r2->null    r3->d    }
+;$T7 has reg:r1
+;enuse()
+;{r0->b    r1->$T7    r2->null    r3->d    }
+; a gets reg:r2
+; changing reg r1 from $T7to $T8
+; freeing  reg:r1 is dirty: true
+;ADDI $T8 b $T9
+;enuse()
+;{r0->b    r1->$T8    r2->a    r3->d    }
+;$T8 has reg:r1
+;enuse()
+;{r0->b    r1->$T8    r2->a    r3->d    }
+;b has reg:r0
+; changing reg r1 from $T8to $T9
+; freeing  reg:r1 is dirty: true
+;STOREI $T9 c
+;enuse()
+;{r0->b    r1->$T9    r2->a    r3->d    }
+;$T9 has reg:r1
+;all full
+;reg: 2 to be kicked old var : a
+; freeing  reg:r2 is dirty: false
+;c gets reg:r2
+; freeing  reg:r1 is dirty: true
+;WRITEI c
+;enuse()
+;{r0->b    r1->null    r2->c    r3->d    }
+;c has reg:r2
+;STOREI 0 $T10
+;$T10 gets reg:r1
+;SUBI $T10 d $T11
+;enuse()
+;{r0->b    r1->$T10    r2->c    r3->d    }
+;$T10 has reg:r1
+;enuse()
+;{r0->b    r1->$T10    r2->c    r3->d    }
+;d has reg:r3
+; changing reg r1 from $T10to $T11
+; freeing  reg:r1 is dirty: true
+; freeing  reg:r3 is dirty: true
+;STOREI $T11 d
+;enuse()
+;{r0->b    r1->$T11    r2->c    r3->null    }
+;$T11 has reg:r1
+;d gets reg:r3
+; freeing  reg:r1 is dirty: true
+;WRITEI d
+;enuse()
+;{r0->b    r1->null    r2->c    r3->d    }
+;d has reg:r3
+;ADDI a b $T12
+;enuse()
+;{r0->b    r1->null    r2->c    r3->d    }
+; a gets reg:r1
+;enuse()
+;{r0->b    r1->a    r2->c    r3->d    }
+;b has reg:r0
+; changing reg r1 from ato $T12
+; freeing  reg:r1 is dirty: false
+;ADDI d c $T13
+;enuse()
+;{r0->b    r1->$T12    r2->c    r3->d    }
+;d has reg:r3
+;enuse()
+;{r0->b    r1->$T12    r2->c    r3->d    }
+;c has reg:r2
+; changing reg r3 from dto $T13
+; freeing  reg:r3 is dirty: true
+;MULI $T12 $T13 $T14
+;enuse()
+;{r0->b    r1->$T12    r2->c    r3->$T13    }
+;$T12 has reg:r1
+;enuse()
+;{r0->b    r1->$T12    r2->c    r3->$T13    }
+;$T13 has reg:r3
+; changing reg r1 from $T12to $T14
+; freeing  reg:r1 is dirty: true
+; freeing  reg:r3 is dirty: true
+;ADDI a b $T15
+;enuse()
+;{r0->b    r1->$T14    r2->c    r3->null    }
+; a gets reg:r3
+;enuse()
+;{r0->b    r1->$T14    r2->c    r3->a    }
+;b has reg:r0
+; changing reg r3 from ato $T15
+; freeing  reg:r3 is dirty: false
+;ADDI $T15 c $T16
+;enuse()
+;{r0->b    r1->$T14    r2->c    r3->$T15    }
+;$T15 has reg:r3
+;enuse()
+;{r0->b    r1->$T14    r2->c    r3->$T15    }
+;c has reg:r2
+; changing reg r3 from $T15to $T16
+; freeing  reg:r3 is dirty: true
+; freeing  reg:r2 is dirty: true
+;ADDI $T16 d $T17
+;enuse()
+;{r0->b    r1->$T14    r2->null    r3->$T16    }
+;$T16 has reg:r3
+;enuse()
+;{r0->b    r1->$T14    r2->null    r3->$T16    }
+; d gets reg:r2
+; changing reg r3 from $T16to $T17
+; freeing  reg:r3 is dirty: true
+; freeing  reg:r2 is dirty: false
+;DIVI $T17 a $T18
+;enuse()
+;{r0->b    r1->$T14    r2->null    r3->$T17    }
+;$T17 has reg:r3
+;enuse()
+;{r0->b    r1->$T14    r2->null    r3->$T17    }
+; a gets reg:r2
+; changing reg r3 from $T17to $T18
+; freeing  reg:r3 is dirty: true
+; freeing  reg:r2 is dirty: false
+;SUBI $T14 $T18 $T19
+;enuse()
+;{r0->b    r1->$T14    r2->null    r3->$T18    }
+;$T14 has reg:r1
+;enuse()
+;{r0->b    r1->$T14    r2->null    r3->$T18    }
+;$T18 has reg:r3
+; changing reg r1 from $T14to $T19
+; freeing  reg:r1 is dirty: true
+; freeing  reg:r3 is dirty: true
+;STOREI $T19 a
+;enuse()
+;{r0->b    r1->$T19    r2->null    r3->null    }
+;$T19 has reg:r1
+;a gets reg:r2
+; freeing  reg:r1 is dirty: true
+;WRITEI a
+;enuse()
+;{r0->b    r1->null    r2->a    r3->null    }
+;a has reg:r2
+;STOREI 10 $T20
+;$T20 gets reg:r1
+;ADDI a $T20 $T21
+;enuse()
+;{r0->b    r1->$T20    r2->a    r3->null    }
+;a has reg:r2
+;enuse()
+;{r0->b    r1->$T20    r2->a    r3->null    }
+;$T20 has reg:r1
+; changing reg r2 from ato $T21
+; freeing  reg:r2 is dirty: true
+; freeing  reg:r1 is dirty: true
+;STOREI $T21 a
+;enuse()
+;{r0->b    r1->null    r2->$T21    r3->null    }
+;$T21 has reg:r2
+;a gets reg:r1
+; freeing  reg:r2 is dirty: true
+;WRITEI a
+;enuse()
+;{r0->b    r1->a    r2->null    r3->null    }
+;a has reg:r1
+;ADDI b a $T22
+;enuse()
+;{r0->b    r1->a    r2->null    r3->null    }
+;b has reg:r0
+;enuse()
+;{r0->b    r1->a    r2->null    r3->null    }
+;a has reg:r1
+; changing reg r0 from bto $T22
+; freeing  reg:r0 is dirty: true
+; freeing  reg:r1 is dirty: true
+;STOREI 10 $T23
+;$T23 gets reg:r1
+;ADDI $T22 $T23 $T24
+;enuse()
+;{r0->$T22    r1->$T23    r2->null    r3->null    }
+;$T22 has reg:r0
+;enuse()
+;{r0->$T22    r1->$T23    r2->null    r3->null    }
+;$T23 has reg:r1
+; changing reg r0 from $T22to $T24
+; freeing  reg:r0 is dirty: true
+; freeing  reg:r1 is dirty: true
+;STOREI $T24 b
+;enuse()
+;{r0->$T24    r1->null    r2->null    r3->null    }
+;$T24 has reg:r0
+;b gets reg:r1
+; freeing  reg:r0 is dirty: true
+;WRITEI b
+;enuse()
+;{r0->null    r1->b    r2->null    r3->null    }
+;b has reg:r1
+; freeing  reg:r1 is dirty: true
+;STOREI 0 $T25
+;$T25 gets reg:r0
+;STOREI 10 $T26
+;$T26 gets reg:r1
+;SUBI $T25 $T26 $T27
+;enuse()
+;{r0->$T25    r1->$T26    r2->null    r3->null    }
+;$T25 has reg:r0
+;enuse()
+;{r0->$T25    r1->$T26    r2->null    r3->null    }
+;$T26 has reg:r1
+; changing reg r0 from $T25to $T27
+; freeing  reg:r0 is dirty: true
+; freeing  reg:r1 is dirty: true
+;STOREI $T27 c
+;enuse()
+;{r0->$T27    r1->null    r2->null    r3->null    }
+;$T27 has reg:r0
+;c gets reg:r1
+; freeing  reg:r0 is dirty: true
+;WRITEI c
+;enuse()
+;{r0->null    r1->c    r2->null    r3->null    }
+;c has reg:r1
+; freeing  reg:r1 is dirty: true
+;STOREF 1 $T28
+;$T28 gets reg:r0
+;STOREF $T28 x
+;enuse()
+;{r0->$T28    r1->null    r2->null    r3->null    }
+;$T28 has reg:r0
+;x gets reg:r1
+; freeing  reg:r0 is dirty: true
+;STOREF 2 $T29
+;$T29 gets reg:r0
+;STOREF $T29 y
+;enuse()
+;{r0->$T29    r1->x    r2->null    r3->null    }
+;$T29 has reg:r0
+;y gets reg:r2
+; freeing  reg:r0 is dirty: true
+;STOREF 3.14159 $T30
+;$T30 gets reg:r0
+;STOREF $T30 z
+;enuse()
+;{r0->$T30    r1->x    r2->y    r3->null    }
+;$T30 has reg:r0
+;z gets reg:r3
+; freeing  reg:r0 is dirty: true
+;WRITEF x
+;enuse()
+;{r0->null    r1->x    r2->y    r3->z    }
+;x has reg:r1
+; freeing  reg:r1 is dirty: true
+;WRITEF z
+;enuse()
+;{r0->null    r1->null    r2->y    r3->z    }
+;z has reg:r3
+;WRITEF y
+;enuse()
+;{r0->null    r1->null    r2->y    r3->z    }
+;y has reg:r2
+;STOREF 2 $T31
+;$T31 gets reg:r0
+;DIVF z $T31 $T32
+;enuse()
+;{r0->$T31    r1->null    r2->y    r3->z    }
+;z has reg:r3
+;enuse()
+;{r0->$T31    r1->null    r2->y    r3->z    }
+;$T31 has reg:r0
+; changing reg r3 from zto $T32
+; freeing  reg:r3 is dirty: true
+; freeing  reg:r0 is dirty: true
+;STOREF $T32 x
+;enuse()
+;{r0->null    r1->null    r2->y    r3->$T32    }
+;$T32 has reg:r3
+;x gets reg:r0
+; freeing  reg:r3 is dirty: true
+;DIVF z y $T33
+;enuse()
+;{r0->x    r1->null    r2->y    r3->null    }
+; z gets reg:r1
+;enuse()
+;{r0->x    r1->z    r2->y    r3->null    }
+;y has reg:r2
+; changing reg r1 from zto $T33
+; freeing  reg:r1 is dirty: false
+; freeing  reg:r2 is dirty: true
+;STOREF $T33 y
+;enuse()
+;{r0->x    r1->$T33    r2->null    r3->null    }
+;$T33 has reg:r1
+;y gets reg:r2
+; freeing  reg:r1 is dirty: true
+;WRITEF x
+;enuse()
+;{r0->x    r1->null    r2->y    r3->null    }
+;x has reg:r0
+;WRITEF y
+;enuse()
+;{r0->x    r1->null    r2->y    r3->null    }
+;y has reg:r2
+;ADDF x y $T34
+;enuse()
+;{r0->x    r1->null    r2->y    r3->null    }
+;x has reg:r0
+;enuse()
+;{r0->x    r1->null    r2->y    r3->null    }
+;y has reg:r2
+; changing reg r0 from xto $T34
+; freeing  reg:r0 is dirty: true
+; freeing  reg:r2 is dirty: true
+;ADDF $T34 z $T35
+;enuse()
+;{r0->$T34    r1->null    r2->null    r3->null    }
+;$T34 has reg:r0
+;enuse()
+;{r0->$T34    r1->null    r2->null    r3->null    }
+; z gets reg:r1
+; changing reg r0 from $T34to $T35
+; freeing  reg:r0 is dirty: true
+;DIVF $T35 z $T36
+;enuse()
+;{r0->$T35    r1->z    r2->null    r3->null    }
+;$T35 has reg:r0
+;enuse()
+;{r0->$T35    r1->z    r2->null    r3->null    }
+;z has reg:r1
+; changing reg r0 from $T35to $T36
+; freeing  reg:r0 is dirty: true
+;STOREF $T36 t
+;enuse()
+;{r0->$T36    r1->z    r2->null    r3->null    }
+;$T36 has reg:r0
+;t gets reg:r2
+; freeing  reg:r0 is dirty: true
+;WRITEF t
+;enuse()
+;{r0->null    r1->z    r2->t    r3->null    }
+;t has reg:r2
+;MULF t t $T37
+;enuse()
+;{r0->null    r1->z    r2->t    r3->null    }
+;t has reg:r2
+;enuse()
+;{r0->null    r1->z    r2->t    r3->null    }
+;t has reg:r2
+; changing reg r2 from tto $T37
+; freeing  reg:r2 is dirty: true
+;STOREF $T37 t
+;enuse()
+;{r0->null    r1->z    r2->$T37    r3->null    }
+;$T37 has reg:r2
+;t gets reg:r0
+; freeing  reg:r2 is dirty: true
+;WRITEF t
+;enuse()
+;{r0->t    r1->z    r2->null    r3->null    }
+;t has reg:r0
+;ADDF t z $T38
+;enuse()
+;{r0->t    r1->z    r2->null    r3->null    }
+;t has reg:r0
+;enuse()
+;{r0->t    r1->z    r2->null    r3->null    }
+;z has reg:r1
+; changing reg r0 from tto $T38
+; freeing  reg:r0 is dirty: true
+;ADDF $T38 t $T39
+;enuse()
+;{r0->$T38    r1->z    r2->null    r3->null    }
+;$T38 has reg:r0
+;enuse()
+;{r0->$T38    r1->z    r2->null    r3->null    }
+; t gets reg:r2
+; changing reg r0 from $T38to $T39
+; freeing  reg:r0 is dirty: true
+;STOREF 2 $T40
+;$T40 gets reg:r3
+;DIVF t $T40 $T41
+;enuse()
+;{r0->$T39    r1->z    r2->t    r3->$T40    }
+;t has reg:r2
+;enuse()
+;{r0->$T39    r1->z    r2->t    r3->$T40    }
+;$T40 has reg:r3
+; changing reg r2 from tto $T41
+; freeing  reg:r2 is dirty: false
+; freeing  reg:r3 is dirty: true
+;ADDF $T39 $T41 $T42
+;enuse()
+;{r0->$T39    r1->z    r2->$T41    r3->null    }
+;$T39 has reg:r0
+;enuse()
+;{r0->$T39    r1->z    r2->$T41    r3->null    }
+;$T41 has reg:r2
+; changing reg r0 from $T39to $T42
+; freeing  reg:r0 is dirty: true
+; freeing  reg:r2 is dirty: true
+;STOREF 4 $T43
+;$T43 gets reg:r2
+;DIVF z $T43 $T44
+;enuse()
+;{r0->$T42    r1->z    r2->$T43    r3->null    }
+;z has reg:r1
+;enuse()
+;{r0->$T42    r1->z    r2->$T43    r3->null    }
+;$T43 has reg:r2
+; changing reg r1 from zto $T44
+; freeing  reg:r1 is dirty: false
+; freeing  reg:r2 is dirty: true
+;ADDF $T42 $T44 $T45
+;enuse()
+;{r0->$T42    r1->$T44    r2->null    r3->null    }
+;$T42 has reg:r0
+;enuse()
+;{r0->$T42    r1->$T44    r2->null    r3->null    }
+;$T44 has reg:r1
+; changing reg r0 from $T42to $T45
+; freeing  reg:r0 is dirty: true
+; freeing  reg:r1 is dirty: true
+;STOREF 5 $T46
+;$T46 gets reg:r1
+;DIVF z $T46 $T47
+;enuse()
+;{r0->$T45    r1->$T46    r2->null    r3->null    }
+; z gets reg:r2
+;enuse()
+;{r0->$T45    r1->$T46    r2->z    r3->null    }
+;$T46 has reg:r1
+; changing reg r2 from zto $T47
+; freeing  reg:r2 is dirty: false
+; freeing  reg:r1 is dirty: true
+;ADDF $T45 $T47 $T48
+;enuse()
+;{r0->$T45    r1->null    r2->$T47    r3->null    }
+;$T45 has reg:r0
+;enuse()
+;{r0->$T45    r1->null    r2->$T47    r3->null    }
+;$T47 has reg:r2
+; changing reg r0 from $T45to $T48
+; freeing  reg:r0 is dirty: true
+; freeing  reg:r2 is dirty: true
+;STOREF 6 $T49
+;$T49 gets reg:r1
+;DIVF z $T49 $T50
+;enuse()
+;{r0->$T48    r1->$T49    r2->null    r3->null    }
+; z gets reg:r2
+;enuse()
+;{r0->$T48    r1->$T49    r2->z    r3->null    }
+;$T49 has reg:r1
+; changing reg r2 from zto $T50
+; freeing  reg:r2 is dirty: false
+; freeing  reg:r1 is dirty: true
+;ADDF $T48 $T50 $T51
+;enuse()
+;{r0->$T48    r1->null    r2->$T50    r3->null    }
+;$T48 has reg:r0
+;enuse()
+;{r0->$T48    r1->null    r2->$T50    r3->null    }
+;$T50 has reg:r2
+; changing reg r0 from $T48to $T51
+; freeing  reg:r0 is dirty: true
+; freeing  reg:r2 is dirty: true
+;STOREF 7 $T52
+;$T52 gets reg:r1
+;DIVF z $T52 $T53
+;enuse()
+;{r0->$T51    r1->$T52    r2->null    r3->null    }
+; z gets reg:r2
+;enuse()
+;{r0->$T51    r1->$T52    r2->z    r3->null    }
+;$T52 has reg:r1
+; changing reg r2 from zto $T53
+; freeing  reg:r2 is dirty: false
+; freeing  reg:r1 is dirty: true
+;ADDF $T51 $T53 $T54
+;enuse()
+;{r0->$T51    r1->null    r2->$T53    r3->null    }
+;$T51 has reg:r0
+;enuse()
+;{r0->$T51    r1->null    r2->$T53    r3->null    }
+;$T53 has reg:r2
+; changing reg r0 from $T51to $T54
+; freeing  reg:r0 is dirty: true
+; freeing  reg:r2 is dirty: true
+;STOREF $T54 t
+;enuse()
+;{r0->$T54    r1->null    r2->null    r3->null    }
+;$T54 has reg:r0
+;t gets reg:r1
+; freeing  reg:r0 is dirty: true
+;WRITEF t
+;enuse()
+;{r0->null    r1->t    r2->null    r3->null    }
+;t has reg:r1
+; freeing  reg:r1 is dirty: true
 ;RET 
+var a
+var b
+var c
+var d
+var x
+var y
+var z
+var t
 push 
 push r0
 push r1
@@ -240,41 +1284,186 @@ push r3
 jsr main
 sys halt
 label main
-link 10
-move 0 r0
+link 54
+move 1 r0
 move r0 r1
-move r0 $-4
-move r1 $-1
-label BLOCK_1_Loop
-move 100 r0
-move $-1 r1
-cmpi r1 r0
-move r0 $-5
-jge BLOCK_1_OUT
-move 29 r0
-move r0 r1
-move r0 $-6
-move 4 r0
-move $-3 r2
-addi r0 r2
-move r0 $-7
-move r2 r0
-move r2 $-8
-label BLOCK_1_INC
-move 1 r2
-move $-1 r3
-addi r2 r3
-move r2 $-9
-move r3 r2
-move r3 $-10
+move r0 $-1
+move 2 r0
+move r0 r2
+move r0 $-2
+move 10 r0
+move r0 r3
 move r0 $-3
-move r1 $-2
-move r2 $-1
-jmp BLOCK_1_Loop
-label BLOCK_1_OUT
-move $-2 r0
+move 20 r0
+move r3 c
+move r0 r3
+move r0 $-4
+sys writei r1
+sys writei r2
+move c r0
 sys writei r0
-move $-3 r0
+sys writei r3
+move r1 a
+addi r2 r1
+move r2 b
+move r1 r2
+move r1 $-5
+sys writei r2
+move r2 a
+muli r0 r2
+move r2 r0
+move r2 $-6
 sys writei r0
+move 0 r1
+move a r2
+move r1 $-7
+subi r2 r1
+move r1 $-8
+addi r0 r1
+move r1 r2
+move r1 $-9
+sys writei r2
+move 0 r1
+move r1 $-10
+subi r3 r1
+move r3 d
+move r1 r3
+move r1 $-11
+sys writei r3
+move a r1
+addi r0 r1
+move r3 d
+addi r2 r3
+move r1 $-12
+muli r3 r1
+move r3 $-13
+move a r3
+addi r0 r3
+move r3 $-14
+addi r2 r3
+move r2 c
+move d r2
+move r3 $-15
+addi r2 r3
+move a r2
+move r3 $-16
+divi r2 r3
+move r1 $-17
+subi r3 r1
+move r3 $-18
+move r1 r2
+move r1 $-19
+sys writei r2
+move 10 r1
+move r2 a
+addi r1 r2
+move r1 $-20
+move r2 r1
+move r2 $-21
+sys writei r1
+move r0 b
+addi r1 r0
+move r1 a
+move 10 r1
+move r0 $-22
+addi r1 r0
+move r1 $-23
+move r0 r1
+move r0 $-24
+move r1 b
+sys writei r1
+move 0 r0
+move 10 r1
+move r0 $-25
+subi r1 r0
+move r1 $-26
+move r0 r1
+move r0 $-27
+move r1 c
+sys writei r1
+move 1 r0
+move r0 r1
+move r0 $-28
+move 2 r0
+move r0 r2
+move r0 $-29
+move 3.14159 r0
+move r0 r3
+move r0 $-30
+move r1 x
+sys writer r1
+sys writer r3
+sys writer r2
+move 2 r0
+move r3 z
+divr r0 r3
+move r0 $-31
+move r3 r0
+move r3 $-32
+move z r1
+divr r2 r1
+move r2 y
+move r1 r2
+move r1 $-33
+sys writer r0
+sys writer r2
+move r0 x
+addr r2 r0
+move r2 y
+move z r1
+move r0 $-34
+addr r1 r0
+move r0 $-35
+divr r1 r0
+move r0 r2
+move r0 $-36
+sys writer r2
+move r2 t
+mulr r2 r2
+move r2 r0
+move r2 $-37
+sys writer r0
+move r0 t
+addr r1 r0
+move t r2
+move r0 $-38
+addr r2 r0
+move 2 r3
+divr r3 r2
+move r3 $-39
+move r0 $-40
+addr r2 r0
+move r2 $-41
+move 4 r2
+divr r2 r1
+move r2 $-42
+move r0 $-43
+addr r1 r0
+move r1 $-44
+move 5 r1
+move z r2
+divr r1 r2
+move r1 $-45
+move r0 $-46
+addr r2 r0
+move r2 $-47
+move 6 r1
+move z r2
+divr r1 r2
+move r1 $-48
+move r0 $-49
+addr r2 r0
+move r2 $-50
+move 7 r1
+move z r2
+divr r1 r2
+move r1 $-51
+move r0 $-52
+addr r2 r0
+move r2 $-53
+move r0 r1
+move r0 $-54
+move r1 t
+sys writer r1
 unlnk
 ret 

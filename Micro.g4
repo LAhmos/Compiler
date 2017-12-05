@@ -182,8 +182,8 @@ decl  stmt_list {Micro.symbolTables.popTable(); } |{$tree=null;} ;
 
 
 cond    returns [AstNode node]          : t1=lit {  $node=$t1.node; } t2=cond_suffix[$node] {if($t2.node!=null) $node=$t2.node;};
-cond_suffix  [AstNode in_node]  returns [AstNode node]     : OR t1=lit {  boolExp tmp=new boolExp(); tmp.right=$t1.node; tmp.left=$in_node; tmp.type=NodeType.cond; tmp.opType=LogicOp.or; $node=tmp; } t2=cond_suffix[$node] {
-	if($t2.node!=null) $node=$t2.node; } | AND t3=lit {  boolExp tmp=new boolExp(); tmp.right=$t3.node;  tmp.left=$in_node; tmp.type=NodeType.cond; tmp.opType=LogicOp.and; $node=tmp; } t4=cond_suffix[$node]{
+cond_suffix  [AstNode in_node]  returns [AstNode node]     : OR t1=lit {  boolExp tmp=new boolExp(); tmp.right=$t1.node; tmp.left=$in_node; tmp.type=NodeType.cond; tmp.opType=LogicOp.or;tmp.compOp=CompOp.True; $node=tmp; } t2=cond_suffix[$node] {
+	if($t2.node!=null) $node=$t2.node; } | AND t3=lit {  boolExp tmp=new boolExp(); tmp.right=$t3.node;  tmp.left=$in_node; tmp.type=NodeType.cond; tmp.opType=LogicOp.and; tmp.compOp=CompOp.True; $node=tmp; } t4=cond_suffix[$node]{
 		if($t4.node!=null) $node=$t4.node;  } | {$node=null;};
 lit        returns [AstNode node]       : NOT t1=basic_cond{((boolExp)($t1.node)).opType=LogicOp.not; $node=$t1.node;} | t2=basic_cond{$node =$t2.node; };
 basic_cond  returns [AstNode node]      : t1=expr t2=compop t3=expr{ boolExp tmp=new boolExp(); tmp.left=$t1.node; tmp.type=NodeType.cond; tmp.right=$t3.node; tmp.opType=LogicOp.noOp; tmp.compOp=boolExp.getOpFromString($t2.text);  $node=tmp;  } | TRUE { boolExp tmp=new boolExp(); tmp.left=null; tmp.right=null; tmp.opType=LogicOp.noOp;tmp.type=NodeType.cond;  tmp.compOp=CompOp.True;  $node=tmp; }| FALSE{ boolExp tmp=new boolExp(); tmp.left=null; tmp.right=null; tmp.opType=LogicOp.noOp; tmp.type=NodeType.cond; tmp.compOp=CompOp.False;  $node=tmp; };

@@ -240,7 +240,7 @@ public class FunctionUnit{
 			System.out. println ( ";---------" );
 		}
 
-		//optmizeLoop(0);
+		optmizeLoop(0);
 	}
 	public void optmizeLoop(int r){
 
